@@ -1,0 +1,26 @@
+favicon.svg
+  06e9b826e9b07f46 1-7
+index.html
+  06e9b826e9b07f46 6,22-23,26-40,44-47,53-56,60-61,67-100,113,115-116,120-121,127-129,133,135-136,149-152,156-159,169-208,212-215,225-228,233-235,240-286,290,320-338,360,366-369,384,430,1007-1043
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.11",
+  "base_commit_sha": "24008c22de573905adec652cb2258cc97adfb95a",
+  "prompts": {
+    "06e9b826e9b07f46": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7cd5bbd5-1f9c-4062-9b22-08b091623d9b",
+        "model": "default"
+      },
+      "human_author": "chencaodong <chencaodong@cvte.com>",
+      "messages": [],
+      "total_additions": 253,
+      "total_deletions": 17,
+      "accepted_lines": 253,
+      "overriden_lines": 0,
+      "messages_url": "https://gitai.gz.cvte.cn/cas/985df910bd88a2fea28840bd782151e95e4bbe08ad42f2cbe97866eb5eb26e4f"
+    }
+  }
+}
