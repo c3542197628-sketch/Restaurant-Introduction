@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <title>Caffè Restaurant - Un luogo di eccellenza</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,24 +19,85 @@
             --text-color: #3E2723;
             --light-color: #F5F5DC;
             --dark-color: #2D1810;
+            --surface-color: #fffdf9;
+            --line-soft: rgba(139, 69, 19, 0.12);
         }
         
+        html {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            overscroll-behavior-y: none;
+            height: 100%;
+        }
+
+        input,
+        textarea,
+        select {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
         body {
             font-family: 'Raleway', sans-serif;
             color: var(--text-color);
-            background-color: #FAFAFA;
+            background: radial-gradient(circle at 20% 10%, #fff7ef 0%, #f8f6f3 35%, #f2f1ef 100%);
+            letter-spacing: 0.01em;
+            overscroll-behavior-y: none;
+            min-height: 100%;
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
         }
+
+        .container {
+            max-width: 1200px;
+        }
         
         .hero-section {
             height: 100vh;
+            position: relative;
+            overflow: hidden;
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3d64f433479f4d3b96401adf9f18c7d2~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736910&x-signature=My3gZgQsbENSn4qlbmRNP1Hx3V4%3D');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            top: -180px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(255, 209, 133, 0.4) 0%, rgba(255, 209, 133, 0) 70%);
+            pointer-events: none;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            bottom: -160px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(205, 133, 63, 0.35) 0%, rgba(205, 133, 63, 0) 72%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            text-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-content p {
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
         }
         
         .section-title::after {
@@ -48,25 +110,30 @@
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #a25722 0%, #7a3d13 100%);
             color: white;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 24px rgba(122, 61, 19, 0.32);
+            transition: all 0.35s ease;
         }
         
         .btn-primary:hover {
-            background-color: var(--dark-color);
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 30px rgba(90, 44, 14, 0.38);
         }
         
         .btn-outline {
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            transition: all 0.35s ease;
         }
         
         .btn-outline:hover {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, #a25722 0%, #7a3d13 100%);
             color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
         }
         
         .card {
@@ -79,12 +146,17 @@
         }
         
         .navbar {
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(2px);
         }
         
         .navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 253, 249, 0.92);
+            box-shadow: 0 8px 24px rgba(58, 34, 20, 0.12);
+            border-bottom: 1px solid var(--line-soft);
+            backdrop-filter: blur(12px);
         }
         
         .navbar.scrolled .nav-link {
@@ -94,9 +166,53 @@
         .navbar.scrolled .nav-link:hover {
             color: var(--accent-color);
         }
+
+        .logo-caffe {
+            color: #f4e8d8;
+            transition: color 0.35s ease;
+        }
+
+        .logo-restaurant {
+            color: #fde047;
+            transition: color 0.35s ease;
+        }
+
+        .navbar.scrolled .logo-caffe {
+            color: var(--text-color);
+        }
+
+        .navbar.scrolled .logo-restaurant {
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.28s ease;
+            opacity: 0.9;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
         
         .product-card {
             overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--line-soft);
+            box-shadow: 0 12px 28px rgba(62, 39, 35, 0.08);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
         
         .product-card img {
@@ -106,21 +222,72 @@
         .product-card:hover img {
             transform: scale(1.05);
         }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 32px rgba(62, 39, 35, 0.14);
+        }
         
         .testimonial-card {
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            border: 1px solid var(--line-soft);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
         
         .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 34px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-white.rounded-lg.overflow-hidden.shadow-md {
+            border-radius: 16px;
+            border: 1px solid var(--line-soft);
+            box-shadow: 0 12px 26px rgba(62, 39, 35, 0.08);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .bg-white.rounded-lg.overflow-hidden.shadow-md:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 34px rgba(62, 39, 35, 0.14);
+        }
+
+        .bg-gray-50.p-8.rounded-lg.shadow-md {
+            border-radius: 18px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(145deg, #ffffff 0%, #fbf8f4 100%);
+            box-shadow: 0 12px 30px rgba(62, 39, 35, 0.09);
+        }
+
+        input, select, textarea {
+            border-color: #e6ddd3;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #c48853;
+            box-shadow: 0 0 0 4px rgba(196, 136, 83, 0.18);
+            background-color: #fff;
+        }
+
+        section {
+            position: relative;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139, 69, 19, 0.16) 50%, transparent 100%);
         }
         
         .footer {
-            background-color: var(--dark-color);
+            background: linear-gradient(135deg, #2d1810 0%, #1d1009 100%);
             color: var(--light-color);
         }
         
@@ -150,6 +317,25 @@
             background-color: var(--accent-color);
             transform: translateY(-3px);
         }
+
+        #lang-switcher,
+        #lang-switcher-mobile {
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #b4703b, #7c4219);
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3ece4;
+        }
         
         /* Animations */
         @keyframes fadeIn {
@@ -171,10 +357,16 @@
         @media (max-width: 768px) {
             .hero-section {
                 height: 70vh;
+                background-attachment: scroll;
             }
             
             .section-title {
                 font-size: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                line-height: 1.15;
             }
         }
 
@@ -189,7 +381,7 @@
     <!-- Navigation -->
     <nav class="navbar fixed w-full z-50 py-4 px-6 flex justify-between items-center">
         <div class="logo">
-            <a href="#" class="text-2xl font-bold text-white">Caffè <span class="text-yellow-300">Restaurant</span></a>
+            <a href="#" class="text-2xl font-bold"><span class="logo-caffe">Caffè</span> <span class="logo-restaurant">Restaurant</span></a>
         </div>
         
         <div class="menu hidden md:flex items-center space-x-8">
@@ -235,7 +427,7 @@
     
     <!-- Hero Section -->
     <section id="home" class="hero-section flex items-center justify-center">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-6 text-center hero-content">
             <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in" data-i18n="hero_title">Caffè Restaurant</h1>
             <p class="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto animate-fade-in delay-200" data-i18n="hero_tagline">Un luogo dove la passione per il caffè incontra l'eccellenza culinariale</p>
             <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in delay-400">
@@ -812,6 +1004,43 @@
     </button>
     
     <script>
+        (function () {
+            let touchStartY = 0;
+            function allowSelect(el) {
+                return el && el.closest && el.closest('input, textarea, select');
+            }
+            document.addEventListener('selectstart', function (e) {
+                if (!allowSelect(e.target)) e.preventDefault();
+            }, true);
+            document.addEventListener('copy', function (e) {
+                if (!allowSelect(e.target)) e.preventDefault();
+            }, true);
+            document.addEventListener('cut', function (e) {
+                if (!allowSelect(e.target)) e.preventDefault();
+            }, true);
+            document.addEventListener('dragstart', function (e) {
+                if (!allowSelect(e.target)) e.preventDefault();
+            }, true);
+            document.addEventListener('contextmenu', function (e) {
+                if (!allowSelect(e.target)) e.preventDefault();
+            }, true);
+            document.addEventListener('touchstart', function (e) {
+                if (!e.touches || e.touches.length !== 1) return;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            document.addEventListener('touchmove', function (e) {
+                if (!e.touches || e.touches.length !== 1) return;
+                const currentY = e.touches[0].clientY;
+                const deltaY = currentY - touchStartY;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+                const clientHeight = window.innerHeight;
+                const scrollHeight = document.documentElement.scrollHeight;
+                if ((scrollTop <= 0 && deltaY > 0) || (scrollTop + clientHeight >= scrollHeight && deltaY < 0)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        })();
+
         const I18N = {
             it: {
                 page_title: "Caffè Restaurant - Un luogo di eccellenza",
