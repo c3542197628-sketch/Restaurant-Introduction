@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 自定义字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- GSAP 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -27,183 +31,230 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'slide-up': 'slideUp 1s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                        'ink': 'ink 3s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards'
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
+                            '0%, 100%': { transform: 'translateY(0px)' },
                             '50%': { transform: 'translateY(-20px)' }
                         },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
+                        ink: {
+                            '0%': { 
+                                transform: 'scale(0)',
+                                opacity: 0.8
+                            },
+                            '100%': { 
+                                transform: 'scale(1)',
+                                opacity: 0
+                            }
                         },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        fadeInUp: {
+                            '0%': { 
+                                transform: 'translateY(30px)',
+                                opacity: 0
+                            },
+                            '100%': { 
+                                transform: 'translateY(0)',
+                                opacity: 1
+                            }
                         }
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        /* 自定义滚动条 */
+        /* 自定义样式 */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .font-display {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        /* 水墨效果 */
+        .ink-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ink-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .ink-effect:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* 面条装饰元素 */
+        .noodle-decoration {
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: #F5DEB3;
+            border-radius: 2px;
+            transform: rotate(45deg);
+            opacity: 0.6;
+        }
+        
+        /* 滚动条样式 */
         ::-webkit-scrollbar {
             width: 8px;
         }
+        
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #F5F5DC;
         }
+        
         ::-webkit-scrollbar-thumb {
             background: #8B4513;
             border-radius: 4px;
         }
+        
         ::-webkit-scrollbar-thumb:hover {
             background: #6B3403;
         }
-
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
+        
+        /* 菜单卡片悬停效果 */
+        .menu-item {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        /* 水墨效果 */
-        .ink-bg {
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 导航栏滚动效果 */
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-scrolled .nav-link {
+            color: #2F1B14;
+        }
+        
+        /* 按钮悬停效果 */
+        .btn-primary {
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
-        .ink-bg::before {
+        
+        .btn-primary::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
-            animation: float 8s ease-in-out infinite;
-            pointer-events: none;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
         }
-
-        /* 面条装饰 */
-        .noodle-decoration {
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #DAA520, transparent);
-            animation: float 4s ease-in-out infinite;
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
-
+        
         /* 加载动画 */
         .loader {
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width: 48px;
+            height: 48px;
+            border: 5px solid #8B4513;
+            border-bottom-color: transparent;
             border-radius: 50%;
-            border-top: 4px solid #DAA520;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
-
-        /* 菜单卡片悬停效果 */
-        .menu-card {
-            transition: all 0.3s ease;
-        }
-        .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* 手绘边框 */
-        .hand-drawn-border {
-            position: relative;
-        }
-        .hand-drawn-border::before {
-            content: '';
+        
+        /* 水墨动画 */
+        .ink-animation {
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border: 2px solid #8B4513;
-            border-radius: 0.5rem;
-            z-index: -1;
-            transform: rotate(-0.5deg);
-            opacity: 0.7;
-        }
-
-        /* 渐变文字 */
-        .gradient-text {
-            background: linear-gradient(90deg, #8B4513, #DAA520);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.2) 0%, transparent 70%);
+            transform: scale(0);
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="font-body text-gray-800 bg-neutral">
-    <!-- 页面加载动画 -->
-    <div id="pageLoader" class="fixed inset-0 bg-accent flex items-center justify-center z-50">
-        <div class="text-center">
-            <div class="loader mx-auto mb-4"></div>
-            <div class="text-white font-display text-xl">艺术面馆加载中...</div>
-        </div>
-    </div>
-
+<body class="bg-neutral text-accent">
     <!-- 导航栏 -->
-    <nav class="fixed top-0 left-0 w-full z-40 transition-all duration-300" id="mainNav">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="mainHeader">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
+                <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4323d2a517bc452aaf7461e949322fc3.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507204035D122A908E19822215251&rrcfp=8a172a1a&x-expires=1778762435&x-signature=u6yc9dVe63EHKgseE%2FzmRW%2F%2Fonw%3D" alt="MIAN Logo" class="h-12 w-auto mr-3">
                 <div class="text-3xl font-display font-bold text-primary">
                     MIAN<span class="text-secondary">·</span><span class="text-sm font-light tracking-widest">面馆</span>
                 </div>
             </div>
             
             <!-- 桌面导航 -->
-            <div class="hidden lg:flex items-center space-x-8">
-                <a href="#home" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">首页</a>
-                <a href="#about" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">关于我们</a>
-                <a href="#menu" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">菜单</a>
-                <a href="#courses" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">面食课程</a>
-                <a href="#news" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">新闻动态</a>
-                <a href="#contact" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium">联系我们</a>
-                <a href="#reservation" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105">
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">首页</a>
+                <a href="#about" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">关于我们</a>
+                <a href="#menu" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">菜单</a>
+                <a href="#courses" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">课程</a>
+                <a href="#news" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">新闻</a>
+                <a href="#contact" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">联系我们</a>
+                <a href="#reservation" class="px-6 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 transform hover:scale-105">
                     预约座位
                 </a>
-            </div>
+            </nav>
             
             <!-- 移动端菜单按钮 -->
-            <div class="lg:hidden">
-                <button id="menuToggle" class="text-gray-800 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
+            <button class="md:hidden text-white text-2xl" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
         
         <!-- 移动端导航菜单 -->
-        <div id="mobileMenu" class="lg:hidden bg-white shadow-lg absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 invisible">
-            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <a href="#home" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">首页</a>
-                <a href="#about" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">关于我们</a>
-                <a href="#menu" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">菜单</a>
-                <a href="#courses" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">面食课程</a>
-                <a href="#news" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">新闻动态</a>
-                <a href="#contact" class="text-gray-800 hover:text-primary transition-colors duration-300 font-medium py-2">联系我们</a>
-                <a href="#reservation" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full transition-all duration-300 text-center">
-                    预约座位
-                </a>
+        <div class="md:hidden bg-accent/95 backdrop-blur-md absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 invisible" id="mobileMenu">
+            <div class="container mx-auto px-4 py-6">
+                <nav class="flex flex-col space-y-4">
+                    <a href="#home" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">首页</a>
+                    <a href="#about" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">关于我们</a>
+                    <a href="#menu" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">菜单</a>
+                    <a href="#courses" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">课程</a>
+                    <a href="#news" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">新闻</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">联系我们</a>
+                    <a href="#reservation" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 text-center mt-4">
+                        预约座位
+                    </a>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- 英雄区域 -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden ink-bg">
-        <!-- 背景图片 -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- 背景视频/图片 -->
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-accent/70 to-accent/40 z-10"></div>
             <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
@@ -211,10 +262,10 @@
                  class="w-full h-full object-cover">
         </div>
         
-        <!-- 面条装饰 -->
-        <div class="noodle-decoration" style="top: 20%; left: 10%;"></div>
-        <div class="noodle-decoration" style="top: 60%; right: 15%; animation-delay: -2s;"></div>
-        <div class="noodle-decoration" style="bottom: 30%; left: 20%; animation-delay: -4s;"></div>
+        <!-- 面条装饰元素 -->
+        <div class="noodle-decoration absolute top-1/4 left-1/4 animate-float" style="animation-delay: 0s;"></div>
+        <div class="noodle-decoration absolute bottom-1/3 right-1/4 animate-float" style="animation-delay: 2s;"></div>
+        <div class="noodle-decoration absolute top-1/2 right-1/3 animate-float" style="animation-delay: 4s;"></div>
         
         <!-- 主要内容 -->
         <div class="container mx-auto px-4 z-20 text-center">
@@ -226,7 +277,7 @@
                     每一根面条，都是匠心独运的美味诗篇
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center opacity-0 transform translate-y-10" id="heroButtons">
-                    <a href="#menu" class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                    <a href="#menu" class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg btn-primary">
                         探索菜单
                     </a>
                     <a href="#about" class="px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium rounded-full transition-all duration-300 transform hover:scale-105">
@@ -236,16 +287,16 @@
             </div>
         </div>
         
-        <!-- 向下滚动指示 -->
+        <!-- 向下滚动指示器 -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <a href="#about" class="text-white">
-                <i class="fas fa-chevron-down text-2xl"></i>
+            <a href="#about" class="text-white text-4xl">
+                <i class="fas fa-chevron-down"></i>
             </a>
         </div>
     </section>
 
     <!-- 关于我们 -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-neutral">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- 左侧图片 -->
@@ -266,10 +317,10 @@
                     
                     <div class="space-y-6">
                         <p class="text-lg text-gray-700 leading-relaxed">
-                            我们相信，每一碗面都是一件艺术品。从手工拉制的面条到精心熬制的汤底，我们致力于为您带来无与伦比的味觉体验。
+                            两种文化，同一张餐桌。
                         </p>
                         <p class="text-lg text-gray-700 leading-relaxed">
-                            在MIAN，我们不仅仅是一家面馆，更是一个艺术空间。我们将传统面食文化与现代艺术设计相结合，为您提供全方位的感官享受。
+                            “面”既是食物，也是脸庞与身份。MIAN 通过中国面、意大利面与面对面用餐的体验，创造一个温暖、开放、融合的空间。
                         </p>
                     </div>
                     
@@ -289,7 +340,7 @@
     </section>
 
     <!-- 特色产品 -->
-    <section id="menu" class="py-20 bg-neutral">
+    <section id="menu" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <span class="text-primary font-medium">精选菜单</span>
@@ -313,14 +364,20 @@
                 <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="special">
                     特色面食
                 </button>
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="side">
+                    配菜小食
+                </button>
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="italian">
+                    意大利风味
+                </button>
             </div>
             
             <!-- 菜单项目 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 项目1 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="noodle">
+                <div class="menu-item group" data-category="noodle">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ac6df29b220e4f1f88f978ba95e5f988.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=oxgScr9Fa8xdneR8wIMYY8pnTCA%3D" 
                              alt="手工拉面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -339,9 +396,9 @@
                 </div>
                 
                 <!-- 项目2 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="soup">
+                <div class="menu-item group" data-category="soup">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1566470699766-7399f46b4961?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2c315fbd8cc448a4846beefc4d1c367d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=4EBGg3kwn3fVsgSe%2F%2BdMmTh0d7o%3D" 
                              alt="牛肉汤面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -360,9 +417,9 @@
                 </div>
                 
                 <!-- 项目3 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="special">
+                <div class="menu-item group" data-category="special">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1516684732162-2d48ac470a8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/37e62f6e37c84463899d590f27562d57.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=OkbO3jySUeD94rehuZBqJa0%2Bcu0%3D" 
                              alt="担担面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -381,9 +438,9 @@
                 </div>
                 
                 <!-- 项目4 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="noodle">
+                <div class="menu-item group" data-category="noodle">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/28b8c72beb85419f8e536cdde69eaea1.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=omTRIj05PgFVxnMptKoVygKEq%2B8%3D" 
                              alt="刀削面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -402,9 +459,9 @@
                 </div>
                 
                 <!-- 项目5 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="soup">
+                <div class="menu-item group" data-category="soup">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1566470699766-7399f46b4961?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/40c126dd47ca4acb92baa8350972f87c.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=2x%2BZZAmGq2slfiqrkVCfDPQhVJI%3D" 
                              alt="鸡汤面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -423,9 +480,9 @@
                 </div>
                 
                 <!-- 项目6 -->
-                <div class="menu-item group menu-card hand-drawn-border" data-category="special">
+                <div class="menu-item group" data-category="special">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://images.unsplash.com/photo-1516684732162-2d48ac470a8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4589f5c0ac264bcda2bef6de9b3cb9b8.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=BKGWHMHYQ8gyrSpKzRemI%2F%2Fv82g%3D" 
                              alt="炸酱面" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -442,6 +499,246 @@
                         <div class="text-primary font-display font-bold text-xl">¥35</div>
                     </div>
                 </div>
+                
+                <!-- 项目7 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd60faec6f2844ec8cc5568d95e91dcf.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=LxfwErqa0cSIDdBgSWpLt8fZp54%3D" 
+                             alt="小菜拼盘" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">传统中式小菜</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">中式小菜拼盘</h3>
+                            <p class="text-gray-600 text-sm mt-1">清爽可口，开胃解腻</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥28</div>
+                    </div>
+                </div>
+                
+                <!-- 项目8 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cc76eaaa254d4e16966d9283ba3e3017.jpeg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=kiIh31u%2B4Qj%2BBbZFeIUfvHAJ7L4%3D" 
+                             alt="卤味拼盘" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">传统卤味工艺</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">传统卤味拼盘</h3>
+                            <p class="text-gray-600 text-sm mt-1">香而不腻，回味悠长</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥38</div>
+                    </div>
+                </div>
+                
+                <!-- 项目9 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/31b4d9f678054096b4cb838ce0e03f16.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=k4zl3fGQJgq0lQDRZNaZydqJN5o%3D" 
+                             alt="炸鸡排" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">外酥里嫩</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">香酥炸鸡排</h3>
+                            <p class="text-gray-600 text-sm mt-1">外酥里嫩，口感绝佳</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥25</div>
+                    </div>
+                </div>
+                
+                <!-- 项目10 -->
+                <div class="menu-item group" data-category="special">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/66077d0b7ff54fa1ab5f3a7667d4b7ad.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=3%2BL2E6kw4O%2BgzWcAH%2Bh8pcq6mzc%3D" 
+                             alt="海鲜面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">新鲜海鲜</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">豪华海鲜面</h3>
+                            <p class="text-gray-600 text-sm mt-1">海鲜盛宴，鲜美无比</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥68</div>
+                    </div>
+                </div>
+                
+                <!-- 项目11 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/fb60333bb96249ea81bdfbdc1a3399c9.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507211118A437791680E3B5429BD5&rrcfp=8a172a1a&x-expires=1778764278&x-signature=JNK7XLheHKKPef7QcQAm0f%2Foqbw%3D" 
+                             alt="SPAGHETTI AL POMODORO番茄罗勒意面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">新鲜罗勒叶</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">SPAGHETTI AL POMODORO</h3>
+                            <p class="text-gray-600 text-sm mt-1">番茄罗勒意面</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥58</div>
+                    </div>
+                </div>
+                
+                <!-- 项目12 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/954446178357346367~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793711127&x-signature=T9PPO1AkazXWHe28w14oHXCE3VA%3D" 
+                             alt="TAGLIATELLE BOLOGNESE" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">慢炖牛肉酱</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">TAGLIATELLE BOLOGNESE</h3>
+                            <p class="text-gray-600 text-sm mt-1">传统博洛尼亚肉酱面</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥68</div>
+                    </div>
+                </div>
+                
+                <!-- 项目13 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p26-doubao-search-sign.byteimg.com/isp-i18n-media/img/9bc16cb5afec2ed83d3c7f6e78b977cf~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793711127&x-signature=4Jr4bPmc05%2B95AoBHQSpMKds%2FPY%3D" 
+                             alt="PAPPARDELLE ALLA NORCINA CON POLLO" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">奶油松露酱</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">PAPPARDELLE ALLA NORCINA</h3>
+                            <p class="text-gray-600 text-sm mt-1">松露奶油鸡肉面</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥88</div>
+                    </div>
+                </div>
+                
+                <!-- 项目14 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7326176fd6f345e28da3aa1fd7e656ed.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=2026050721355930E48A36D90DA62F2948&rrcfp=8a172a1a&x-expires=1778765759&x-signature=bTeGFDvHYhbgdCCkOShCFvUZ75E%3D" 
+                             alt="LINGUINE MARE CHIARO" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">新鲜海鲜</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">LINGUINE MARE CHIARO</h3>
+                            <p class="text-gray-600 text-sm mt-1">海鲜 Linguine</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥98</div>
+                    </div>
+                </div>
+                
+                <!-- 项目15 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd6b97294c4a4bfbae8cb0cb2996d489.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605072138096A07283447D037CDBD35&rrcfp=8a172a1a&x-expires=1778765890&x-signature=ZD34jPkNYSYzozydgtB%2FErsCbAs%3D" 
+                             alt="CASERECCE PISTACCHIO GAMBERETTI" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">开心果酱</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">CASERECCE PISTACCHIO</h3>
+                            <p class="text-gray-600 text-sm mt-1">开心果虾仁意面</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥88</div>
+                    </div>
+                </div>
+                
+                <!-- 项目16 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/c19e407d064041bfbaa768deda7eb1eb.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605072127090D1A76E3EDED883C9924&rrcfp=8a172a1a&x-expires=1778765229&x-signature=0fJ5CQI3JpqiIF5XIKUKEusXJxA%3D" 
+                             alt="LASAGNA FERRRARESE" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">多层千层面</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">LASAGNA FERRRARESE</h3>
+                            <p class="text-gray-600 text-sm mt-1">传统千层面</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥108</div>
+                    </div>
+                </div>
+                
+                <!-- 项目17 -->
+                <div class="menu-item group" data-category="italian">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2a8ab40fda19400ba01f08b9e4c0f23b.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507213200684F43580B45E1372434&rrcfp=8a172a1a&x-expires=1778765520&x-signature=N80GoiTxEEh7lYp0O0eprw4TdEw%3D" 
+                             alt="GNOCCHI AL SUD DI CINGHIALE" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm">野猪酱汁</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent">GNOCCHI AL SUD</h3>
+                            <p class="text-gray-600 text-sm mt-1">土豆团子配野猪酱</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥98</div>
+                    </div>
+                </div>
+                
+
+            </div>
+            
+            <!-- 查看更多按钮 -->
+            <div class="text-center mt-16">
+                <button class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg btn-primary">
+                    查看完整菜单
+                </button>
             </div>
         </div>
     </section>
@@ -470,7 +767,7 @@
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-clock mr-3 text-secondary"></i>
+                            <i class="far fa-clock mr-3 text-secondary"></i>
                             <span>2小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
@@ -493,7 +790,7 @@
                 <!-- 课程2 -->
                 <div class="bg-neutral-dark/50 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="text-secondary text-4xl mb-6">
-                        <i class="fas fa-award"></i>
+                        <i class="fas fa-certificate"></i>
                     </div>
                     <h3 class="text-2xl font-display font-bold mb-4">拉面大师班</h3>
                     <p class="text-gray-300 mb-6">
@@ -501,7 +798,7 @@
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-clock mr-3 text-secondary"></i>
+                            <i class="far fa-clock mr-3 text-secondary"></i>
                             <span>4小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
@@ -532,7 +829,7 @@
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-clock mr-3 text-secondary"></i>
+                            <i class="far fa-clock mr-3 text-secondary"></i>
                             <span>3小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
@@ -643,6 +940,13 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 查看更多按钮 -->
+            <div class="text-center mt-16">
+                <button class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg btn-primary">
+                    查看更多新闻
+                </button>
+            </div>
         </div>
     </section>
 
@@ -677,7 +981,7 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-accent mb-1">电话</h3>
-                                <p class="text-gray-600">+86 10 8888 8888</p>
+                                <p class="text-gray-600">010-8888-8888</p>
                             </div>
                         </div>
                         
@@ -687,7 +991,7 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-accent mb-1">邮箱</h3>
-                                <p class="text-gray-600">info@mian-restaurant.com</p>
+                                <p class="text-gray-600">info@mianrestaurant.com</p>
                             </div>
                         </div>
                         
@@ -697,31 +1001,35 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-accent mb-1">营业时间</h3>
-                                <p class="text-gray-600">周一至周日: 10:00 - 22:00</p>
+                                <p class="text-gray-600">周一至周日 10:00 - 22:00</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-weixin"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
+                    <!-- 社交媒体 -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-accent mb-4">关注我们</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 text-white">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 text-white">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 text-white">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 右侧联系表单 -->
-                <div class="bg-neutral p-8 rounded-xl">
+                <div class="bg-neutral rounded-xl p-8 shadow-lg">
                     <h3 class="text-2xl font-display font-bold text-accent mb-6">发送消息</h3>
-                    <form id="contactForm" class="space-y-6">
+                    <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">姓名</label>
@@ -743,102 +1051,76 @@
                             <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="请输入您的消息"></textarea>
                         </div>
                         
-                        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                            发送消息
-                        </button>
+                        <div>
+                            <button type="submit" class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg btn-primary">
+                                发送消息
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 预约座位 -->
+    <!-- 预约区域 -->
     <section id="reservation" class="py-20 bg-accent text-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-secondary font-medium">预约座位</span>
-                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2">体验艺术面食</h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-6">
-                    提前预约您的座位，享受无与伦比的面食艺术体验
-                </p>
-            </div>
-            
-            <div class="max-w-4xl mx-auto bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20">
-                <form id="reservationForm" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="text-secondary font-medium">立即预约</span>
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2 mb-8">预订您的艺术面食体验</h2>
+                
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-8 md:p-12">
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="resName" class="block text-sm font-medium text-gray-300 mb-2">姓名</label>
-                            <input type="text" id="resName" name="resName" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300" placeholder="您的姓名">
+                            <label for="res-name" class="block text-sm font-medium text-gray-300 mb-2">姓名</label>
+                            <input type="text" id="res-name" name="res-name" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的姓名">
                         </div>
+                        
                         <div>
-                            <label for="resPhone" class="block text-sm font-medium text-gray-300 mb-2">电话</label>
-                            <input type="tel" id="resPhone" name="resPhone" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300" placeholder="您的电话">
+                            <label for="res-phone" class="block text-sm font-medium text-gray-300 mb-2">电话</label>
+                            <input type="tel" id="res-phone" name="res-phone" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的联系电话">
                         </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
                         <div>
-                            <label for="resDate" class="block text-sm font-medium text-gray-300 mb-2">日期</label>
-                            <input type="date" id="resDate" name="resDate" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300">
+                            <label for="res-date" class="block text-sm font-medium text-gray-300 mb-2">日期</label>
+                            <input type="date" id="res-date" name="res-date" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
+                        
                         <div>
-                            <label for="resTime" class="block text-sm font-medium text-gray-300 mb-2">时间</label>
-                            <select id="resTime" name="resTime" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300">
-                                <option value="">选择时间</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="17:00">17:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="21:00">21:00</option>
-                            </select>
+                            <label for="res-time" class="block text-sm font-medium text-gray-300 mb-2">时间</label>
+                            <input type="time" id="res-time" name="res-time" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
                         <div>
-                            <label for="resGuests" class="block text-sm font-medium text-gray-300 mb-2">人数</label>
-                            <select id="resGuests" name="resGuests" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300">
-                                <option value="">选择人数</option>
+                            <label for="res-guests" class="block text-sm font-medium text-gray-300 mb-2">人数</label>
+                            <select id="res-guests" name="res-guests" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white">
                                 <option value="1">1人</option>
-                                <option value="2">2人</option>
+                                <option value="2" selected>2人</option>
                                 <option value="3">3人</option>
                                 <option value="4">4人</option>
                                 <option value="5">5人</option>
                                 <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
-                                <option value="more">8人以上</option>
+                                <option value="more">7人以上</option>
                             </select>
                         </div>
-                        <div>
-                            <label for="resOccasion" class="block text-sm font-medium text-gray-300 mb-2">特殊场合</label>
-                            <select id="resOccasion" name="resOccasion" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300">
-                                <option value="">选择场合</option>
-                                <option value="birthday">生日庆祝</option>
-                                <option value="anniversary">纪念日</option>
-                                <option value="business">商务聚餐</option>
-                                <option value="family">家庭聚会</option>
-                                <option value="other">其他</option>
-                            </select>
+                        
+                        <div class="md:col-span-2">
+                            <label for="res-notes" class="block text-sm font-medium text-gray-300 mb-2">特殊要求</label>
+                            <input type="text" id="res-notes" name="res-notes" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="特殊饮食要求等">
                         </div>
-                    </div>
-                    
-                    <div>
-                        <label for="resMessage" class="block text-sm font-medium text-gray-300 mb-2">特殊要求</label>
-                        <textarea id="resMessage" name="resMessage" rows="4" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300" placeholder="请告诉我们您的特殊要求或饮食偏好"></textarea>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                            确认预约
-                        </button>
-                    </div>
-                </form>
+                        
+                        <div class="md:col-span-2">
+                            <label for="res-message" class="block text-sm font-medium text-gray-300 mb-2">发送消息</label>
+                            <textarea id="res-message" name="res-message" rows="4" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="请输入您的消息"></textarea>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <button type="submit" class="w-full py-4 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg">
+                                确认预约
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -849,8 +1131,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                 <!-- 品牌信息 -->
                 <div class="lg:col-span-1">
-                    <div class="text-3xl font-display font-bold mb-6">
-                        MIAN<span class="text-secondary">·</span><span class="text-sm font-light tracking-widest">面馆</span>
+                    <div class="flex items-center mb-6">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4323d2a517bc452aaf7461e949322fc3.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507204035D122A908E19822215251&rrcfp=8a172a1a&x-expires=1778762435&x-signature=u6yc9dVe63EHKgseE%2FzmRW%2F%2Fonw%3D" alt="MIAN Logo" class="h-10 w-auto mr-3">
+                        <div class="text-3xl font-display font-bold">
+                            MIAN<span class="text-secondary">·</span><span class="text-sm font-light tracking-widest">面馆</span>
+                        </div>
                     </div>
                     <p class="text-gray-300 mb-6">
                         面食与艺术的完美融合，为您带来无与伦比的味觉体验。
@@ -873,20 +1158,20 @@
                 
                 <!-- 快速链接 -->
                 <div>
-                    <h3 class="text-xl font-display font-bold mb-6">快速链接</h3>
+                    <h3 class="text-xl font-semibold mb-6">快速链接</h3>
                     <ul class="space-y-4">
                         <li><a href="#home" class="text-gray-300 hover:text-secondary transition-colors duration-300">首页</a></li>
                         <li><a href="#about" class="text-gray-300 hover:text-secondary transition-colors duration-300">关于我们</a></li>
                         <li><a href="#menu" class="text-gray-300 hover:text-secondary transition-colors duration-300">菜单</a></li>
-                        <li><a href="#courses" class="text-gray-300 hover:text-secondary transition-colors duration-300">面食课程</a></li>
-                        <li><a href="#news" class="text-gray-300 hover:text-secondary transition-colors duration-300">新闻动态</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-secondary transition-colors duration-300">课程</a></li>
+                        <li><a href="#news" class="text-gray-300 hover:text-secondary transition-colors duration-300">新闻</a></li>
                         <li><a href="#contact" class="text-gray-300 hover:text-secondary transition-colors duration-300">联系我们</a></li>
                     </ul>
                 </div>
                 
-                <!-- 联系信息 -->
+                <!-- 联系方式 -->
                 <div>
-                    <h3 class="text-xl font-display font-bold mb-6">联系我们</h3>
+                    <h3 class="text-xl font-semibold mb-6">联系方式</h3>
                     <ul class="space-y-4">
                         <li class="flex items-start space-x-3">
                             <i class="fas fa-map-marker-alt text-secondary mt-1"></i>
@@ -894,103 +1179,117 @@
                         </li>
                         <li class="flex items-start space-x-3">
                             <i class="fas fa-phone-alt text-secondary mt-1"></i>
-                            <span class="text-gray-300">+86 10 8888 8888</span>
+                            <span class="text-gray-300">010-8888-8888</span>
                         </li>
                         <li class="flex items-start space-x-3">
                             <i class="fas fa-envelope text-secondary mt-1"></i>
-                            <span class="text-gray-300">info@mian-restaurant.com</span>
+                            <span class="text-gray-300">info@mianrestaurant.com</span>
                         </li>
                         <li class="flex items-start space-x-3">
                             <i class="fas fa-clock text-secondary mt-1"></i>
-                            <span class="text-gray-300">周一至周日: 10:00 - 22:00</span>
+                            <span class="text-gray-300">周一至周日 10:00 - 22:00</span>
                         </li>
                     </ul>
                 </div>
                 
                 <!-- 订阅 -->
                 <div>
-                    <h3 class="text-xl font-display font-bold mb-6">订阅我们</h3>
+                    <h3 class="text-xl font-semibold mb-6">订阅我们</h3>
                     <p class="text-gray-300 mb-4">
-                        订阅我们的新闻通讯，获取最新的活动和优惠信息。
+                        订阅我们的邮件，获取最新的活动和优惠信息。
                     </p>
                     <form class="space-y-4">
                         <div>
-                            <input type="email" placeholder="您的邮箱地址" class="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300">
+                            <input type="email" placeholder="您的邮箱地址" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
-                        <button type="submit" class="w-full bg-secondary hover:bg-secondary/90 text-white font-medium py-3 rounded-lg transition-all duration-300">
+                        <button type="submit" class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300">
                             订阅
                         </button>
                     </form>
                 </div>
             </div>
             
-            <div class="border-t border-white/20 mt-12 pt-8 text-center">
-                <p class="text-gray-400">© 2024 MIAN 艺术面馆. 保留所有权利.</p>
+            <div class="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 MIAN 艺术面馆. 保留所有权利.</p>
             </div>
         </div>
     </footer>
 
     <!-- 返回顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-110 opacity-0 invisible">
-        <i class="fas fa-arrow-up"></i>
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg opacity-0 invisible">
+        <i class="fas fa-chevron-up text-white"></i>
     </button>
 
     <!-- JavaScript -->
     <script>
-        // 页面加载完成后执行
+        // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
-            // 页面加载动画
-            setTimeout(function() {
-                const loader = document.getElementById('pageLoader');
-                loader.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(function() {
-                    loader.classList.add('hidden');
-                }, 500);
-            }, 1500);
-
+            // 初始化GSAP ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
             // 英雄区域动画
-            setTimeout(function() {
-                const heroTitle = document.getElementById('heroTitle');
-                const heroSubtitle = document.getElementById('heroSubtitle');
-                const heroButtons = document.getElementById('heroButtons');
+            gsap.to('#heroTitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.3
+            });
+            
+            gsap.to('#heroSubtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.6
+            });
+            
+            gsap.to('#heroButtons', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.9
+            });
+            
+            // 滚动动画
+            const sections = document.querySelectorAll('section:not(#home)');
+            sections.forEach(section => {
+                gsap.from(section.querySelector('h2'), {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8
+                });
                 
-                heroTitle.classList.add('animate-fade-in');
-                heroTitle.style.opacity = '1';
-                heroTitle.style.transform = 'translateY(0)';
-                
-                setTimeout(function() {
-                    heroSubtitle.classList.add('animate-fade-in');
-                    heroSubtitle.style.opacity = '1';
-                    heroSubtitle.style.transform = 'translateY(0)';
-                    
-                    setTimeout(function() {
-                        heroButtons.classList.add('animate-fade-in');
-                        heroButtons.style.opacity = '1';
-                        heroButtons.style.transform = 'translateY(0)';
-                    }, 500);
-                }, 500);
-            }, 1800);
-
+                gsap.from(section.querySelectorAll('p, .grid, .flex'), {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 70%'
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2
+                });
+            });
+            
             // 导航栏滚动效果
-            const mainNav = document.getElementById('mainNav');
-            const backToTop = document.getElementById('backToTop');
+            const header = document.getElementById('mainHeader');
+            const backToTopBtn = document.getElementById('backToTop');
             
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
-                    mainNav.classList.add('bg-white', 'shadow-lg');
-                    mainNav.classList.remove('py-4');
-                    mainNav.classList.add('py-2');
-                    backToTop.classList.remove('opacity-0', 'invisible');
-                    backToTop.classList.add('opacity-100', 'visible');
+                    header.classList.add('navbar-scrolled');
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
                 } else {
-                    mainNav.classList.remove('bg-white', 'shadow-lg');
-                    mainNav.classList.remove('py-2');
-                    mainNav.classList.add('py-4');
-                    backToTop.classList.add('opacity-0', 'invisible');
-                    backToTop.classList.remove('opacity-100', 'visible');
+                    header.classList.remove('navbar-scrolled');
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
                 }
             });
-
+            
             // 移动端菜单
             const menuToggle = document.getElementById('menuToggle');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -999,42 +1298,42 @@
                 if (mobileMenu.classList.contains('invisible')) {
                     mobileMenu.classList.remove('invisible', '-translate-y-full', 'opacity-0');
                     mobileMenu.classList.add('translate-y-0', 'opacity-100');
-                    menuToggle.innerHTML = '<i class="fas fa-times text-2xl"></i>';
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
                 } else {
                     mobileMenu.classList.add('invisible', '-translate-y-full', 'opacity-0');
                     mobileMenu.classList.remove('translate-y-0', 'opacity-100');
-                    menuToggle.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             });
-
+            
             // 移动端菜单项点击关闭菜单
-            const mobileMenuItems = mobileMenu.querySelectorAll('a');
-            mobileMenuItems.forEach(item => {
-                item.addEventListener('click', function() {
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
                     mobileMenu.classList.add('invisible', '-translate-y-full', 'opacity-0');
                     mobileMenu.classList.remove('translate-y-0', 'opacity-100');
-                    menuToggle.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 });
             });
-
+            
             // 返回顶部按钮
-            backToTop.addEventListener('click', function() {
+            backToTopBtn.addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
             });
-
-            // 菜单分类切换
-            const categoryButtons = document.querySelectorAll('.menu-category-btn');
+            
+            // 菜单分类筛选
+            const categoryBtns = document.querySelectorAll('.menu-category-btn');
             const menuItems = document.querySelectorAll('.menu-item');
             
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', function() {
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
                     // 移除所有按钮的活跃状态
-                    categoryButtons.forEach(btn => {
-                        btn.classList.remove('bg-primary', 'text-white');
-                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white');
+                        b.classList.add('bg-gray-100', 'text-gray-700');
                     });
                     
                     // 添加当前按钮的活跃状态
@@ -1043,123 +1342,85 @@
                     
                     const category = this.getAttribute('data-category');
                     
-                    // 显示或隐藏菜单项目
+                    // 筛选菜单项目
                     menuItems.forEach(item => {
                         if (category === 'all' || item.getAttribute('data-category') === category) {
                             item.style.display = 'block';
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateY(0)';
-                            }, 100);
+                            gsap.fromTo(item, 
+                                { opacity: 0, y: 20 },
+                                { opacity: 1, y: 0, duration: 0.5 }
+                            );
                         } else {
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                item.style.display = 'none';
-                            }, 300);
+                            item.style.display = 'none';
                         }
                     });
                 });
             });
-
-            // 联系表单提交
-            const contactForm = document.getElementById('contactForm');
+            
+            // 水墨点击效果
+            const inkElements = document.querySelectorAll('.ink-effect');
+            
+            inkElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    const ink = document.createElement('div');
+                    ink.classList.add('ink-animation');
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ink.style.width = ink.style.height = size + 'px';
+                    ink.style.left = x + 'px';
+                    ink.style.top = y + 'px';
+                    
+                    this.appendChild(ink);
+                    
+                    setTimeout(() => {
+                        ink.remove();
+                    }, 600);
+                });
+            });
+            
+            // 表单提交处理
+            const contactForm = document.querySelector('#contact form');
+            const reservationForm = document.querySelector('#reservation form');
+            
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    // 表单验证
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
-                    
-                    if (!name || !email || !subject || !message) {
-                        alert('请填写所有必填字段');
-                        return;
-                    }
-                    
-                    // 模拟表单提交
-                    const submitButton = this.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> 发送中...';
-                    
-                    setTimeout(() => {
-                        alert('消息已发送！我们会尽快回复您。');
-                        contactForm.reset();
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = originalText;
-                    }, 2000);
+                    alert('感谢您的留言！我们会尽快回复您。');
+                    this.reset();
                 });
             }
-
-            // 预约表单提交
-            const reservationForm = document.getElementById('reservationForm');
+            
             if (reservationForm) {
                 reservationForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    // 表单验证
-                    const name = document.getElementById('resName').value;
-                    const phone = document.getElementById('resPhone').value;
-                    const date = document.getElementById('resDate').value;
-                    const time = document.getElementById('resTime').value;
-                    const guests = document.getElementById('resGuests').value;
-                    
-                    if (!name || !phone || !date || !time || !guests) {
-                        alert('请填写所有必填字段');
-                        return;
-                    }
-                    
-                    // 模拟表单提交
-                    const submitButton = this.querySelector('button[type="submit"]');
-                    const originalText = submitButton.innerHTML;
-                    
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> 预约中...';
-                    
-                    setTimeout(() => {
-                        alert('预约成功！我们会通过电话确认您的预约信息。');
-                        reservationForm.reset();
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = originalText;
-                    }, 2000);
+                    alert('预约成功！我们会尽快与您联系确认详情。');
+                    this.reset();
                 });
             }
-
+            
             // 课程预约按钮
             const courseButtons = document.querySelectorAll('#courses button');
-            courseButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const courseName = this.closest('.bg-neutral-dark\\/50').querySelector('h3').textContent;
-                    alert(`您已选择"${courseName}"，请填写预约信息。`);
-                    // 可以跳转到预约页面或显示预约模态框
+            courseButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('课程预约功能即将上线，敬请期待！');
                 });
             });
-
-            // 滚动动画
-            const animateOnScroll = function() {
-                const elements = document.querySelectorAll('.animate-on-scroll');
-                
-                elements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementPosition < windowHeight - 100) {
-                        element.classList.add('animate-slide-up');
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
+            
+            // 查看更多按钮
+            const viewMoreButtons = document.querySelectorAll('.btn-primary');
+            viewMoreButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.textContent.trim() === '查看完整菜单') {
+                        alert('完整菜单正在更新中，敬请期待！');
+                    } else if (this.textContent.trim() === '查看更多新闻') {
+                        alert('更多新闻内容即将发布，敬请期待！');
                     }
                 });
-            };
-            
-            // 初始检查
-            animateOnScroll();
-            
-            // 滚动时检查
-            window.addEventListener('scroll', animateOnScroll);
+            });
         });
     </script>
 </body>
