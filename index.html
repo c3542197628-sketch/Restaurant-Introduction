@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffè Restaurant - Un luogo di eccellenza</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2B48C;
+            --accent-color: #CD853F;
+            --text-color: #3E2723;
+            --light-color: #F5F5DC;
+            --dark-color: #2D1810;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--text-color);
+            background-color: #FAFAFA;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-section {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3d64f433479f4d3b96401adf9f18c7d2~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736910&x-signature=My3gZgQsbENSn4qlbmRNP1Hx3V4%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar.scrolled .nav-link {
+            color: var(--text-color);
+        }
+        
+        .navbar.scrolled .nav-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .product-card {
+            overflow: hidden;
+        }
+        
+        .product-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+        }
+        
+        .footer-link {
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .navbar.scrolled #lang-switcher {
+            color: var(--text-color);
+            border-color: rgba(62, 39, 35, 0.35);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 py-4 px-6 flex justify-between items-center">
+        <div class="logo">
+            <a href="#" class="text-2xl font-bold text-white">Caffè <span class="text-yellow-300">Restaurant</span></a>
+        </div>
+        
+        <div class="menu hidden md:flex items-center space-x-8">
+            <a href="#home" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_home">Home</a>
+            <a href="#about" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_about">Chi Siamo</a>
+            <a href="#products" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_menu">Menu</a>
+            <a href="#courses" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_courses">Corsi</a>
+            <a href="#news" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_news">News</a>
+            <a href="#contact" class="nav-link text-white hover:text-yellow-300 transition-colors" data-i18n="nav_contact">Contatti</a>
+            <select id="lang-switcher" class="text-sm rounded-lg border border-white/40 bg-black/20 text-white px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-yellow-400/60 cursor-pointer" aria-label="Language">
+                <option value="it">IT</option>
+                <option value="en">EN</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+        
+        <div class="mobile-menu-button md:hidden flex items-center gap-3">
+            <select id="lang-switcher-mobile" class="text-sm rounded-lg border border-white/40 bg-black/30 text-white px-2 py-1.5 focus:outline-none" aria-label="Language">
+                <option value="it">IT</option>
+                <option value="en">EN</option>
+                <option value="zh">中文</option>
+            </select>
+            <button id="menu-toggle" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-90 z-40 hidden flex-col justify-center items-center">
+        <button id="close-menu" class="absolute top-6 right-6 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-6 text-center">
+            <a href="#home" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_home">Home</a>
+            <a href="#about" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_about">Chi Siamo</a>
+            <a href="#products" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_menu">Menu</a>
+            <a href="#courses" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_courses">Corsi</a>
+            <a href="#news" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_news">News</a>
+            <a href="#contact" class="text-white text-xl hover:text-yellow-300 transition-colors" data-i18n="nav_contact">Contatti</a>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in" data-i18n="hero_title">Caffè Restaurant</h1>
+            <p class="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto animate-fade-in delay-200" data-i18n="hero_tagline">Un luogo dove la passione per il caffè incontra l'eccellenza culinariale</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in delay-400">
+                <a href="#products" class="btn-primary px-8 py-3 rounded-full font-medium text-lg" data-i18n="hero_cta_menu">Esplora il Menu</a>
+                <a href="#contact" class="btn-outline px-8 py-3 rounded-full font-medium text-lg" data-i18n="hero_cta_book">Prenota un Tavolo</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7530628814644dc9a89ad08772e2617c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736910&x-signature=g7uecP8E3Y2pC2PCO5E8bLMr9rA%3D" alt="Proprietario del ristorante" data-i18n-alt="about_img_alt" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="section-title text-4xl font-bold mb-8" data-i18n="about_title">Chi Siamo</h2>
+                    <p class="text-lg mb-6" data-i18n="about_p1">Caffè Restaurant è nato dalla passione di un gruppo di professionisti del caffè e della cucina, che hanno deciso di unire le loro competenze per creare un luogo unico nel suo genere.</p>
+                    <p class="text-lg mb-6" data-i18n="about_p2">La nostra filosofia è basata sulla qualità dei prodotti, sulla freschezza degli ingredienti e sulla cura dei dettagli, per offrire ai nostri clienti un'esperienza sensoriale unica.</p>
+                    <p class="text-lg mb-8" data-i18n="about_p3">Ogni nostro caffè è selezionato con cura e realizzato secondo metodi artigianali, per garantire un sapore inconfondibile e un aroma avvolgente.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            <span data-i18n="about_chk1">Prodotti freschi</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            <span data-i18n="about_chk2">Artigianali</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            <span data-i18n="about_chk3">Sostenibili</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                            <span data-i18n="about_chk4">Tracciabili</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16" data-i18n="menu_section_title">Il Nostro Menu</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/0f0d3526067c456fbf9bf7d6560de679~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736909&x-signature=bTZcPoGUpuSSuEA6qCOr5DvJbdM%3D" alt="Colazione" data-i18n-alt="menu_breakfast_img_alt" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="menu_breakfast_title">Colazione</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="menu_breakfast_desc">Una selezione di dolci e salati preparati ogni mattina con ingredienti freschi.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_breakfast_i1">Croissant</span>
+                                <span>€3.50</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_breakfast_i2">Macchiato</span>
+                                <span>€2.00</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_breakfast_i3">Colazione Completa</span>
+                                <span>€12.00</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-primary block text-center px-6 py-2 rounded-full" data-i18n="btn_order">Ordina</a>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/43b9e0009ea548c4ab06b1f1fdd7610e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736935&x-signature=bofOVVey8Ul%2B17Opn2e2tpMrFOg%3D" alt="Pranzo" data-i18n-alt="menu_lunch_img_alt" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="menu_lunch_title">Pranzo</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="menu_lunch_desc">Piatti gourmet preparati con ingredienti di stagione e paired con i nostri caffè.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_lunch_i1">Risotto al Caffè</span>
+                                <span>€16.50</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_lunch_i2">Tagliata di Manzo</span>
+                                <span>€22.00</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_lunch_i3">Insalata Caprese</span>
+                                <span>€10.00</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-primary block text-center px-6 py-2 rounded-full" data-i18n="btn_order">Ordina</a>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/1db025683d594c959a8b3c9da316c6f9~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736913&x-signature=zRHUQKW%2F4m9yerIlqH1EQ2YK0bQ%3D" alt="Caffè" data-i18n-alt="menu_coffee_img_alt" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="menu_coffee_title">Caffè Speciali</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="menu_coffee_desc">Una gamma di caffè speciali, preparati con tecniche artigianali e grani selezionati.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_coffee_i1">Espresso</span>
+                                <span>€1.50</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_coffee_i2">Cappuccino</span>
+                                <span>€2.50</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span data-i18n="menu_coffee_i3">Caffè Mocha</span>
+                                <span>€3.50</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-primary block text-center px-6 py-2 rounded-full" data-i18n="btn_order">Ordina</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-outline px-8 py-3 rounded-full font-medium text-lg inline-block" data-i18n="menu_full">Scopri Tutto il Menu</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coffee Process Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <h2 class="section-title text-4xl font-bold mb-8" data-i18n="passion_title">La Nostra Passione</h2>
+                    <p class="text-lg mb-6" data-i18n="passion_p1">Ogni chicco di caffè è selezionato con estrema cura e passione, per garantire un sapore unico e inconfondibile.</p>
+                    <p class="text-lg mb-8" data-i18n="passion_p2">Il nostro processo di lavorazione segue metodi tradizionali, per preservare tutte le proprietà organolettiche del caffè e offrire ai nostri clienti un'esperienza sensoriale unica.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-seedling text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="passion_s1_t">Selezione</h4>
+                                <p data-i18n="passion_s1_d">Scegliamo i migliori grani di caffè provenienti dalle migliori piantagioni del mondo.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-fire text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="passion_s2_t">Tostatura</h4>
+                                <p data-i18n="passion_s2_d">La tostatura è fatta a mano, con metodi tradizionali per esaltare il sapore.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-mortar-pestle text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="passion_s3_t">Macinatura</h4>
+                                <p data-i18n="passion_s3_d">Ogni caffè è macinato al momento, per garantire la massima freschezza.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-coffee text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="passion_s4_t">Preparazione</h4>
+                                <p data-i18n="passion_s4_d">I nostri baristi preparano ogni caffè con passione e competenza.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 order-1 md:order-2">
+                    <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/addf399170c34a20b12aebee67590570~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736911&x-signature=DWb4fbejvO%2F%2FW%2BAUkcp1oZ1Ta0c%3D" alt="Processo di tostatura" data-i18n-alt="passion_img_alt" class="rounded-lg shadow-xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16" data-i18n="courses_title">Corsi di Caffetteria</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full" data-i18n="course_level_beginner">Principianti</span>
+                            <span class="text-gray-600" data-i18n="course_hours_4">4 ore</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="course1_title">Introduzione all'Eccellenza</h3>
+                        <p class="text-gray-600 mb-6" data-i18n="course1_desc">Breve corso per conoscere il mondo del caffè e della caffetteria.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€80</span>
+                            <button type="button" class="btn-primary px-6 py-2 rounded-full" data-i18n="btn_book" data-course-book>Prenota</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full" data-i18n="course_level_beginner">Principianti</span>
+                            <span class="text-gray-600" data-i18n="course_hours_8">8 ore</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="course2_title">Caffetteria - Base</h3>
+                        <p class="text-gray-600 mb-6" data-i18n="course2_desc">Acquisizione delle competenze necessarie per regolare il macinacaffè, preparare l'espresso e il cappuccino in modo professionale.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€150</span>
+                            <button type="button" class="btn-primary px-6 py-2 rounded-full" data-i18n="btn_book" data-course-book>Prenota</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full" data-i18n="course_level_intermediate">Intermedio</span>
+                            <span class="text-gray-600" data-i18n="course_hours_16">16 ore</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3" data-i18n="course3_title">Caffetteria - Avanzato</h3>
+                        <p class="text-gray-600 mb-6" data-i18n="course3_desc">Approfondimento teorico del caffè e consolidamento delle tecniche apprese nel corso base.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€280</span>
+                            <button type="button" class="btn-primary px-6 py-2 rounded-full" data-i18n="btn_book" data-course-book>Prenota</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-outline px-8 py-3 rounded-full font-medium text-lg inline-block" data-i18n="courses_all">Scopri Tutti i Corsi</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16" data-i18n="testimonials_title">Cosa Dicono i Nostri Clienti</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="t1_quote">"Un luogo incantevole, con un'atmosfera calda e accogliente. Il caffè è eccezionale e i piatti sono preparati con ingredienti freschi e di qualità."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Maria Rossi</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="t1_role">Cliente Regolare</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="t2_quote">"Ho partecipato al corso di caffetteria base e sono rimasto molto soddisfatto. Gli insegnanti sono professionisti e la struttura è moderna e ben attrezzata."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Luca Bianchi</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="t2_role">Studente</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="t3_quote">"Il miglior caffè di città! La qualità dei prodotti è eccezionale e il personale è sempre cordiale e disponibile. Consiglio vivamente questo luogo."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Giulia Verdi</h4>
+                            <p class="text-gray-500 text-sm" data-i18n="t3_role">Cliente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-4xl font-bold text-center mb-16" data-i18n="news_title">Ultime News</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p6-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/3d64f433479f4d3b96401adf9f18c7d2~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736910&x-signature=My3gZgQsbENSn4qlbmRNP1Hx3V4%3D" alt="Nuovo Menu" data-i18n-alt="news1_img_alt" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 text-sm" data-i18n="news1_date">10 Dicembre 2025</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-gray-500 text-sm" data-i18n="news_read_2">2 min</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" data-i18n="news1_title">Nuovo Menu invernale</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="news1_desc">Scopri il nostro nuovo menu invernale, con piatti speciali preparati con ingredienti di stagione.</p>
+                        <a href="#" class="text-yellow-800 font-medium hover:underline"><span data-i18n="news_read_more">Leggi di più</span> <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/1db025683d594c959a8b3c9da316c6f9~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736913&x-signature=zRHUQKW%2F4m9yerIlqH1EQ2YK0bQ%3D" alt="Evento Speciale" data-i18n-alt="news2_img_alt" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 text-sm" data-i18n="news2_date">08 Ottobre 2025</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-gray-500 text-sm" data-i18n="news_read_3">3 min</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" data-i18n="news2_title">Evento: La Natura del Caffè</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="news2_desc">Partecipa al nostro evento speciale per scoprire la storia e la cultura del caffè, con degustazioni e workshop.</p>
+                        <a href="#" class="text-yellow-800 font-medium hover:underline"><span data-i18n="news_read_more">Leggi di più</span> <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://p26-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7530628814644dc9a89ad08772e2617c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202605071707221440C6A5833E42F725AE&rrcfp=f06b921b&x-expires=1780736910&x-signature=g7uecP8E3Y2pC2PCO5E8bLMr9rA%3D" alt="Nuova Collaborazione" data-i18n-alt="news3_img_alt" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 text-sm" data-i18n="news3_date">24 Luglio 2025</span>
+                            <span class="mx-2">•</span>
+                            <span class="text-gray-500 text-sm" data-i18n="news_read_1">1 min</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3" data-i18n="news3_title">Nuova Collaborazione con Artisti Locali</h3>
+                        <p class="text-gray-600 mb-4" data-i18n="news3_desc">Abbiamo collaborato con artisti locali per creare un ambiente unico e suggestivo nel nostro ristorante.</p>
+                        <a href="#" class="text-yellow-800 font-medium hover:underline"><span data-i18n="news_read_more">Leggi di più</span> <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-outline px-8 py-3 rounded-full font-medium text-lg inline-block" data-i18n="news_all">Tutte le News</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="w-full md:w-1/2">
+                    <h2 class="section-title text-4xl font-bold mb-8" data-i18n="contact_title">Contatti</h2>
+                    <p class="text-lg mb-8" data-i18n="contact_intro">Se hai domande o desideri prenotare un tavolo, non esitare a contattarci.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="contact_addr_label">Indirizzo</h4>
+                                <p data-i18n="contact_addr_value">Via Roma 123, 20123 Milano, Italia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="contact_phone_label">Telefono</h4>
+                                <p>+39 02 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="contact_email_label">Email</h4>
+                                <p>info@cafferestaurant.it</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2" data-i18n="contact_hours_label">Orari</h4>
+                                <p data-i18n="contact_hours_wd">Lun-Ven: 7:00 - 22:00</p>
+                                <p data-i18n="contact_hours_we">Sab-Dom: 8:00 - 23:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold text-lg mb-4" data-i18n="contact_social">Seguici sui social</h4>
+                        <div class="flex">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f text-white"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter text-white"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold mb-6" data-i18n="form_title">Prenota un Tavolo</h3>
+                        <form id="reservation-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2" data-i18n="form_name">Nome</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2" data-i18n="form_email">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="phone" class="block text-gray-700 mb-2" data-i18n="form_phone">Telefono</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-gray-700 mb-2" data-i18n="form_date">Data</label>
+                                    <input type="date" id="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="time" class="block text-gray-700 mb-2" data-i18n="form_time">Ora</label>
+                                    <input type="time" id="time" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                </div>
+                                <div>
+                                    <label for="guests" class="block text-gray-700 mb-2" data-i18n="form_guests">Numero di Ospiti</label>
+                                    <select id="guests" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                        <option value="1" data-i18n="guest_1">1 Persona</option>
+                                        <option value="2" data-i18n="guest_2">2 Persone</option>
+                                        <option value="3" data-i18n="guest_3">3 Persone</option>
+                                        <option value="4" data-i18n="guest_4">4 Persone</option>
+                                        <option value="5" data-i18n="guest_5">5 Persone</option>
+                                        <option value="6" data-i18n="guest_6">6 Persone</option>
+                                        <option value="more" data-i18n="guest_more">Più di 6 Persone</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2" data-i18n="form_message">Messaggio</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full py-3 rounded-lg font-medium text-lg" data-i18n="form_submit">Invia Prenotazione</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Caffè Restaurant</h3>
+                    <p class="text-gray-400 mb-6" data-i18n="footer_tagline">Un luogo dove la passione per il caffè incontra l'eccellenza culinariale.</p>
+                    <div class="flex">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6" data-i18n="footer_links_title">Collegamenti Rapidi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="footer-link" data-i18n="nav_home">Home</a></li>
+                        <li><a href="#about" class="footer-link" data-i18n="nav_about">Chi Siamo</a></li>
+                        <li><a href="#products" class="footer-link" data-i18n="nav_menu">Menu</a></li>
+                        <li><a href="#courses" class="footer-link" data-i18n="nav_courses">Corsi</a></li>
+                        <li><a href="#news" class="footer-link" data-i18n="nav_news">News</a></li>
+                        <li><a href="#contact" class="footer-link" data-i18n="nav_contact">Contatti</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6" data-i18n="footer_services_title">Servizi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link" data-i18n="footer_s1">Prenotazione Tavolo</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer_s2">Corsi di Caffetteria</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer_s3">Catering</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer_s4">Eventi Privati</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer_s5">Spedizione a Domicilio</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6" data-i18n="footer_contact_title">Contatti</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400" data-i18n="contact_addr_value">Via Roma 123, 20123 Milano, Italia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+39 02 1234 5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">info@cafferestaurant.it</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400 footer-hours"><span data-i18n="contact_hours_wd">Lun-Ven: 7:00 - 22:00</span><br><span data-i18n="contact_hours_we">Sab-Dom: 8:00 - 23:00</span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400" data-i18n="footer_copy">&copy; 2025 Caffè Restaurant. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-yellow-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        const I18N = {
+            it: {
+                page_title: "Caffè Restaurant - Un luogo di eccellenza",
+                nav_home: "Home", nav_about: "Chi Siamo", nav_menu: "Menu", nav_courses: "Corsi", nav_news: "News", nav_contact: "Contatti",
+                hero_title: "Caffè Restaurant",
+                hero_tagline: "Un luogo dove la passione per il caffè incontra l'eccellenza culinariale",
+                hero_cta_menu: "Esplora il Menu", hero_cta_book: "Prenota un Tavolo",
+                about_img_alt: "Proprietario del ristorante", about_title: "Chi Siamo",
+                about_p1: "Caffè Restaurant è nato dalla passione di un gruppo di professionisti del caffè e della cucina, che hanno deciso di unire le loro competenze per creare un luogo unico nel suo genere.",
+                about_p2: "La nostra filosofia è basata sulla qualità dei prodotti, sulla freschezza degli ingredienti e sulla cura dei dettagli, per offrire ai nostri clienti un'esperienza sensoriale unica.",
+                about_p3: "Ogni nostro caffè è selezionato con cura e realizzato secondo metodi artigianali, per garantire un sapore inconfondibile e un aroma avvolgente.",
+                about_chk1: "Prodotti freschi", about_chk2: "Artigianali", about_chk3: "Sostenibili", about_chk4: "Tracciabili",
+                menu_section_title: "Il Nostro Menu",
+                menu_breakfast_img_alt: "Colazione", menu_breakfast_title: "Colazione",
+                menu_breakfast_desc: "Una selezione di dolci e salati preparati ogni mattina con ingredienti freschi.",
+                menu_breakfast_i1: "Croissant", menu_breakfast_i2: "Macchiato", menu_breakfast_i3: "Colazione Completa",
+                menu_lunch_img_alt: "Pranzo", menu_lunch_title: "Pranzo",
+                menu_lunch_desc: "Piatti gourmet preparati con ingredienti di stagione e abbinati ai nostri caffè.",
+                menu_lunch_i1: "Risotto al Caffè", menu_lunch_i2: "Tagliata di Manzo", menu_lunch_i3: "Insalata Caprese",
+                menu_coffee_img_alt: "Caffè", menu_coffee_title: "Caffè Speciali",
+                menu_coffee_desc: "Una gamma di caffè speciali, preparati con tecniche artigianali e grani selezionati.",
+                menu_coffee_i1: "Espresso", menu_coffee_i2: "Cappuccino", menu_coffee_i3: "Caffè Mocha",
+                btn_order: "Ordina", menu_full: "Scopri Tutto il Menu",
+                passion_title: "La Nostra Passione",
+                passion_p1: "Ogni chicco di caffè è selezionato con estrema cura e passione, per garantire un sapore unico e inconfondibile.",
+                passion_p2: "Il nostro processo di lavorazione segue metodi tradizionali, per preservare tutte le proprietà organolettiche del caffè e offrire ai nostri clienti un'esperienza sensoriale unica.",
+                passion_s1_t: "Selezione", passion_s1_d: "Scegliamo i migliori grani di caffè provenienti dalle migliori piantagioni del mondo.",
+                passion_s2_t: "Tostatura", passion_s2_d: "La tostatura è fatta a mano, con metodi tradizionali per esaltare il sapore.",
+                passion_s3_t: "Macinatura", passion_s3_d: "Ogni caffè è macinato al momento, per garantire la massima freschezza.",
+                passion_s4_t: "Preparazione", passion_s4_d: "I nostri baristi preparano ogni caffè con passione e competenza.",
+                passion_img_alt: "Processo di tostatura",
+                courses_title: "Corsi di Caffetteria", course_level_beginner: "Principianti", course_level_intermediate: "Intermedio",
+                course_hours_4: "4 ore", course_hours_8: "8 ore", course_hours_16: "16 ore",
+                course1_title: "Introduzione all'Eccellenza", course1_desc: "Breve corso per conoscere il mondo del caffè e della caffetteria.",
+                course2_title: "Caffetteria - Base", course2_desc: "Acquisizione delle competenze necessarie per regolare il macinacaffè, preparare l'espresso e il cappuccino in modo professionale.",
+                course3_title: "Caffetteria - Avanzato", course3_desc: "Approfondimento teorico del caffè e consolidamento delle tecniche apprese nel corso base.",
+                btn_book: "Prenota", courses_all: "Scopri Tutti i Corsi",
+                testimonials_title: "Cosa Dicono i Nostri Clienti",
+                t1_quote: "\"Un luogo incantevole, con un'atmosfera calda e accogliente. Il caffè è eccezionale e i piatti sono preparati con ingredienti freschi e di qualità.\"",
+                t1_role: "Cliente Regolare",
+                t2_quote: "\"Ho partecipato al corso di caffetteria base e sono rimasto molto soddisfatto. Gli insegnanti sono professionisti e la struttura è moderna e ben attrezzata.\"",
+                t2_role: "Studente",
+                t3_quote: "\"Il miglior caffè di città! La qualità dei prodotti è eccezionale e il personale è sempre cordiale e disponibile. Consiglio vivamente questo luogo.\"",
+                t3_role: "Cliente",
+                news_title: "Ultime News", news_read_more: "Leggi di più", news_all: "Tutte le News",
+                news_read_1: "1 min", news_read_2: "2 min", news_read_3: "3 min",
+                news1_img_alt: "Nuovo Menu", news1_date: "10 dicembre 2025", news1_title: "Nuovo Menu invernale",
+                news1_desc: "Scopri il nostro nuovo menu invernale, con piatti speciali preparati con ingredienti di stagione.",
+                news2_img_alt: "Evento Speciale", news2_date: "8 ottobre 2025", news2_title: "Evento: La Natura del Caffè",
+                news2_desc: "Partecipa al nostro evento speciale per scoprire la storia e la cultura del caffè, con degustazioni e workshop.",
+                news3_img_alt: "Nuova Collaborazione", news3_date: "24 luglio 2025", news3_title: "Nuova Collaborazione con Artisti Locali",
+                news3_desc: "Abbiamo collaborato con artisti locali per creare un ambiente unico e suggestivo nel nostro ristorante.",
+                contact_title: "Contatti", contact_intro: "Se hai domande o desideri prenotare un tavolo, non esitare a contattarci.",
+                contact_addr_label: "Indirizzo", contact_addr_value: "Via Roma 123, 20123 Milano, Italia",
+                contact_phone_label: "Telefono", contact_email_label: "Email", contact_hours_label: "Orari",
+                contact_hours_wd: "Lun-Ven: 7:00 - 22:00", contact_hours_we: "Sab-Dom: 8:00 - 23:00", contact_social: "Seguici sui social",
+                form_title: "Prenota un Tavolo", form_name: "Nome", form_email: "Email", form_phone: "Telefono",
+                form_date: "Data", form_time: "Ora", form_guests: "Numero di Ospiti", form_message: "Messaggio", form_submit: "Invia Prenotazione",
+                guest_1: "1 Persona", guest_2: "2 Persone", guest_3: "3 Persone", guest_4: "4 Persone", guest_5: "5 Persone", guest_6: "6 Persone", guest_more: "Più di 6 Persone",
+                footer_tagline: "Un luogo dove la passione per il caffè incontra l'eccellenza culinariale.",
+                footer_links_title: "Collegamenti Rapidi", footer_services_title: "Servizi", footer_contact_title: "Contatti",
+                footer_s1: "Prenotazione Tavolo", footer_s2: "Corsi di Caffetteria", footer_s3: "Catering", footer_s4: "Eventi Privati", footer_s5: "Spedizione a Domicilio",
+                footer_copy: "© 2026 Caffè Restaurant. Tutti i diritti riservati.",
+                alert_required: "Per favore, compila tutti i campi obbligatori.",
+                alert_thanks_reservation: "Grazie per la tua prenotazione, {name}! Ti contatteremo presto per confermare.",
+                alert_thanks_course: "Grazie per aver scelto il corso \"{course}\". Ti invieremo un'email con tutti i dettagli.",
+                alert_thanks_order: "Grazie per il tuo ordine di {product}. Il tuo cibo sarà preparato freschissimo!"
+            },
+            en: {
+                page_title: "Caffè Restaurant - A place of excellence",
+                nav_home: "Home", nav_about: "About", nav_menu: "Menu", nav_courses: "Courses", nav_news: "News", nav_contact: "Contact",
+                hero_title: "Caffè Restaurant",
+                hero_tagline: "Where passion for coffee meets culinary excellence",
+                hero_cta_menu: "Explore the Menu", hero_cta_book: "Reserve a Table",
+                about_img_alt: "Restaurant owner", about_title: "About Us",
+                about_p1: "Caffè Restaurant was born from the passion of coffee and culinary professionals who joined forces to create a truly unique place.",
+                about_p2: "Our philosophy is built on product quality, ingredient freshness, and attention to detail—to give every guest a memorable sensory experience.",
+                about_p3: "Every coffee is carefully selected and crafted using artisan methods for unmistakable flavor and an enveloping aroma.",
+                about_chk1: "Fresh products", about_chk2: "Artisan", about_chk3: "Sustainable", about_chk4: "Traceable",
+                menu_section_title: "Our Menu",
+                menu_breakfast_img_alt: "Breakfast", menu_breakfast_title: "Breakfast",
+                menu_breakfast_desc: "Sweet and savory selections prepared each morning with fresh ingredients.",
+                menu_breakfast_i1: "Croissant", menu_breakfast_i2: "Macchiato", menu_breakfast_i3: "Full Breakfast",
+                menu_lunch_img_alt: "Lunch", menu_lunch_title: "Lunch",
+                menu_lunch_desc: "Gourmet dishes made with seasonal ingredients, paired with our coffees.",
+                menu_lunch_i1: "Coffee Risotto", menu_lunch_i2: "Beef Tagliata", menu_lunch_i3: "Caprese Salad",
+                menu_coffee_img_alt: "Coffee", menu_coffee_title: "Specialty Coffee",
+                menu_coffee_desc: "A range of specialty coffees crafted with artisan techniques and selected beans.",
+                menu_coffee_i1: "Espresso", menu_coffee_i2: "Cappuccino", menu_coffee_i3: "Caffè Mocha",
+                btn_order: "Order", menu_full: "See Full Menu",
+                passion_title: "Our Passion",
+                passion_p1: "Every coffee bean is chosen with care and passion to deliver a unique, unmistakable taste.",
+                passion_p2: "Our process follows traditional methods to preserve the coffee's full sensory qualities and offer a one-of-a-kind experience.",
+                passion_s1_t: "Selection", passion_s1_d: "We select the finest beans from the world's best plantations.",
+                passion_s2_t: "Roasting", passion_s2_d: "Hand roasting using traditional methods to enhance flavor.",
+                passion_s3_t: "Grinding", passion_s3_d: "Ground to order for maximum freshness.",
+                passion_s4_t: "Preparation", passion_s4_d: "Our baristas craft every cup with skill and passion.",
+                passion_img_alt: "Roasting process",
+                courses_title: "Barista Courses", course_level_beginner: "Beginner", course_level_intermediate: "Intermediate",
+                course_hours_4: "4 hours", course_hours_8: "8 hours", course_hours_16: "16 hours",
+                course1_title: "Introduction to Excellence", course1_desc: "A short course to discover the world of coffee and barista craft.",
+                course2_title: "Barista - Basics", course2_desc: "Learn to dial in the grinder and prepare espresso and cappuccino professionally.",
+                course3_title: "Barista - Advanced", course3_desc: "Deepen coffee theory and refine the techniques from the basics course.",
+                btn_book: "Book", courses_all: "View All Courses",
+                testimonials_title: "What Our Guests Say",
+                t1_quote: "\"A charming place with a warm, welcoming atmosphere. The coffee is exceptional and dishes are made with fresh, quality ingredients.\"",
+                t1_role: "Regular Guest",
+                t2_quote: "\"I took the beginner barista course and was very satisfied. The instructors are pros and the facility is modern and well equipped.\"",
+                t2_role: "Student",
+                t3_quote: "\"The best coffee in town! Outstanding quality and always friendly, helpful staff. Highly recommended.\"",
+                t3_role: "Guest",
+                news_title: "Latest News", news_read_more: "Read more", news_all: "All News",
+                news_read_1: "1 min", news_read_2: "2 min", news_read_3: "3 min",
+                news1_img_alt: "New menu", news1_date: "December 10, 2025", news1_title: "New winter menu",
+                news1_desc: "Discover our new winter menu with seasonal specialties.",
+                news2_img_alt: "Special event", news2_date: "October 8, 2025", news2_title: "Event: The Nature of Coffee",
+                news2_desc: "Join our special event on coffee history and culture with tastings and workshops.",
+                news3_img_alt: "New collaboration", news3_date: "July 24, 2025", news3_title: "New collaboration with local artists",
+                news3_desc: "We teamed up with local artists to create a unique atmosphere in our restaurant.",
+                contact_title: "Contact", contact_intro: "Questions or table reservations? Get in touch—we're happy to help.",
+                contact_addr_label: "Address", contact_addr_value: "Via Roma 123, 20123 Milan, Italy",
+                contact_phone_label: "Phone", contact_email_label: "Email", contact_hours_label: "Hours",
+                contact_hours_wd: "Mon-Fri: 7:00 - 22:00", contact_hours_we: "Sat-Sun: 8:00 - 23:00", contact_social: "Follow us",
+                form_title: "Reserve a Table", form_name: "Name", form_email: "Email", form_phone: "Phone",
+                form_date: "Date", form_time: "Time", form_guests: "Guests", form_message: "Message", form_submit: "Send Reservation",
+                guest_1: "1 guest", guest_2: "2 guests", guest_3: "3 guests", guest_4: "4 guests", guest_5: "5 guests", guest_6: "6 guests", guest_more: "More than 6 guests",
+                footer_tagline: "Where passion for coffee meets culinary excellence.",
+                footer_links_title: "Quick Links", footer_services_title: "Services", footer_contact_title: "Contact",
+                footer_s1: "Table Reservation", footer_s2: "Barista Courses", footer_s3: "Catering", footer_s4: "Private Events", footer_s5: "Delivery",
+                footer_copy: "© 2026 Caffè Restaurant. All rights reserved.",
+                alert_required: "Please fill in all required fields.",
+                alert_thanks_reservation: "Thank you for your reservation, {name}! We'll contact you shortly to confirm.",
+                alert_thanks_course: "Thank you for choosing \"{course}\". We'll email you all the details.",
+                alert_thanks_order: "Thank you for your order: {product}. Your food will be prepared fresh!"
+            },
+            zh: {
+                page_title: "Caffè Restaurant · 卓越之选",
+                nav_home: "首页", nav_about: "关于我们", nav_menu: "菜单", nav_courses: "课程", nav_news: "动态", nav_contact: "联系",
+                hero_title: "Caffè Restaurant",
+                hero_tagline: "咖啡热忱与烹饪匠心在此相遇",
+                hero_cta_menu: "浏览菜单", hero_cta_book: "预订座位",
+                about_img_alt: "餐厅主理人", about_title: "关于我们",
+                about_p1: "Caffè Restaurant 由咖啡与餐饮专业人士创立，融合专长，打造别具一格的空间。",
+                about_p2: "我们坚持优质食材、新鲜原料与细节打磨，为每位客人呈现难忘的感官体验。",
+                about_p3: "每一款咖啡都经精心挑选，并以匠心工艺呈现，风味鲜明、香气丰盈。",
+                about_chk1: "新鲜出品", about_chk2: "手工匠心", about_chk3: "可持续", about_chk4: "可追溯",
+                menu_section_title: "我们的菜单",
+                menu_breakfast_img_alt: "早餐", menu_breakfast_title: "早餐",
+                menu_breakfast_desc: "每日清晨现制甜咸点心，选用新鲜食材。",
+                menu_breakfast_i1: "可颂", menu_breakfast_i2: "玛奇朵", menu_breakfast_i3: "全套早餐",
+                menu_lunch_img_alt: "午餐", menu_lunch_title: "午餐",
+                menu_lunch_desc: "应季食材打造的精致料理，并与咖啡巧妙搭配。",
+                menu_lunch_i1: "咖啡烩饭", menu_lunch_i2: "牛肉切片", menu_lunch_i3: "卡普里沙拉",
+                menu_coffee_img_alt: "咖啡", menu_coffee_title: "特色咖啡",
+                menu_coffee_desc: "多款特色咖啡，手工萃取，甄选豆源。",
+                menu_coffee_i1: "浓缩咖啡", menu_coffee_i2: "卡布奇诺", menu_coffee_i3: "摩卡咖啡",
+                btn_order: "点餐", menu_full: "查看完整菜单",
+                passion_title: "我们的热忱",
+                passion_p1: "每一颗咖啡豆都经悉心甄选，呈现独一无二的风味。",
+                passion_p2: "沿用传统工艺，完整保留咖啡的感官特质，带来难忘体验。",
+                passion_s1_t: "甄选", passion_s1_d: "甄选自全球优质产区的咖啡豆。",
+                passion_s2_t: "烘焙", passion_s2_d: "手工烘焙，传统方式激发风味。",
+                passion_s3_t: "研磨", passion_s3_d: "现磨现萃，保证新鲜。",
+                passion_s4_t: "出品", passion_s4_d: "咖啡师以专业与热情呈现每一杯。",
+                passion_img_alt: "烘焙过程",
+                courses_title: "咖啡师课程", course_level_beginner: "初级", course_level_intermediate: "中级",
+                course_hours_4: "4 小时", course_hours_8: "8 小时", course_hours_16: "16 小时",
+                course1_title: "卓越入门", course1_desc: "短时课程，了解咖啡与吧台基础。",
+                course2_title: "咖啡师 · 基础", course2_desc: "学习研磨调节，专业出品浓缩咖啡与卡布奇诺。",
+                course3_title: "咖啡师 · 进阶", course3_desc: "深化咖啡理论，巩固基础课程技法。",
+                btn_book: "预约", courses_all: "查看全部课程",
+                testimonials_title: "客人怎么说",
+                t1_quote: "「氛围温馨动人，咖啡出众，菜品用料新鲜优质。」",
+                t1_role: "常客",
+                t2_quote: "「我参加了基础咖啡师课程，非常满意。师资专业，场地现代齐全。」",
+                t2_role: "学员",
+                t3_quote: "「城里最好的咖啡！品质出色，服务热情周到，强烈推荐。」",
+                t3_role: "客人",
+                news_title: "最新动态", news_read_more: "阅读全文", news_all: "全部动态",
+                news_read_1: "1 分钟", news_read_2: "2 分钟", news_read_3: "3 分钟",
+                news1_img_alt: "新菜单", news1_date: "2025年12月10日", news1_title: "冬季新菜单",
+                news1_desc: "探索冬季新菜，时令食材精心烹制。",
+                news2_img_alt: "特别活动", news2_date: "2025年10月8日", news2_title: "活动：咖啡的自然",
+                news2_desc: "参与特别活动，了解咖啡历史与文化，含品鉴与工作坊。",
+                news3_img_alt: "新合作", news3_date: "2025年7月24日", news3_title: "与本地艺术家合作",
+                news3_desc: "携手本地艺术家，为餐厅营造独特氛围。",
+                contact_title: "联系方式", contact_intro: "预约或咨询，欢迎随时联系我们。",
+                contact_addr_label: "地址", contact_addr_value: "Via Roma 123, 20123 米兰, 意大利",
+                contact_phone_label: "电话", contact_email_label: "邮箱", contact_hours_label: "营业时间",
+                contact_hours_wd: "周一至周五：7:00 - 22:00", contact_hours_we: "周六至周日：8:00 - 23:00", contact_social: "关注我们",
+                form_title: "预订座位", form_name: "姓名", form_email: "邮箱", form_phone: "电话",
+                form_date: "日期", form_time: "时间", form_guests: "人数", form_message: "留言", form_submit: "提交预订",
+                guest_1: "1 人", guest_2: "2 人", guest_3: "3 人", guest_4: "4 人", guest_5: "5 人", guest_6: "6 人", guest_more: "超过 6 人",
+                footer_tagline: "咖啡热忱与烹饪匠心在此相遇。",
+                footer_links_title: "快速链接", footer_services_title: "服务", footer_contact_title: "联系",
+                footer_s1: "桌位预订", footer_s2: "咖啡师课程", footer_s3: "餐饮外烩", footer_s4: "私人活动", footer_s5: "外送服务",
+                footer_copy: "© 2026 Caffè Restaurant。保留所有权利。",
+                alert_required: "请填写所有必填项。",
+                alert_thanks_reservation: "感谢预订，{name}！我们将尽快与您确认。",
+                alert_thanks_course: "感谢选择「{course}」课程，详情将发送至您的邮箱。",
+                alert_thanks_order: "感谢订购 {product}，将为您新鲜制作！"
+            }
+        };
+
+        let currentLang = 'it';
+
+        function T(key) {
+            const pack = I18N[currentLang] || I18N.it;
+            return pack[key] !== undefined ? pack[key] : (I18N.it[key] || key);
+        }
+
+        function applyLanguage(lang) {
+            if (!I18N[lang]) lang = 'it';
+            currentLang = lang;
+            localStorage.setItem('siteLang', lang);
+            document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (!key) return;
+                const text = T(key);
+                if (el.tagName === 'OPTION') el.textContent = text;
+                else el.textContent = text;
+            });
+            document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+                const key = el.getAttribute('data-i18n-alt');
+                if (key) el.setAttribute('alt', T(key));
+            });
+
+            document.title = T('page_title');
+            const ls = document.getElementById('lang-switcher');
+            const lm = document.getElementById('lang-switcher-mobile');
+            if (ls) ls.value = lang;
+            if (lm) lm.value = lang;
+        }
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function bindCourseButtons() {
+            document.querySelectorAll('[data-course-book]').forEach(button => {
+                button.replaceWith(button.cloneNode(true));
+            });
+            document.querySelectorAll('[data-course-book]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const courseName = button.closest('.bg-white').querySelector('h3').textContent;
+                    alert(T('alert_thanks_course').replace('{course}', courseName));
+                });
+            });
+        }
+
+        function bindOrderButtons() {
+            document.querySelectorAll('.product-card .btn-primary').forEach(button => {
+                button.replaceWith(button.cloneNode(true));
+            });
+            document.querySelectorAll('.product-card .btn-primary').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const productName = button.closest('.product-card').querySelector('h3').textContent;
+                    alert(T('alert_thanks_order').replace('{product}', productName));
+                });
+            });
+        }
+
+        const reservationForm = document.getElementById('reservation-form');
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const guests = document.getElementById('guests').value;
+            if (!name || !email || !phone || !date || !time || !guests) {
+                alert(T('alert_required'));
+                return;
+            }
+            alert(T('alert_thanks_reservation').replace('{name}', name));
+            reservationForm.reset();
+        });
+
+        document.getElementById('lang-switcher').addEventListener('change', (e) => {
+            applyLanguage(e.target.value);
+            bindCourseButtons();
+            bindOrderButtons();
+        });
+        document.getElementById('lang-switcher-mobile').addEventListener('change', (e) => {
+            applyLanguage(e.target.value);
+            bindCourseButtons();
+            bindOrderButtons();
+        });
+
+        const saved = localStorage.getItem('siteLang');
+        applyLanguage(saved && I18N[saved] ? saved : 'it');
+        bindCourseButtons();
+        bindOrderButtons();
+    </script>
+</body>
+</html>
