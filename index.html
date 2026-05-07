@@ -15,6 +15,565 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <script>
+        // 多语言支持
+        document.addEventListener('DOMContentLoaded', function() {
+            const translations = {
+                'zh': {
+                    'nav.home': '首页',
+                    'nav.about': '关于我们',
+                    'nav.menu': '菜单',
+                    'nav.courses': '课程',
+                    'nav.news': '新闻',
+                    'nav.contact': '联系我们',
+                    'nav.reservation': '预约座位',
+                    'hero.title': '面食的<span class="text-secondary italic">艺术</span>',
+                    'hero.subtitle': '每一根面条，都是匠心独运的美味诗篇',
+                    'hero.description': '欢迎来到 MIAN 艺术面馆，这里不仅有美味的面食，更有独特的艺术体验。',
+                    'about.section-title': '关于我们',
+                    'about.title': '面食与艺术的完美融合',
+                    'about.paragraph-1': '两种文化，同一张餐桌。',
+                    'about.paragraph-2': '"面"既是食物，也是脸庞与身份。MIAN 通过中国面、意大利面与面对面用餐的体验，创造一个温暖、开放、融合的空间。',
+                    'about.experience-years': '年面食制作经验',
+                    'about.noodle-types': '特色面食种类',
+                    'about.experience-years': '年面食制作经验',
+                    'about.noodle-types': '特色面食种类',
+                    'menu.section-title': '精选菜单',
+                    'menu.title': '艺术面食精品',
+                    'menu.categories.all': '全部',
+                    'menu.categories.classic': '经典面食',
+                    'menu.categories.dessert': '饮品甜点',
+                    'menu.categories.special': '特色菜品',
+                    'menu.categories.side': '配菜小食',
+                    'menu.categories.italian': '意大利风味',
+                    'menu.description': '每一款面食都经过精心制作，为您带来独特的味觉体验',
+                    'courses.title': '面食艺术工坊',
+                    'courses.description': '跟随我们的面点大师，学习面食制作的传统技艺',
+                    'news.section-title': '最新动态',
+                    'news.title': '面食文化资讯',
+                    'news.description': '了解最新的面食文化、传统工艺和店内活动',
+                    'contact.section-title': '联系我们',
+                    'contact.title': '来品尝艺术面食',
+                    'contact.description': '欢迎来到我们的面食艺术空间，在这里，每一碗面都是一次文化之旅。',
+                    'reservation.title': '预订您的艺术面食体验',
+                    'reservation.subtitle': '立即预约',
+                    'footer.description': '面食与艺术的完美融合，为您带来无与伦比的味觉体验。',
+                    'footer.quicklinks': '快速链接',
+                    'footer.contact': '联系方式',
+                    'footer.subscribe': '订阅我们',
+                    'footer.subscribe-description': '订阅我们的邮件，获取最新的活动和优惠信息。',
+                    'footer.copyright': '© 2024 MIAN 艺术面馆. 保留所有权利.',
+                    'btn.explore-menu': '探索菜单',
+                    'btn.about-us': '关于我们',
+                    'btn.view-menu': '查看完整菜单',
+                    'btn.view-news': '查看更多新闻',
+                    'btn.send-message': '发送消息',
+                    'btn.confirm-reservation': '确认预约',
+                    'btn.subscribe': '订阅',
+                    'form.name': '姓名',
+                    'form.email': '邮箱',
+                    'form.subject': '主题',
+                    'form.message': '消息',
+                    'form.phone': '电话',
+                    'form.date': '日期',
+                    'form.time': '时间',
+                    'form.guests': '人数',
+                    'form.special-requests': '特殊要求',
+                    'form.your-name': '您的姓名',
+                    'form.your-email': '您的邮箱',
+                    'form.your-subject': '消息主题',
+                    'form.your-message': '请输入您的消息',
+                    'form.your-phone': '您的联系电话',
+                    'form.your-notes': '特殊饮食要求等',
+                    'form.your-reservation-message': '请输入您的消息',
+                    'form.email-placeholder': '您的邮箱地址',
+                    'form.select-guests-1': '1人',
+                    'form.select-guests-2': '2人',
+                    'form.select-guests-3': '3人',
+                    'form.select-guests-4': '4人',
+                    'form.select-guests-5': '5人',
+                    'form.select-guests-6': '6人',
+                    'form.select-guests-more': '7人以上',
+                    'address': '北京市朝阳区建国路88号',
+                    'phone': '010-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': '周一至周日 10:00 - 22:00',
+                    'follow-us': '关注我们',
+                    'course-1-title': '面食入门课程',
+                    'course-1-description': '适合初学者的面食基础知识，包括面团制作、揉面技巧和基本成型方法。',
+                    'course-1-duration': '2小时课程',
+                    'course-1-size': '最多8人小班',
+                    'course-1-includes': '含实践操作',
+                    'course-1-price': '¥298/人',
+                    'course-1-btn': '立即预约',
+                    'course-2-title': '拉面大师班',
+                    'course-2-description': '深入学习手工拉面的制作技巧，包括面团调制、醒面、拉制和汤底熬制。',
+                    'course-2-duration': '4小时课程',
+                    'course-2-size': '最多6人小班',
+                    'course-2-includes': '专业认证',
+                    'course-2-price': '¥598/人',
+                    'course-2-btn': '立即预约',
+                    'course-3-title': '意大利传统面食制作',
+                    'course-3-description': '跟随意大利主厨学习正宗意面制作技艺，包括手工面条、酱汁调配和传统烹饪方法。',
+                    'course-3-duration': '3.5小时课程',
+                    'course-3-size': '最多8人小班',
+                    'course-3-includes': '含意式美食品尝',
+                    'course-3-price': '¥568/人',
+                    'course-3-btn': '立即预约',
+                    'news-1-category': '文化展览',
+                    'news-1-date': '2024年6月15日',
+                    'news-1-title': '中国面食文化展开幕',
+                    'news-1-description': '我们将举办一场以中国传统面食为主题的文化展，展示各地面食文化和制作工艺。',
+                    'news-1-btn': '阅读更多',
+                    'news-2-category': '赛事活动',
+                    'news-2-date': '2024年7月20日',
+                    'news-2-title': '第三届面点大师大赛',
+                    'news-2-description': '年度面点大师大赛即将举行，来自全国各地的面点师傅将齐聚一堂，展示精湛的面食制作技艺。',
+                    'news-2-btn': '阅读更多',
+                    'news-3-category': '新品发布',
+                    'news-3-date': '2024年8月5日',
+                    'news-3-title': '夏季养生面食新品',
+                    'news-3-description': '我们推出夏季限定面食系列，采用新鲜食材与传统配方的创意搭配，带来清爽健康的夏日体验。',
+                    'news-3-btn': '阅读更多',
+                    'menu-item-xiaolongbao': '鲜肉小笼包',
+                    'menu-item-xiaolongbao-desc': '皮薄馅嫩，汤汁鲜美',
+                    'menu-item-xiaolongbao-feature': '鲜嫩多汁',
+                    'menu-item-beef-noodle': '红烧牛肉面',
+                    'menu-item-beef-noodle-desc': '慢炖牛肉，香浓汤底',
+                    'menu-item-beef-noodle-feature': '经典红烧风味',
+                    'menu-item-daoxiao': '传统刀削面',
+                    'menu-item-daoxiao-desc': '外滑内筋，别具风味',
+                    'menu-item-daoxiao-feature': '传统刀削工艺',
+                    'menu-item-tomato-egg': '番茄鸡蛋面',
+                    'menu-item-tomato-egg-desc': '酸甜开胃，家常风味',
+                    'menu-item-tomato-egg-feature': '酸甜可口',
+                    'menu-item-chicken-soup': '鸡汤面',
+                    'menu-item-chicken-soup-desc': '慢熬鸡汤，营养丰富',
+                    'menu-item-chicken-soup-feature': '清鲜滋补',
+                    'menu-item-scallion-oil': '葱油拌面',
+                    'menu-item-scallion-oil-desc': '简单美味，葱香扑鼻',
+                    'menu-item-scallion-oil-feature': '葱香四溢',
+                    'menu-item-signature': '特色招牌面',
+                    'menu-item-signature-desc': '匠心独运，口感层次丰富',
+                    'menu-item-signature-feature': '独家秘方',
+                    'menu-item-tiramisu': '经典提拉米苏',
+                    'menu-item-tiramisu-desc': '咖啡浸泡的手指饼干与马斯卡彭奶酪的完美融合',
+                    'menu-item-tiramisu-feature': '意式经典甜点',
+                    'menu-item-espresso': '意式浓缩咖啡',
+                    'menu-item-espresso-desc': '醇厚浓郁，口感丰富',
+                    'menu-item-espresso-feature': '意式进口咖啡豆',
+                    'menu-item-cappuccino': '卡布奇诺',
+                    'menu-item-cappuccino-desc': '香浓咖啡与丝滑奶泡的完美融合',
+                    'menu-item-cappuccino-feature': '丝滑奶泡',
+                    'menu-item-flower-tea': '精选花茶',
+                    'menu-item-flower-tea-desc': '清香怡人，舒缓身心',
+                    'menu-item-flower-tea-feature': '天然花香',
+                    'menu-item-cola': '可乐',
+                    'menu-item-cola-desc': '冰镇可乐，畅爽解渴',
+                    'menu-item-cola-feature': '经典碳酸饮料',
+                    'menu-item-mineral-water': '矿泉水',
+                    'menu-item-mineral-water-desc': '纯净矿泉水，清冽甘甜',
+                    'menu-item-mineral-water-feature': '天然纯净',
+                    'menu-item-yangzhou-fried-rice': '扬州炒饭',
+                    'menu-item-yangzhou-fried-rice-desc': '粒粒分明，鲜香可口',
+                    'menu-item-yangzhou-fried-rice-feature': '经典扬州风味',
+                    'menu-item-chicken-cutlet': '香酥炸鸡排',
+                    'menu-item-chicken-cutlet-desc': '外酥里嫩，口感绝佳',
+                    'menu-item-chicken-cutlet-feature': '外酥里嫩',
+                    'menu-item-avocado-toast': '牛油果鸡蛋土司',
+                    'menu-item-avocado-toast-desc': '营养丰富，口感层次分明',
+                    'menu-item-avocado-toast-feature': '健康美味',
+                    'menu-item-sausage': '烤肠',
+                    'menu-item-sausage-desc': '香气四溢，口感丰富',
+                    'menu-item-sausage-feature': '外焦里嫩',
+                    'menu-item-soup-dumplings': '招牌灌汤包',
+                    'menu-item-soup-dumplings-desc': '皮薄馅大，汤汁浓郁',
+                    'menu-item-soup-dumplings-feature': '汤汁鲜美',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': '番茄罗勒意面',
+                    'menu-item-spaghetti-feature': '新鲜罗勒叶'
+                },
+                'en': {
+                    'nav.home': 'Home',
+                    'nav.about': 'About Us',
+                    'nav.menu': 'Menu',
+                    'nav.courses': 'Courses',
+                    'nav.news': 'News',
+                    'nav.contact': 'Contact Us',
+                    'nav.reservation': 'Reserve a Table',
+                    'hero.title': 'The <span class="text-secondary italic">Art</span> of Noodles',
+                    'hero.subtitle': 'Every strand tells a story of craftsmanship',
+                    'hero.description': 'Welcome to MIAN Artistic Noodle House, where you can enjoy delicious noodles and a unique artistic experience.',
+                    'about.section-title': 'About Us',
+                    'about.title': 'The Perfect Fusion of Noodles and Art',
+                    'about.paragraph-1': 'Two cultures, one table.',
+                    'about.paragraph-2': '"Noodle" is both food and face, identity. Through Chinese noodles, Italian pasta, and the experience of dining face to face, MIAN creates a warm, open, and inclusive space.',
+                    'about.experience-years': 'Years of Experience',
+                    'about.noodle-types': 'Special Noodle Types',
+                    'menu.section-title': 'Our Menu',
+                    'menu.title': 'Artistic Noodle Creations',
+                    'menu.categories.all': 'All',
+                    'menu.categories.classic': 'Classic Noodles',
+                    'menu.categories.dessert': 'Desserts & Drinks',
+                    'menu.categories.special': 'Special Noodles',
+                    'menu.categories.side': 'Side Dishes',
+                    'menu.categories.italian': 'Italian Flavors',
+                    'menu.description': 'Each noodle dish is carefully crafted to bring you a unique culinary experience',
+                    'courses.title': 'Noodle Art Workshop',
+                    'courses.description': 'Learn traditional noodle-making techniques from our master chefs',
+                    'news.section-title': 'Latest News',
+                    'news.title': 'Noodle Culture Information',
+                    'news.description': 'Discover the latest in noodle culture, traditional craftsmanship, and in-store events',
+                    'contact.section-title': 'Contact Us',
+                    'contact.title': 'Come and Taste Artistic Noodles',
+                    'contact.description': 'Welcome to our noodle art space, where every bowl is a cultural journey.',
+                    'reservation.title': 'Reserve Your Artistic Noodle Experience',
+                    'reservation.subtitle': 'Book Now',
+                    'footer.description': 'The perfect fusion of noodles and art, bringing you an unparalleled culinary experience.',
+                    'footer.quicklinks': 'Quick Links',
+                    'footer.contact': 'Contact Information',
+                    'footer.subscribe': 'Subscribe',
+                    'footer.subscribe-description': 'Subscribe to our newsletter for the latest events and offers.',
+                    'footer.copyright': '© 2024 MIAN Artistic Noodle House. All rights reserved.',
+                    'btn.explore-menu': 'Explore Menu',
+                    'btn.about-us': 'About Us',
+                    'btn.view-menu': 'View Full Menu',
+                    'btn.view-news': 'View More News',
+                    'btn.send-message': 'Send Message',
+                    'btn.confirm-reservation': 'Confirm Reservation',
+                    'btn.subscribe': 'Subscribe',
+                    'form.name': 'Name',
+                    'form.email': 'Email',
+                    'form.subject': 'Subject',
+                    'form.message': 'Message',
+                    'form.phone': 'Phone',
+                    'form.date': 'Date',
+                    'form.time': 'Time',
+                    'form.guests': 'Guests',
+                    'form.special-requests': 'Special Requests',
+                    'form.your-name': 'Your Name',
+                    'form.your-email': 'Your Email',
+                    'form.your-subject': 'Message Subject',
+                    'form.your-message': 'Please enter your message',
+                    'form.your-phone': 'Your Phone Number',
+                    'form.your-notes': 'Special dietary requirements, etc.',
+                    'form.your-reservation-message': 'Please enter your message',
+                    'form.email-placeholder': 'Your email address',
+                    'form.select-guests-1': '1 Person',
+                    'form.select-guests-2': '2 People',
+                    'form.select-guests-3': '3 People',
+                    'form.select-guests-4': '4 People',
+                    'form.select-guests-5': '5 People',
+                    'form.select-guests-6': '6 People',
+                    'form.select-guests-more': '7+ People',
+                    'address': '88 Jianguo Road, Chaoyang District, Beijing',
+                    'phone': '+86 10-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': 'Monday to Sunday 10:00 - 22:00',
+                    'follow-us': 'Follow Us',
+                    'course-1-title': 'Noodle Making Basics',
+                    'course-1-description': 'Perfect for beginners, covering dough preparation, kneading techniques, and basic shaping methods.',
+                    'course-1-duration': '2-Hour Course',
+                    'course-1-size': 'Small class (max 8 people)',
+                    'course-1-includes': 'Hands-on practice',
+                    'course-1-price': '¥298/person',
+                    'course-1-btn': 'Book Now',
+                    'course-2-title': 'Ramen Master Class',
+                    'course-2-description': 'Deep dive into handmade ramen techniques, including dough preparation, resting, pulling, and broth making.',
+                    'course-2-duration': '4-Hour Course',
+                    'course-2-size': 'Small class (max 6 people)',
+                    'course-2-includes': 'Professional certification',
+                    'course-2-price': '¥598/person',
+                    'course-2-btn': 'Book Now',
+                    'course-3-title': 'Regional Specialties',
+                    'course-3-description': 'Learn to make famous regional Chinese noodles, including Dandan noodles, Zhajiangmian, and Daoxiao noodles.',
+                    'course-3-duration': '3-Hour Course',
+                    'course-3-size': 'Small class (max 10 people)',
+                    'course-3-includes': 'Tasting session',
+                    'course-3-price': '¥498/person',
+                    'course-3-btn': 'Book Now',
+                    'news-1-category': 'Cultural Exhibition',
+                    'news-1-date': 'June 15, 2024',
+                    'news-1-title': 'Chinese Noodle Culture Exhibition Opens',
+                    'news-1-description': 'We are hosting a cultural exhibition featuring traditional Chinese noodles, showcasing regional noodle cultures and production techniques.',
+                    'news-1-btn': 'Read More',
+                    'news-2-category': 'Competitions',
+                    'news-2-date': 'July 20, 2024',
+                    'news-2-title': '3rd Annual Noodle Master Competition',
+                    'news-2-description': 'The annual Noodle Master Competition is coming soon, featuring master chefs from across the country showcasing their exquisite noodle-making skills.',
+                    'news-2-btn': 'Read More',
+                    'news-3-category': 'New Releases',
+                    'news-3-date': 'August 5, 2024',
+                    'news-3-title': 'Summer Health Noodle Collection',
+                    'news-3-description': 'We are launching our summer limited-edition noodle series, featuring creative combinations of fresh ingredients and traditional recipes for a refreshing and healthy summer experience.',
+                    'news-3-btn': 'Read More',
+                    'menu-item-xiaolongbao': 'Steamed Pork Dumplings',
+                    'menu-item-xiaolongbao-desc': 'Thin skin, tender filling, rich broth',
+                    'menu-item-xiaolongbao-feature': 'Juicy and Tender',
+                    'menu-item-beef-noodle': 'Braised Beef Noodles',
+                    'menu-item-beef-noodle-desc': 'Slow-cooked beef, rich broth',
+                    'menu-item-beef-noodle-feature': 'Classic Braised Flavor',
+                    'menu-item-daoxiao': 'Traditional Knife-Cut Noodles',
+                    'menu-item-daoxiao-desc': 'Smooth exterior, chewy interior, unique flavor',
+                    'menu-item-daoxiao-feature': 'Traditional Knife-Cutting Technique',
+                    'menu-item-tomato-egg': 'Tomato and Egg Noodles',
+                    'menu-item-tomato-egg-desc': 'Sweet and sour, home-style flavor',
+                    'menu-item-tomato-egg-feature': 'Sweet and Sour',
+                    'menu-item-chicken-soup': 'Chicken Soup Noodles',
+                    'menu-item-chicken-soup-desc': 'Slow-simmered chicken broth, nutritious',
+                    'menu-item-chicken-soup-feature': 'Clear and Nourishing',
+                    'menu-item-scallion-oil': 'Scallion Oil Noodles',
+                    'menu-item-scallion-oil-desc': 'Simple and delicious, rich scallion aroma',
+                    'menu-item-scallion-oil-feature': 'Rich Scallion Aroma',
+                    'menu-item-signature': 'Signature Noodles',
+                    'menu-item-signature-desc': 'Crafted with匠心, rich texture layers',
+                    'menu-item-signature-feature': 'Exclusive Recipe',
+                    'menu-item-tiramisu': 'Classic Tiramisu',
+                    'menu-item-tiramisu-desc': 'Perfect fusion of coffee-soaked ladyfingers and mascarpone cheese',
+                    'menu-item-tiramisu-feature': 'Classic Italian Dessert',
+                    'menu-item-espresso': 'Italian Espresso',
+                    'menu-item-espresso-desc': 'Rich and full-bodied, complex flavor',
+                    'menu-item-espresso-feature': 'Imported Italian Coffee Beans',
+                    'menu-item-cappuccino': 'Cappuccino',
+                    'menu-item-cappuccino-desc': 'Perfect fusion of rich coffee and silky milk foam',
+                    'menu-item-cappuccino-feature': 'Silky Milk Foam',
+                    'menu-item-flower-tea': 'Premium Flower Tea',
+                    'menu-item-flower-tea-desc': 'Fragrant and soothing',
+                    'menu-item-flower-tea-feature': 'Natural Floral Aroma',
+                    'menu-item-cola': 'Cola',
+                    'menu-item-cola-desc': 'Iced cola, refreshing and thirst-quenching',
+                    'menu-item-cola-feature': 'Classic Carbonated Drink',
+                    'menu-item-mineral-water': 'Mineral Water',
+                    'menu-item-mineral-water-desc': 'Pure mineral water, clean and sweet',
+                    'menu-item-mineral-water-feature': 'Naturally Pure',
+                    'menu-item-yangzhou-fried-rice': 'Yangzhou Fried Rice',
+                    'menu-item-yangzhou-fried-rice-desc': 'Each grain distinct, fragrant and delicious',
+                    'menu-item-yangzhou-fried-rice-feature': 'Classic Yangzhou Flavor',
+                    'menu-item-chicken-cutlet': 'Crispy Fried Chicken Cutlet',
+                    'menu-item-chicken-cutlet-desc': 'Crispy exterior, tender interior, excellent texture',
+                    'menu-item-chicken-cutlet-feature': 'Crispy Exterior, Tender Interior',
+                    'menu-item-avocado-toast': 'Avocado and Egg Toast',
+                    'menu-item-avocado-toast-desc': 'Nutritious, rich texture layers',
+                    'menu-item-avocado-toast-feature': 'Healthy and Delicious',
+                    'menu-item-sausage': 'Grilled Sausage',
+                    'menu-item-sausage-desc': 'Aromatic, rich flavor',
+                    'menu-item-sausage-feature': 'Crispy Exterior, Juicy Interior',
+                    'menu-item-soup-dumplings': 'Signature Soup Dumplings',
+                    'menu-item-soup-dumplings-desc': 'Thin skin, generous filling, rich broth',
+                    'menu-item-soup-dumplings-feature': 'Delicious Broth',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': 'Tomato and Basil Pasta',
+                    'menu-item-spaghetti-feature': 'Fresh Basil Leaves'
+                },
+                'it': {
+                    'nav.home': 'Casa',
+                    'nav.about': 'Chi Siamo',
+                    'nav.menu': 'Menù',
+                    'nav.courses': 'Corsi',
+                    'nav.news': 'Notizie',
+                    'nav.contact': 'Contatti',
+                    'nav.reservation': 'Prenota un Tavolo',
+                    'hero.title': 'L\'<span class="text-secondary italic">Arte</span> dei Noodles',
+                    'hero.subtitle': 'Ogni filo racconta una storia di artigianalità',
+                    'hero.description': 'Benvenuti a MIAN Artistic Noodle House, dove potete gustare deliziosi noodles e vivere un\'unica esperienza artistica.',
+                    'about.section-title': 'Chi Siamo',
+                    'about.title': 'La Perfetta Fusione tra Noodles e Arte',
+                    'about.paragraph-1': 'Due culture, un tavolo.',
+                    'about.paragraph-2': '"Noodle" è sia cibo che volto, identità. Attraverso i noodles cinesi, la pasta italiana e l\'esperienza di mangiare faccia a faccia, MIAN crea uno spazio caldo, aperto e inclusivo.',
+                    'about.experience-years': 'Anni di Esperienza',
+                    'about.noodle-types': 'Tipi di Noodles Speciali',
+                    'menu.section-title': 'Il Nostro Menù',
+                    'menu.title': 'Creazioni Artistiche di Noodles',
+                    'menu.categories.all': 'Tutti',
+                    'menu.categories.classic': 'Noodles Classici',
+                    'menu.categories.dessert': 'Dolci e Bevande',
+                    'menu.categories.special': 'Noodles Speciali',
+                    'menu.categories.side': 'Contorni',
+                    'menu.categories.italian': 'Sapori Italiani',
+                    'menu.description': 'Ogni piatto di noodles è realizzato con cura per offrirvi un\'esperienza culinarie unica',
+                    'courses.title': 'Laboratorio di Arte del Noodle',
+                    'courses.description': 'Imparate le tecniche tradizionali di preparazione dei noodles dai nostri chef master',
+                    'news.section-title': 'Ultime Notizie',
+                    'news.title': 'Informazioni sulla Cultura del Noodle',
+                    'news.description': 'Scoprite le ultime novità sulla cultura del noodle, l\'artigianalità tradizionale e gli eventi in negozio',
+                    'contact.section-title': 'Contatti',
+                    'contact.title': 'Vieni a Gustare i Noodles Artistici',
+                    'contact.description': 'Benvenuti nel nostro spazio di arte del noodle, dove ogni piatto è un viaggio culturale.',
+                    'reservation.title': 'Prenota la Tua Esperienza di Noodle Artistico',
+                    'reservation.subtitle': 'Prenota Ora',
+                    'footer.description': 'La perfetta fusione tra noodles e arte, per un\'esperienza culinarie senza confini.',
+                    'footer.quicklinks': 'Collegamenti Rapidi',
+                    'footer.contact': 'Informazioni di Contatto',
+                    'footer.subscribe': 'Iscriviti',
+                    'footer.subscribe-description': 'Iscriviti alla nostra newsletter per gli ultimi eventi e offerte.',
+                    'footer.copyright': '© 2024 MIAN Artistic Noodle House. Tutti i diritti riservati.',
+                    'btn.explore-menu': 'Esplora il Menù',
+                    'btn.about-us': 'Chi Siamo',
+                    'btn.view-menu': 'Visualizza il Menù Completo',
+                    'btn.view-news': 'Visualizza Più Notizie',
+                    'btn.send-message': 'Invia Messaggio',
+                    'btn.confirm-reservation': 'Conferma Prenotazione',
+                    'btn.subscribe': 'Iscriviti',
+                    'form.name': 'Nome',
+                    'form.email': 'Email',
+                    'form.subject': 'Oggetto',
+                    'form.message': 'Messaggio',
+                    'form.phone': 'Telefono',
+                    'form.date': 'Data',
+                    'form.time': 'Ora',
+                    'form.guests': 'Ospiti',
+                    'form.special-requests': 'Richieste Speciali',
+                    'form.your-name': 'Il Tuo Nome',
+                    'form.your-email': 'Tua Email',
+                    'form.your-subject': 'Oggetto del Messaggio',
+                    'form.your-message': 'Inserisci il tuo messaggio',
+                    'form.your-phone': 'Il Tuo Numero di Telefono',
+                    'form.your-notes': 'Requisiti alimentari speciali, ecc.',
+                    'form.your-reservation-message': 'Inserisci il tuo messaggio',
+                    'form.email-placeholder': 'Il tuo indirizzo email',
+                    'form.select-guests-1': '1 Persona',
+                    'form.select-guests-2': '2 Persone',
+                    'form.select-guests-3': '3 Persone',
+                    'form.select-guests-4': '4 Persone',
+                    'form.select-guests-5': '5 Persone',
+                    'form.select-guests-6': '6 Persone',
+                    'form.select-guests-more': '7+ Persone',
+                    'address': 'Via Jianguo 88, Distretto di Chaoyang, Pechino',
+                    'phone': '+86 10-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': 'Lunedì al Domenica 10:00 - 22:00',
+                    'follow-us': 'Seguici',
+                    'course-1-title': 'Nozioni di Base sui Noodles',
+                    'course-1-description': 'Perfetto per principianti, copre la preparazione dell\'impasto, le tecniche di impasto e i metodi di modellazione di base.',
+                    'course-1-duration': 'Corso di 2 Ore',
+                    'course-1-size': 'Classe piccola (max 8 persone)',
+                    'course-1-includes': 'Pratica hands-on',
+                    'course-1-price': '¥298/persona',
+                    'course-1-btn': 'Prenota Ora',
+                    'course-2-title': 'Master Class di Ramen',
+                    'course-2-description': 'Approfondimento sulle tecniche di preparazione del ramen artigianale, inclusa la preparazione dell\'impasto, la riposa, lo stiro e la preparazione del brodo.',
+                    'course-2-duration': 'Corso di 4 Ore',
+                    'course-2-size': 'Classe piccola (max 6 persone)',
+                    'course-2-includes': 'Certificazione professionale',
+                    'course-2-price': '¥598/persona',
+                    'course-2-btn': 'Prenota Ora',
+                    'course-3-title': 'Pasta Tradizionale Italiana',
+                    'course-3-description': 'Impara l\'arte della vera pasta italiana con il nostro chef italiano, compresa la preparazione manuale, la salsa e i metodi di cottura tradizionali.',
+                    'course-3-duration': 'Corso di 3.5 Ore',
+                    'course-3-size': 'Classe piccola (max 8 persone)',
+                    'course-3-includes': 'Degustazione di cibi italiani',
+                    'course-3-price': '¥568/persona',
+                    'course-3-btn': 'Prenota Ora',
+                    'news-1-category': 'Mostra Culturale',
+                    'news-1-date': '15 Giugno 2024',
+                    'news-1-title': 'Inaugurazione della Mostra sulla Cultura del Noodle Cinese',
+                    'news-1-description': 'Organizziamo una mostra culturale dedicata ai noodles tradizionali cinesi, che presenta culture regionali dei noodles e tecniche di produzione.',
+                    'news-1-btn': 'Leggi di Più',
+                    'news-2-category': 'Competizioni',
+                    'news-2-date': '20 Luglio 2024',
+                    'news-2-title': '3° Competizione Annuale del Maestro dei Noodles',
+                    'news-2-description': 'La competizione annuale del Maestro dei Noodles sta per iniziare, con chef master provenienti da tutto il paese che mostreranno le loro eccellenti competenze di preparazione dei noodles.',
+                    'news-2-btn': 'Leggi di Più',
+                    'news-3-category': 'Nuove Uscite',
+                    'news-3-date': '5 Agosto 2024',
+                    'news-3-title': 'Collezione Estiva di Noodles per la Salute',
+                    'news-3-description': 'Lanciamo la nostra serie limitata di noodles per l\'estate, con combinazioni creative di ingredienti freschi e ricette tradizionali per un\'esperienza estiva rinfrescante e salutare.',
+                    'news-3-btn': 'Leggi di Più',
+                    'menu-item-xiaolongbao': 'Ravioli di Maiale al Vapore',
+                    'menu-item-xiaolongbao-desc': 'Pelle sottile, ripieno tenero, brodo ricco',
+                    'menu-item-xiaolongbao-feature': 'Ghiotto e Tenero',
+                    'menu-item-beef-noodle': 'Tagliolini con Manzo Brasato',
+                    'menu-item-beef-noodle-desc': 'Manzo cotto a fuoco lento, brodo ricco',
+                    'menu-item-beef-noodle-feature': 'Sapore Classico Brasato',
+                    'menu-item-daoxiao': 'Tagliolini Tagliati a Coltello Tradizionali',
+                    'menu-item-daoxiao-desc': 'Esterno liscio, interno gommoso, sapore unico',
+                    'menu-item-daoxiao-feature': 'Tecnica Tradizionale di Taglio a Coltello',
+                    'menu-item-tomato-egg': 'Tagliolini con Pomodoro e Uova',
+                    'menu-item-tomato-egg-desc': 'Dolce e acido, sapore casalingo',
+                    'menu-item-tomato-egg-feature': 'Dolce e Acido',
+                    'menu-item-chicken-soup': 'Tagliolini in Brodo di Pollo',
+                    'menu-item-chicken-soup-desc': 'Brodo di pollo cotto a lungo, nutriente',
+                    'menu-item-chicken-soup-feature': 'Chiaro e Nutriente',
+                    'menu-item-scallion-oil': 'Tagliolini con Olio di Cipolla',
+                    'menu-item-scallion-oil-desc': 'Semplice e delizioso, ricca aroma di cipolla',
+                    'menu-item-scallion-oil-feature': 'Ricca Aroma di Cipolla',
+                    'menu-item-signature': 'Tagliolini Segnature',
+                    'menu-item-signature-desc': 'Realizzato con maestria, strati di textures ricchi',
+                    'menu-item-signature-feature': 'Ricetta Esclusiva',
+                    'menu-item-tiramisu': 'Tiramisu Classico',
+                    'menu-item-tiramisu-desc': 'Perfetta fusione di savoiardi inzuppati nel caffè e formaggio mascarpone',
+                    'menu-item-tiramisu-feature': 'Dolce Classico Italiano',
+                    'menu-item-espresso': 'Espresso Italiano',
+                    'menu-item-espresso-desc': 'Ricco e corposo, sapore complesso',
+                    'menu-item-espresso-feature': 'Fagioli di Caffè Italiani Importati',
+                    'menu-item-cappuccino': 'Cappuccino',
+                    'menu-item-cappuccino-desc': 'Perfetta fusione di caffè ricco e schiuma di latte setosa',
+                    'menu-item-cappuccino-feature': 'Schiuma di Latte Setosa',
+                    'menu-item-flower-tea': 'Tè Fiorito Premium',
+                    'menu-item-flower-tea-desc': 'Profumato e rinfrescante',
+                    'menu-item-flower-tea-feature': 'Aroma Naturale di Fiori',
+                    'menu-item-cola': 'Cola',
+                    'menu-item-cola-desc': 'Cola ghiacciata, rinfrescante e dissetante',
+                    'menu-item-cola-feature': 'Bevanda Gassata Classica',
+                    'menu-item-mineral-water': 'Acqua Minerale',
+                    'menu-item-mineral-water-desc': 'Acqua minerale pura, pulita e dolce',
+                    'menu-item-mineral-water-feature': 'Naturalmente Pura',
+                    'menu-item-yangzhou-fried-rice': 'Riso Fritto alla Yangzhou',
+                    'menu-item-yangzhou-fried-rice-desc': 'Ogni chicco distinto, profumato e delizioso',
+                    'menu-item-yangzhou-fried-rice-feature': 'Sapore Classico di Yangzhou',
+                    'menu-item-chicken-cutlet': 'Cotoletta di Pollo Fritto Croccante',
+                    'menu-item-chicken-cutlet-desc': 'Esterno croccante, interno tenero, texture eccellente',
+                    'menu-item-chicken-cutlet-feature': 'Esterno Croccante, Interno Tenero',
+                    'menu-item-avocado-toast': 'Toast con Avocado e Uova',
+                    'menu-item-avocado-toast-desc': 'Nutriente, strati di texture ricchi',
+                    'menu-item-avocado-toast-feature': 'Sano e Delizioso',
+                    'menu-item-sausage': 'Salsiccia Grigliata',
+                    'menu-item-sausage-desc': 'Aromatica, sapore ricco',
+                    'menu-item-sausage-feature': 'Esterno Croccante, Interno Ghiotto',
+                    'menu-item-soup-dumplings': 'Ravioli di Brodo Segnature',
+                    'menu-item-soup-dumplings-desc': 'Pelle sottile, ripieno generoso, brodo ricco',
+                    'menu-item-soup-dumplings-feature': 'Brodo Delizioso',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': 'Pasta con Pomodoro e Basilico',
+                    'menu-item-spaghetti-feature': 'Foglie di Basilico Fresche'
+                }
+            };
+
+            const langButtons = document.querySelectorAll('.lang-btn');
+
+            function setLanguage(lang) {
+                document.documentElement.lang = lang;
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+
+                // 更新语言按钮的样式
+                langButtons.forEach(btn => {
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('bg-primary', 'text-white');
+                    } else {
+                        btn.classList.remove('bg-primary', 'text-white');
+                    }
+                });
+            }
+
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    localStorage.setItem('preferredLanguage', lang); // 保存用户偏好
+                });
+            });
+
+            // 初始化
+            const savedLang = localStorage.getItem('preferredLanguage') || 'zh';
+            setLanguage(savedLang);
+        });
+    </script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -210,23 +769,31 @@
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
                 <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4323d2a517bc452aaf7461e949322fc3.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507204035D122A908E19822215251&rrcfp=8a172a1a&x-expires=1778762435&x-signature=u6yc9dVe63EHKgseE%2FzmRW%2F%2Fonw%3D" alt="MIAN Logo" class="h-12 w-auto mr-3">
-                <div class="text-3xl font-display font-bold text-primary">
-                    MIAN<span class="text-secondary">·</span><span class="text-sm font-light tracking-widest">面馆</span>
+                <div class="font-display font-bold text-primary flex flex-col items-center">
+                    <div class="text-3xl">MIAN<span class="text-secondary">·</span></div>
+                    <div class="text-sm font-light tracking-widest">面馆</div>
                 </div>
             </div>
             
             <!-- 桌面导航 -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">首页</a>
-                <a href="#about" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">关于我们</a>
-                <a href="#menu" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">菜单</a>
-                <a href="#courses" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">课程</a>
-                <a href="#news" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">新闻</a>
-                <a href="#contact" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">联系我们</a>
-                <a href="#reservation" class="px-6 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 transform hover:scale-105">
+                <a href="#home" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.home">首页</a>
+                <a href="#about" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.about">关于我们</a>
+                <a href="#menu" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.menu">菜单</a>
+                <a href="#courses" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.courses">课程</a>
+                <a href="#news" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.news">新闻</a>
+                <a href="#contact" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium" data-i18n="nav.contact">联系我们</a>
+                <a href="#reservation" class="px-6 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 transform hover:scale-105" data-i18n="nav.reservation">
                     预约座位
                 </a>
             </nav>
+            
+            <!-- 语言切换器 -->
+            <div class="hidden md:flex items-center space-x-2 ml-4">
+                <button class="lang-btn px-2 py-1 rounded-md text-sm font-medium transition-colors duration-300" data-lang="zh">中</button>
+                <button class="lang-btn px-2 py-1 rounded-md text-sm font-medium transition-colors duration-300" data-lang="en">EN</button>
+                <button class="lang-btn px-2 py-1 rounded-md text-sm font-medium transition-colors duration-300" data-lang="it">IT</button>
+            </div>
             
             <!-- 移动端菜单按钮 -->
             <button class="md:hidden text-white text-2xl" id="menuToggle">
@@ -238,13 +805,13 @@
         <div class="md:hidden bg-accent/95 backdrop-blur-md absolute w-full left-0 top-full transform -translate-y-full opacity-0 transition-all duration-300 invisible" id="mobileMenu">
             <div class="container mx-auto px-4 py-6">
                 <nav class="flex flex-col space-y-4">
-                    <a href="#home" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">首页</a>
-                    <a href="#about" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">关于我们</a>
-                    <a href="#menu" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">菜单</a>
-                    <a href="#courses" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">课程</a>
-                    <a href="#news" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">新闻</a>
-                    <a href="#contact" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2">联系我们</a>
-                    <a href="#reservation" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 text-center mt-4">
+                    <a href="#home" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.home">首页</a>
+                    <a href="#about" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.about">关于我们</a>
+                    <a href="#menu" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.menu">菜单</a>
+                    <a href="#courses" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.courses">课程</a>
+                    <a href="#news" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.news">新闻</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition-colors duration-300 font-medium py-2" data-i18n="nav.contact">联系我们</a>
+                    <a href="#reservation" class="px-6 py-3 bg-secondary hover:bg-secondary/90 text-white rounded-full transition-all duration-300 text-center mt-4" data-i18n="nav.reservation">
                         预约座位
                     </a>
                 </nav>
@@ -270,17 +837,17 @@
         <!-- 主要内容 -->
         <div class="container mx-auto px-4 z-20 text-center">
             <div class="max-w-4xl mx-auto">
-                <h1 class="text-[clamp(2.5rem,8vw,6rem)] font-display font-bold text-white leading-tight mb-6 opacity-0 transform translate-y-10" id="heroTitle">
+                <h1 class="text-[clamp(2.5rem,8vw,6rem)] font-display font-bold text-white leading-tight mb-6 opacity-0 transform translate-y-10" id="heroTitle" data-i18n="hero.title">
                     面食的<span class="text-secondary italic">艺术</span>
                 </h1>
-                <p class="text-[clamp(1rem,3vw,1.5rem)] text-neutral mb-12 max-w-2xl mx-auto opacity-0 transform translate-y-10" id="heroSubtitle">
+                <p class="text-[clamp(1rem,3vw,1.5rem)] text-neutral mb-12 max-w-2xl mx-auto opacity-0 transform translate-y-10" id="heroSubtitle" data-i18n="hero.subtitle">
                     每一根面条，都是匠心独运的美味诗篇
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center opacity-0 transform translate-y-10" id="heroButtons">
-                    <a href="#menu" class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg btn-primary">
+                    <a href="#menu" class="px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg btn-primary" data-i18n="btn.explore-menu">
                         探索菜单
                     </a>
-                    <a href="#about" class="px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium rounded-full transition-all duration-300 transform hover:scale-105">
+                    <a href="#about" class="px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium rounded-full transition-all duration-300 transform hover:scale-105" data-i18n="btn.about-us">
                         关于我们
                     </a>
                 </div>
@@ -311,27 +878,27 @@
                 <!-- 右侧内容 -->
                 <div class="space-y-8">
                     <div class="inline-block">
-                        <span class="text-primary font-medium">关于我们</span>
-                        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2">面食与艺术的完美融合</h2>
+                        <span class="text-primary font-medium" data-i18n="about.section-title">关于我们</span>
+                        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2" data-i18n="about.title">面食与艺术的完美融合</h2>
                     </div>
                     
                     <div class="space-y-6">
                         <p class="text-lg text-gray-700 leading-relaxed">
-                            两种文化，同一张餐桌。
+                            <span data-i18n="about.paragraph-1">两种文化，同一张餐桌。</span>
                         </p>
                         <p class="text-lg text-gray-700 leading-relaxed">
-                            “面”既是食物，也是脸庞与身份。MIAN 通过中国面、意大利面与面对面用餐的体验，创造一个温暖、开放、融合的空间。
+                            <span data-i18n="about.paragraph-2">“面”既是食物，也是脸庞与身份。MIAN 通过中国面、意大利面与面对面用餐的体验，创造一个温暖、开放、融合的空间。</span>
                         </p>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-8 pt-4">
                         <div class="text-center">
                             <div class="text-4xl font-display font-bold text-primary mb-2">15+</div>
-                            <div class="text-gray-600">年面食制作经验</div>
+                            <div class="text-gray-600" data-i18n="about.experience-years">年面食制作经验</div>
                         </div>
                         <div class="text-center">
                             <div class="text-4xl font-display font-bold text-primary mb-2">30+</div>
-                            <div class="text-gray-600">特色面食种类</div>
+                            <div class="text-gray-600" data-i18n="about.noodle-types">特色面食种类</div>
                         </div>
                     </div>
                 </div>
@@ -343,242 +910,425 @@
     <section id="menu" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-primary font-medium">精选菜单</span>
-                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2">艺术面食精品</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+                <span class="text-primary font-medium" data-i18n="menu.section-title">精选菜单</span>
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2" data-i18n="menu.title">艺术面食精品</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-6" data-i18n="menu.description">
                     每一款面食都经过精心制作，为您带来独特的味觉体验
                 </p>
             </div>
             
             <!-- 菜单分类 -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="menu-category-btn px-6 py-3 bg-primary text-white rounded-full font-medium transition-all duration-300 hover:shadow-lg" data-category="all">
+                <button class="menu-category-btn px-6 py-3 bg-primary text-white rounded-full font-medium transition-all duration-300 hover:shadow-lg" data-category="all" data-i18n="menu.categories.all">
                     全部
                 </button>
-                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="noodle">
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="noodle" data-i18n="menu.categories.classic">
                     经典面食
                 </button>
-                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="soup">
-                    汤面系列
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="dessert" data-i18n="menu.categories.dessert">
+                    饮品甜点
                 </button>
-                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="special">
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="special" data-i18n="menu.categories.special">
                     特色面食
                 </button>
-                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="side">
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="side" data-i18n="menu.categories.side">
                     配菜小食
                 </button>
-                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="italian">
+                <button class="menu-category-btn px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-primary hover:text-white" data-category="italian" data-i18n="menu.categories.italian">
                     意大利风味
                 </button>
             </div>
             
             <!-- 菜单项目 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 项目1 -->
-                <div class="menu-item group" data-category="noodle">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ac6df29b220e4f1f88f978ba95e5f988.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=oxgScr9Fa8xdneR8wIMYY8pnTCA%3D" 
-                             alt="手工拉面" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">100%手工拉制</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">手工拉面</h3>
-                            <p class="text-gray-600 text-sm mt-1">劲道十足，口感爽滑</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥38</div>
-                    </div>
-                </div>
+
                 
                 <!-- 项目2 -->
-                <div class="menu-item group" data-category="soup">
+                <div class="menu-item group" data-category="dessert">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2c315fbd8cc448a4846beefc4d1c367d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=4EBGg3kwn3fVsgSe%2F%2BdMmTh0d7o%3D" 
-                             alt="牛肉汤面" 
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/623b6b100db14fd985462c0a5db1302e.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=2026050723481478967F18EF2A9E569F02&rrcfp=8a172a1a&x-expires=1778773694&x-signature=2xlR6dl89SitbNVDsHoZ8KYF0N0%3D" 
+                             alt="提拉米苏" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
-                                <div class="text-white text-sm">慢炖8小时汤底</div>
+                                <div class="text-white text-sm" data-i18n="menu-item-tiramisu-feature">意式经典甜点</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-xl font-display font-bold text-accent">红烧牛肉面</h3>
-                            <p class="text-gray-600 text-sm mt-1">汤浓肉香，营养丰富</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥45</div>
-                    </div>
-                </div>
-                
-                <!-- 项目3 -->
-                <div class="menu-item group" data-category="special">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/37e62f6e37c84463899d590f27562d57.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=OkbO3jySUeD94rehuZBqJa0%2Bcu0%3D" 
-                             alt="担担面" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">传统四川风味</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">川味担担面</h3>
-                            <p class="text-gray-600 text-sm mt-1">麻辣鲜香，回味无穷</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥32</div>
-                    </div>
-                </div>
-                
-                <!-- 项目4 -->
-                <div class="menu-item group" data-category="noodle">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/28b8c72beb85419f8e536cdde69eaea1.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=omTRIj05PgFVxnMptKoVygKEq%2B8%3D" 
-                             alt="刀削面" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">传统刀削工艺</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">传统刀削面</h3>
-                            <p class="text-gray-600 text-sm mt-1">外滑内筋，别具风味</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥36</div>
-                    </div>
-                </div>
-                
-                <!-- 项目5 -->
-                <div class="menu-item group" data-category="soup">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/40c126dd47ca4acb92baa8350972f87c.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=2x%2BZZAmGq2slfiqrkVCfDPQhVJI%3D" 
-                             alt="鸡汤面" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">土鸡汤熬制</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">清炖鸡汤面</h3>
-                            <p class="text-gray-600 text-sm mt-1">清香淡雅，温补养身</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥42</div>
-                    </div>
-                </div>
-                
-                <!-- 项目6 -->
-                <div class="menu-item group" data-category="special">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4589f5c0ac264bcda2bef6de9b3cb9b8.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=BKGWHMHYQ8gyrSpKzRemI%2F%2Fv82g%3D" 
-                             alt="炸酱面" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">秘制炸酱配方</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">老北京炸酱面</h3>
-                            <p class="text-gray-600 text-sm mt-1">酱香浓郁，口感丰富</p>
-                        </div>
-                        <div class="text-primary font-display font-bold text-xl">¥35</div>
-                    </div>
-                </div>
-                
-                <!-- 项目7 -->
-                <div class="menu-item group" data-category="side">
-                    <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd60faec6f2844ec8cc5568d95e91dcf.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=LxfwErqa0cSIDdBgSWpLt8fZp54%3D" 
-                             alt="小菜拼盘" 
-                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-6">
-                                <div class="text-white text-sm">传统中式小菜</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-display font-bold text-accent">中式小菜拼盘</h3>
-                            <p class="text-gray-600 text-sm mt-1">清爽可口，开胃解腻</p>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-tiramisu">经典提拉米苏</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-tiramisu-desc">咖啡浸泡的手指饼干与马斯卡彭奶酪的完美融合</p>
                         </div>
                         <div class="text-primary font-display font-bold text-xl">¥28</div>
                     </div>
                 </div>
                 
-                <!-- 项目8 -->
-                <div class="menu-item group" data-category="side">
+
+                
+                <!-- 项目4 -->
+                <div class="menu-item group" data-category="special">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/cc76eaaa254d4e16966d9283ba3e3017.jpeg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=kiIh31u%2B4Qj%2BBbZFeIUfvHAJ7L4%3D" 
-                             alt="卤味拼盘" 
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/46a3bd746dc046c9ac85dd3dd3180c38.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260508002742CF8BFE475FB2C385BF77&rrcfp=8a172a1a&x-expires=1778776062&x-signature=1LPPrE1MmuShVMsucaYke11kRxo%3D" 
+                             alt="鲜肉小笼包" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
-                                <div class="text-white text-sm">传统卤味工艺</div>
+                                <div class="text-white text-sm" data-i18n="menu-item-xiaolongbao-feature">鲜嫩多汁</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-xl font-display font-bold text-accent">传统卤味拼盘</h3>
-                            <p class="text-gray-600 text-sm mt-1">香而不腻，回味悠长</p>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-xiaolongbao">鲜肉小笼包</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-xiaolongbao-desc">皮薄馅嫩，汤汁鲜美</p>
                         </div>
-                        <div class="text-primary font-display font-bold text-xl">¥38</div>
+                        <div class="text-primary font-display font-bold text-xl">¥17</div>
+                    </div>
+                </div>
+                
+
+                
+
+                
+                <!-- 项目7 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/525fee56869c4015a0e5c7a96696bd64.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=2026050723344739CAB213D7E9DF25B826&rrcfp=8a172a1a&x-expires=1778772887&x-signature=q%2BUY%2BEj6tUgv%2Bekpng24H2ENdD4%3D" 
+                             alt="红烧牛肉面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-beef-noodle-feature">经典红烧风味</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-beef-noodle">红烧牛肉面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-beef-noodle-desc">慢炖牛肉，香浓汤底</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥45</div>
+                    </div>
+                </div>
+                
+                <!-- 项目8 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ca33c980b05f43b6bb3ba66b0645a1dd.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605080029385C2265088376B63971C5&rrcfp=8a172a1a&x-expires=1778776178&x-signature=YreP42ZCmckCd9pKmfXGhhMv5%2Bs%3D" 
+                             alt="刀削面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-daoxiao-feature">传统刀削工艺</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-daoxiao">传统刀削面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-daoxiao-desc">外滑内筋，别具风味</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥36</div>
+                    </div>
+                </div>
+                
+
+                
+                <!-- 项目10 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/0e394692da6a42edb238287e49b101ad.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507233647165AFEC46CA7C5DBFBB3&rrcfp=8a172a1a&x-expires=1778773008&x-signature=a0C1Bd4Gi96vDWY3QoulPy2OwM4%3D" 
+                             alt="番茄鸡蛋面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-tomato-egg-feature">酸甜可口</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-tomato-egg">番茄鸡蛋面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-tomato-egg-desc">酸甜开胃，家常风味</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥8</div>
+                    </div>
+                </div>
+                
+                <!-- 项目11 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4fbd37d5d6064713b33223a11117dbd6.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507233816456C84647D3F993A5612&rrcfp=8a172a1a&x-expires=1778773096&x-signature=w8JQDNN8aLQkutoVaUzzu%2BJwL4I%3D" 
+                             alt="鸡汤面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-chicken-soup-feature">清鲜滋补</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-chicken-soup">鸡汤面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-chicken-soup-desc">慢熬鸡汤，营养丰富</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥32</div>
+                    </div>
+                </div>
+                
+                <!-- 项目7 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ebd34442a21743fca7f6b67d48d88645.jpeg~tplv-a9rns2rl98-24:720:720.jpeg?lk3s=8e244e95&rcl=20260507234014B0DBD3C45788B12D9F19&rrcfp=8a172a1a&x-expires=1778773214&x-signature=EAyA2BIh4cSlsS5uWPyfKa7C9UM%3D" 
+                             alt="葱油拌面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-scallion-oil-feature">葱香四溢</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-scallion-oil">葱油拌面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-scallion-oil-desc">简单美味，葱香扑鼻</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥8</div>
+                    </div>
+                </div>
+                
+                <!-- 项目8 -->
+                <div class="menu-item group" data-category="noodle">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/e6b93faa8f4d4a51adbc0ad064aeddb5.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507234311399D5ACF41A7864A15D2&rrcfp=8a172a1a&x-expires=1778773391&x-signature=J5K5Lpa18Mf%2BS1DtQd6LAfujlc0%3D" 
+                             alt="特色招牌面" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-signature-feature">独家秘方</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-signature">特色招牌面</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-signature-desc">匠心独运，口感层次丰富</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥25</div>
                     </div>
                 </div>
                 
                 <!-- 项目9 -->
-                <div class="menu-item group" data-category="side">
+                <div class="menu-item group" data-category="dessert">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/31b4d9f678054096b4cb838ce0e03f16.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=k4zl3fGQJgq0lQDRZNaZydqJN5o%3D" 
-                             alt="炸鸡排" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/3bd9a0fdd98f48b8bc33d262d6f731b3.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605072349377E548D2C3270E1D3DC3E&rrcfp=8a172a1a&x-expires=1778773777&x-signature=cQ9MyFvxALBcJ9NjsVSho7oVGZg%3D" 
+                             alt="意式浓缩咖啡" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
-                                <div class="text-white text-sm">外酥里嫩</div>
+                                <div class="text-white text-sm" data-i18n="menu-item-espresso-feature">意式进口咖啡豆</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-xl font-display font-bold text-accent">香酥炸鸡排</h3>
-                            <p class="text-gray-600 text-sm mt-1">外酥里嫩，口感绝佳</p>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-espresso">意式浓缩咖啡</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-espresso-desc">醇厚浓郁，口感丰富</p>
                         </div>
-                        <div class="text-primary font-display font-bold text-xl">¥25</div>
+                        <div class="text-primary font-display font-bold text-xl">¥8</div>
+                    </div>
+                </div>
+                
+
+                
+                <!-- 项目7 -->
+                <div class="menu-item group" data-category="dessert">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/bd6ab68e448e4a9f9c7597bbbe34e815.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605072352150B61C5890357F4E260DD&rrcfp=8a172a1a&x-expires=1778773935&x-signature=SToKI5dkA1KyWAf0j2KadNC2%2FCA%3D" 
+                             alt="卡布奇诺" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-cappuccino-feature">丝滑奶泡</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-cappuccino">卡布奇诺</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-cappuccino-desc">香浓咖啡与丝滑奶泡的完美融合</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥8</div>
+                    </div>
+                </div>
+                
+                <!-- 项目7 -->
+                <div class="menu-item group" data-category="dessert">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/04129c12727346b8b07bd747c92ca7c0.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=2026050723541783AB083569BFB6349B1D&rrcfp=8a172a1a&x-expires=1778774057&x-signature=bhoIS81oyDwnDNW0zlLinWs0XTY%3D" 
+                             alt="花茶" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-flower-tea-feature">天然花香</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-flower-tea">精选花茶</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-flower-tea-desc">清香怡人，舒缓身心</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥18</div>
+                    </div>
+                </div>
+                
+                <!-- 项目8 -->
+                <div class="menu-item group" data-category="dessert">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/9e63fc4ab37943d2a94befadd71f885c.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507235822BD38CDA2D03F461E1EA6&rrcfp=8a172a1a&x-expires=1778774303&x-signature=xzh4QWsThh6yxIGDGLFpDOaO8vo%3D" 
+                             alt="可乐" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-cola-feature">经典碳酸饮料</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-cola">可乐</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-cola-desc">冰镇可乐，畅爽解渴</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥3</div>
+                    </div>
+                </div>
+                
+                <!-- 项目9 -->
+                <div class="menu-item group" data-category="dessert">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/be1d6c7adbea4cd0a24871d263111521.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=2026050723591989C1B710C518723E63DE&rrcfp=8a172a1a&x-expires=1778774359&x-signature=h97ZOmGUbkRueX29h%2F56MZ8K0oE%3D" 
+                             alt="矿泉水" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-mineral-water-feature">天然纯净</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-mineral-water">矿泉水</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-mineral-water-desc">纯净矿泉水，清冽甘甜</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥3</div>
                     </div>
                 </div>
                 
                 <!-- 项目10 -->
                 <div class="menu-item group" data-category="special">
                     <div class="relative overflow-hidden rounded-lg mb-4">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/66077d0b7ff54fa1ab5f3a7667d4b7ad.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507205145A7D33F458F3B8F4E2392&rrcfp=8a172a1a&x-expires=1778763106&x-signature=3%2BL2E6kw4O%2BgzWcAH%2Bh8pcq6mzc%3D" 
-                             alt="海鲜面" 
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ca33c980b05f43b6bb3ba66b0645a1dd.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605080029385C2265088376B63971C5&rrcfp=8a172a1a&x-expires=1778776178&x-signature=YreP42ZCmckCd9pKmfXGhhMv5%2Bs%3D" 
+                             alt="扬州炒饭" 
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
-                                <div class="text-white text-sm">新鲜海鲜</div>
+                                <div class="text-white text-sm" data-i18n="menu-item-yangzhou-fried-rice-feature">经典扬州风味</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-xl font-display font-bold text-accent">豪华海鲜面</h3>
-                            <p class="text-gray-600 text-sm mt-1">海鲜盛宴，鲜美无比</p>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-yangzhou-fried-rice">扬州炒饭</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-yangzhou-fried-rice-desc">粒粒分明，鲜香可口</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥32</div>
+                    </div>
+                </div>
+                
+                <!-- 项目7 -->
+
+                
+                <!-- 项目9 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4dbf9236347e487db0a74b3871a7809d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260508000923E942F7A66DCC645B2622&rrcfp=8a172a1a&x-expires=1778774963&x-signature=L%2BOLdWlNEAw83bHH%2BOr7naLT14U%3D" 
+                             alt="炸鸡排" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-chicken-cutlet-feature">外酥里嫩</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-chicken-cutlet">香酥炸鸡排</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-chicken-cutlet-desc">外酥里嫩，口感绝佳</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥18</div>
+                    </div>
+                </div>
+                
+                <!-- 项目9 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/c5c38d0cea724699b4b3c9dbb624611d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260508001305573333466BC2E71BD448&rrcfp=8a172a1a&x-expires=1778775186&x-signature=mwKkNj0mBbzYJXwnD0R0ahlFz%2Fo%3D" 
+                             alt="牛油果鸡蛋土司" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-avocado-toast-feature">健康美味</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-avocado-toast">牛油果鸡蛋土司</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-avocado-toast-desc">营养丰富，口感层次分明</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥20</div>
+                    </div>
+                </div>
+                
+                <!-- 项目10 -->
+                <div class="menu-item group" data-category="side">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/0f063987a17945b7833317b2516fe461.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=202605080015038AB186F5FC125076C09A&rrcfp=8a172a1a&x-expires=1778775303&x-signature=xn%2BwYN%2F9NkDw3XzX5%2FThkSHKuiE%3D" 
+                             alt="烤肠" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-sausage-feature">外焦里嫩</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-sausage">烤肠</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-sausage-desc">香气四溢，口感丰富</p>
+                        </div>
+                        <div class="text-primary font-display font-bold text-xl">¥18</div>
+                    </div>
+                </div>
+                
+                <!-- 项目10 -->
+                <div class="menu-item group" data-category="special">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/8bbf29ee46104e36ab75cb16be42aa28.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260508002245061D0618497A03221F84&rrcfp=8a172a1a&x-expires=1778775765&x-signature=6SBTYrAD7ySlz3UW3SwDyTSaFxc%3D" 
+                             alt="招牌灌汤包" 
+                             class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div class="p-6">
+                                <div class="text-white text-sm" data-i18n="menu-item-soup-dumplings-feature">汤汁鲜美</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-soup-dumplings">招牌灌汤包</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-soup-dumplings-desc">皮薄馅大，汤汁浓郁</p>
                         </div>
                         <div class="text-primary font-display font-bold text-xl">¥68</div>
                     </div>
@@ -592,14 +1342,14 @@
                              class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
-                                <div class="text-white text-sm">新鲜罗勒叶</div>
+                                <div class="text-white text-sm" data-i18n="menu-item-spaghetti-feature">新鲜罗勒叶</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-xl font-display font-bold text-accent">SPAGHETTI AL POMODORO</h3>
-                            <p class="text-gray-600 text-sm mt-1">番茄罗勒意面</p>
+                            <h3 class="text-xl font-display font-bold text-accent" data-i18n="menu-item-spaghetti">SPAGHETTI AL POMODORO</h3>
+                            <p class="text-gray-600 text-sm mt-1" data-i18n="menu-item-spaghetti-desc">番茄罗勒意面</p>
                         </div>
                         <div class="text-primary font-display font-bold text-xl">¥58</div>
                     </div>
@@ -706,7 +1456,7 @@
                             <h3 class="text-xl font-display font-bold text-accent">LASAGNA FERRRARESE</h3>
                             <p class="text-gray-600 text-sm mt-1">传统千层面</p>
                         </div>
-                        <div class="text-primary font-display font-bold text-xl">¥108</div>
+                        <div class="text-primary font-display font-bold text-xl">¥88</div>
                     </div>
                 </div>
                 
@@ -748,8 +1498,8 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <span class="text-secondary font-medium">面食课程</span>
-                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2">面食艺术工坊</h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-6">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2" data-i18n="courses.title">面食艺术工坊</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-6" data-i18n="courses.description">
                     跟随我们的面点大师，学习面食制作的传统技艺
                 </p>
             </div>
@@ -761,27 +1511,27 @@
                     <div class="text-secondary text-4xl mb-6">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <h3 class="text-2xl font-display font-bold mb-4">面食入门课程</h3>
-                    <p class="text-gray-300 mb-6">
+                    <h3 class="text-2xl font-display font-bold mb-4" data-i18n="course-1-title">面食入门课程</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="course-1-description">
                         适合初学者的面食基础知识，包括面团制作、揉面技巧和基本成型方法。
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="far fa-clock mr-3 text-secondary"></i>
-                            <span>2小时课程</span>
+                            <span data-i18n="course-1-duration">2小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-users mr-3 text-secondary"></i>
-                            <span>最多8人小班</span>
+                            <span data-i18n="course-1-size">最多8人小班</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-graduation-cap mr-3 text-secondary"></i>
-                            <span>含实践操作</span>
+                            <span data-i18n="course-1-includes">含实践操作</span>
                         </div>
                     </div>
                     <div class="mt-8">
-                        <div class="text-2xl font-display font-bold text-secondary mb-4">¥298/人</div>
-                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <div class="text-2xl font-display font-bold text-secondary mb-4" data-i18n="course-1-price">¥298/人</div>
+                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105" data-i18n="course-2-btn">
                             立即预约
                         </button>
                     </div>
@@ -792,27 +1542,27 @@
                     <div class="text-secondary text-4xl mb-6">
                         <i class="fas fa-certificate"></i>
                     </div>
-                    <h3 class="text-2xl font-display font-bold mb-4">拉面大师班</h3>
-                    <p class="text-gray-300 mb-6">
+                    <h3 class="text-2xl font-display font-bold mb-4" data-i18n="course-2-title">拉面大师班</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="course-2-description">
                         深入学习手工拉面的制作技巧，包括面团调制、醒面、拉制和汤底熬制。
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="far fa-clock mr-3 text-secondary"></i>
-                            <span>4小时课程</span>
+                            <span data-i18n="course-2-duration">4小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-users mr-3 text-secondary"></i>
-                            <span>最多6人小班</span>
+                            <span data-i18n="course-2-size">最多6人小班</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-graduation-cap mr-3 text-secondary"></i>
-                            <span>专业认证</span>
+                            <span data-i18n="course-2-includes">专业认证</span>
                         </div>
                     </div>
                     <div class="mt-8">
-                        <div class="text-2xl font-display font-bold text-secondary mb-4">¥598/人</div>
-                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <div class="text-2xl font-display font-bold text-secondary mb-4" data-i18n="course-2-price">¥598/人</div>
+                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105" data-i18n="course-2-btn">
                             立即预约
                         </button>
                     </div>
@@ -823,27 +1573,27 @@
                     <div class="text-secondary text-4xl mb-6">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <h3 class="text-2xl font-display font-bold mb-4">地方特色面食</h3>
-                    <p class="text-gray-300 mb-6">
-                        学习中国各地特色面食的制作方法，包括担担面、炸酱面、刀削面等。
+                    <h3 class="text-2xl font-display font-bold mb-4" data-i18n="course-3-title">意大利传统面食制作</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="course-3-description">
+                        跟随意大利主厨学习正宗意面制作技艺，包括手工面条、酱汁调配和传统烹饪方法。
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="far fa-clock mr-3 text-secondary"></i>
-                            <span>3小时课程</span>
+                            <span data-i18n="course-3-duration">3.5小时课程</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-users mr-3 text-secondary"></i>
-                            <span>最多10人小班</span>
+                            <span data-i18n="course-3-size">最多8人小班</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-300">
                             <i class="fas fa-graduation-cap mr-3 text-secondary"></i>
-                            <span>含美食品尝</span>
+                            <span data-i18n="course-3-includes">含意式美食品尝</span>
                         </div>
                     </div>
                     <div class="mt-8">
-                        <div class="text-2xl font-display font-bold text-secondary mb-4">¥498/人</div>
-                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <div class="text-2xl font-display font-bold text-secondary mb-4" data-i18n="course-3-price">¥568/人</div>
+                        <button class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105" data-i18n="course-3-btn">
                             立即预约
                         </button>
                     </div>
@@ -856,9 +1606,9 @@
     <section id="news" class="py-20 bg-neutral">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-primary font-medium">最新动态</span>
-                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2">面食文化资讯</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
+                <span class="text-primary font-medium" data-i18n="news.section-title">最新动态</span>
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2" data-i18n="news.title">面食文化资讯</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-6" data-i18n="news.description">
                     了解最新的面食文化、传统工艺和店内活动
                 </p>
             </div>
@@ -871,19 +1621,19 @@
                         <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
                              alt="面食文化展" 
                              class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-primary text-white text-sm font-medium px-4 py-2 rounded-full">
+                        <div class="absolute top-4 left-4 bg-primary text-white text-sm font-medium px-4 py-2 rounded-full" data-i18n="news-1-category">
                             文化展览
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">2024年6月15日</div>
-                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300">
+                        <div class="text-sm text-gray-500 mb-2" data-i18n="news-1-date">2024年6月15日</div>
+                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300" data-i18n="news-1-title">
                             中国面食文化展开幕
                         </h3>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4" data-i18n="news-1-description">
                             我们将举办一场以中国传统面食为主题的文化展，展示各地面食文化和制作工艺。
                         </p>
-                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300">
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300" data-i18n="news-3-btn">
                             阅读更多
                             <i class="fas fa-arrow-right ml-2 text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                         </a>
@@ -896,19 +1646,19 @@
                         <img src="https://images.unsplash.com/photo-1566470699766-7399f46b4961?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                              alt="面点大师赛" 
                              class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-secondary text-white text-sm font-medium px-4 py-2 rounded-full">
+                        <div class="absolute top-4 left-4 bg-secondary text-white text-sm font-medium px-4 py-2 rounded-full" data-i18n="news-2-category">
                             赛事活动
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">2024年7月20日</div>
-                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300">
+                        <div class="text-sm text-gray-500 mb-2" data-i18n="news-2-date">2024年7月20日</div>
+                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300" data-i18n="news-2-title">
                             第三届面点大师大赛
                         </h3>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4" data-i18n="news-2-description">
                             年度面点大师大赛即将举行，来自全国各地的面点师傅将齐聚一堂，展示精湛的面食制作技艺。
                         </p>
-                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300">
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300" data-i18n="news-3-btn">
                             阅读更多
                             <i class="fas fa-arrow-right ml-2 text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                         </a>
@@ -921,19 +1671,19 @@
                         <img src="https://images.unsplash.com/photo-1516684732162-2d48ac470a8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                              alt="新品发布" 
                              class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-accent text-white text-sm font-medium px-4 py-2 rounded-full">
+                        <div class="absolute top-4 left-4 bg-accent text-white text-sm font-medium px-4 py-2 rounded-full" data-i18n="news-3-category">
                             新品发布
                         </div>
                     </div>
                     <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">2024年8月5日</div>
-                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300">
+                        <div class="text-sm text-gray-500 mb-2" data-i18n="news-3-date">2024年8月5日</div>
+                        <h3 class="text-xl font-display font-bold text-accent mb-3 group-hover:text-primary transition-colors duration-300" data-i18n="news-3-title">
                             夏季养生面食新品
                         </h3>
-                        <p class="text-gray-600 mb-4">
+                        <p class="text-gray-600 mb-4" data-i18n="news-3-description">
                             我们推出夏季限定面食系列，采用新鲜食材与传统配方的创意搭配，带来清爽健康的夏日体验。
                         </p>
-                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300">
+                        <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300" data-i18n="news-3-btn">
                             阅读更多
                             <i class="fas fa-arrow-right ml-2 text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                         </a>
@@ -957,9 +1707,9 @@
                 <!-- 左侧联系信息 -->
                 <div class="space-y-8">
                     <div>
-                        <span class="text-primary font-medium">联系我们</span>
-                        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2">来品尝艺术面食</h2>
-                        <p class="text-lg text-gray-600 mt-6 max-w-lg">
+                        <span class="text-primary font-medium" data-i18n="contact.section-title">联系我们</span>
+                        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-accent mt-2" data-i18n="contact.title">来品尝艺术面食</h2>
+                        <p class="text-lg text-gray-600 mt-6 max-w-lg" data-i18n="contact.description">
                             欢迎来到我们的面食艺术空间，在这里，每一碗面都是一次文化之旅。
                         </p>
                     </div>
@@ -970,8 +1720,8 @@
                                 <i class="fas fa-map-marker-alt text-primary text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-accent mb-1">地址</h3>
-                                <p class="text-gray-600">北京市朝阳区建国路88号</p>
+                                <h3 class="text-lg font-semibold text-accent mb-1" data-i18n="form.name">地址</h3>
+                                <p class="text-gray-600" data-i18n="address">北京市朝阳区建国路88号</p>
                             </div>
                         </div>
                         
@@ -980,8 +1730,8 @@
                                 <i class="fas fa-phone-alt text-primary text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-accent mb-1">电话</h3>
-                                <p class="text-gray-600">010-8888-8888</p>
+                                <h3 class="text-lg font-semibold text-accent mb-1" data-i18n="form.phone">电话</h3>
+                                <p class="text-gray-600" data-i18n="phone">010-8888-8888</p>
                             </div>
                         </div>
                         
@@ -990,8 +1740,8 @@
                                 <i class="fas fa-envelope text-primary text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-accent mb-1">邮箱</h3>
-                                <p class="text-gray-600">info@mianrestaurant.com</p>
+                                <h3 class="text-lg font-semibold text-accent mb-1" data-i18n="form.email">邮箱</h3>
+                                <p class="text-gray-600" data-i18n="email">info@mianrestaurant.com</p>
                             </div>
                         </div>
                         
@@ -1000,15 +1750,15 @@
                                 <i class="fas fa-clock text-primary text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-accent mb-1">营业时间</h3>
-                                <p class="text-gray-600">周一至周日 10:00 - 22:00</p>
+                                <h3 class="text-lg font-semibold text-accent mb-1" data-i18n="form.time">营业时间</h3>
+                                <p class="text-gray-600" data-i18n="hours">周一至周日 10:00 - 22:00</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- 社交媒体 -->
                     <div>
-                        <h3 class="text-lg font-semibold text-accent mb-4">关注我们</h3>
+                        <h3 class="text-lg font-semibold text-accent mb-4" data-i18n="follow-us">关注我们</h3>
                         <div class="flex space-x-4">
                             <a href="#" class="w-10 h-10 bg-primary hover:bg-secondary rounded-full flex items-center justify-center transition-all duration-300 text-white">
                                 <i class="fab fa-weixin"></i>
@@ -1028,31 +1778,31 @@
                 
                 <!-- 右侧联系表单 -->
                 <div class="bg-neutral rounded-xl p-8 shadow-lg">
-                    <h3 class="text-2xl font-display font-bold text-accent mb-6">发送消息</h3>
+                    <h3 class="text-2xl font-display font-bold text-accent mb-6" data-i18n="form.message">发送消息</h3>
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">姓名</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="您的姓名">
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.name">姓名</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="您的姓名" data-i18n-placeholder="form.your-name">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="您的邮箱">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.email">邮箱</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="您的邮箱" data-i18n-placeholder="form.your-email">
                             </div>
                         </div>
                         
                         <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">主题</label>
-                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="消息主题">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.subject">主题</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="消息主题" data-i18n-placeholder="form.your-subject">
                         </div>
                         
                         <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">消息</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="请输入您的消息"></textarea>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.message">消息</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300" placeholder="请输入您的消息" data-i18n-placeholder="form.your-message"></textarea>
                         </div>
                         
                         <div>
-                            <button type="submit" class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg btn-primary">
+                            <button type="submit" class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg btn-primary" data-i18n="btn.send-message">
                                 发送消息
                             </button>
                         </div>
@@ -1066,56 +1816,56 @@
     <section id="reservation" class="py-20 bg-accent text-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <span class="text-secondary font-medium">立即预约</span>
-                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2 mb-8">预订您的艺术面食体验</h2>
+                <span class="text-secondary font-medium" data-i18n="reservation.subtitle">立即预约</span>
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-display font-bold text-white mt-2 mb-8" data-i18n="reservation.title">预订您的艺术面食体验</h2>
                 
                 <div class="bg-white/10 backdrop-blur-md rounded-xl p-8 md:p-12">
                     <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="res-name" class="block text-sm font-medium text-gray-300 mb-2">姓名</label>
-                            <input type="text" id="res-name" name="res-name" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的姓名">
+                            <label for="res-name" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.name">姓名</label>
+                            <input type="text" id="res-name" name="res-name" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的姓名" data-i18n-placeholder="form.your-name">
                         </div>
                         
                         <div>
-                            <label for="res-phone" class="block text-sm font-medium text-gray-300 mb-2">电话</label>
-                            <input type="tel" id="res-phone" name="res-phone" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的联系电话">
+                            <label for="res-phone" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.phone">电话</label>
+                            <input type="tel" id="res-phone" name="res-phone" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="您的联系电话" data-i18n-placeholder="form.your-phone">
                         </div>
                         
                         <div>
-                            <label for="res-date" class="block text-sm font-medium text-gray-300 mb-2">日期</label>
+                            <label for="res-date" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.date">日期</label>
                             <input type="date" id="res-date" name="res-date" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
                         
                         <div>
-                            <label for="res-time" class="block text-sm font-medium text-gray-300 mb-2">时间</label>
+                            <label for="res-time" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.time">时间</label>
                             <input type="time" id="res-time" name="res-time" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
                         
                         <div>
-                            <label for="res-guests" class="block text-sm font-medium text-gray-300 mb-2">人数</label>
+                            <label for="res-guests" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.guests">人数</label>
                             <select id="res-guests" name="res-guests" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white">
-                                <option value="1">1人</option>
-                                <option value="2" selected>2人</option>
-                                <option value="3">3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="more">7人以上</option>
+                                <option value="1" data-i18n="form.select-guests-1">1人</option>
+                                <option value="2" selected data-i18n="form.select-guests-2">2人</option>
+                                <option value="3" data-i18n="form.select-guests-3">3人</option>
+                                <option value="4" data-i18n="form.select-guests-4">4人</option>
+                                <option value="5" data-i18n="form.select-guests-5">5人</option>
+                                <option value="6" data-i18n="form.select-guests-6">6人</option>
+                                <option value="more" data-i18n="form.select-guests-more">7人以上</option>
                             </select>
                         </div>
                         
                         <div class="md:col-span-2">
-                            <label for="res-notes" class="block text-sm font-medium text-gray-300 mb-2">特殊要求</label>
-                            <input type="text" id="res-notes" name="res-notes" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="特殊饮食要求等">
+                            <label for="res-notes" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.special-requests">特殊要求</label>
+                            <input type="text" id="res-notes" name="res-notes" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="特殊饮食要求等" data-i18n-placeholder="form.your-notes">
                         </div>
                         
                         <div class="md:col-span-2">
-                            <label for="res-message" class="block text-sm font-medium text-gray-300 mb-2">发送消息</label>
-                            <textarea id="res-message" name="res-message" rows="4" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="请输入您的消息"></textarea>
+                            <label for="res-message" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="form.message">发送消息</label>
+                            <textarea id="res-message" name="res-message" rows="4" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400" placeholder="请输入您的消息" data-i18n-placeholder="form.your-reservation-message"></textarea>
                         </div>
                         
                         <div class="md:col-span-2">
-                            <button type="submit" class="w-full py-4 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg">
+                            <button type="submit" class="w-full py-4 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg" data-i18n="btn.confirm-reservation">
                                 确认预约
                             </button>
                         </div>
@@ -1133,8 +1883,9 @@
                 <div class="lg:col-span-1">
                     <div class="flex items-center mb-6">
                         <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4323d2a517bc452aaf7461e949322fc3.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260507204035D122A908E19822215251&rrcfp=8a172a1a&x-expires=1778762435&x-signature=u6yc9dVe63EHKgseE%2FzmRW%2F%2Fonw%3D" alt="MIAN Logo" class="h-10 w-auto mr-3">
-                        <div class="text-3xl font-display font-bold">
-                            MIAN<span class="text-secondary">·</span><span class="text-sm font-light tracking-widest">面馆</span>
+                        <div class="font-display font-bold flex flex-col items-center">
+                            <div class="text-3xl">MIAN<span class="text-secondary">·</span></div>
+                            <div class="text-sm font-light tracking-widest">面馆</div>
                         </div>
                     </div>
                     <p class="text-gray-300 mb-6">
@@ -1158,7 +1909,7 @@
                 
                 <!-- 快速链接 -->
                 <div>
-                    <h3 class="text-xl font-semibold mb-6">快速链接</h3>
+                    <h3 class="text-xl font-semibold mb-6" data-i18n="footer.quicklinks">快速链接</h3>
                     <ul class="space-y-4">
                         <li><a href="#home" class="text-gray-300 hover:text-secondary transition-colors duration-300">首页</a></li>
                         <li><a href="#about" class="text-gray-300 hover:text-secondary transition-colors duration-300">关于我们</a></li>
@@ -1171,7 +1922,7 @@
                 
                 <!-- 联系方式 -->
                 <div>
-                    <h3 class="text-xl font-semibold mb-6">联系方式</h3>
+                    <h3 class="text-xl font-semibold mb-6" data-i18n="footer.contact">联系方式</h3>
                     <ul class="space-y-4">
                         <li class="flex items-start space-x-3">
                             <i class="fas fa-map-marker-alt text-secondary mt-1"></i>
@@ -1194,15 +1945,15 @@
                 
                 <!-- 订阅 -->
                 <div>
-                    <h3 class="text-xl font-semibold mb-6">订阅我们</h3>
-                    <p class="text-gray-300 mb-4">
+                    <h3 class="text-xl font-semibold mb-6" data-i18n="footer.subscribe">订阅我们</h3>
+                    <p class="text-gray-300 mb-4" data-i18n="footer.subscribe-description">
                         订阅我们的邮件，获取最新的活动和优惠信息。
                     </p>
                     <form class="space-y-4">
                         <div>
-                            <input type="email" placeholder="您的邮箱地址" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
+                            <input type="email" placeholder="您的邮箱地址" data-i18n-placeholder="form.email-placeholder" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-300 text-white placeholder-gray-400">
                         </div>
-                        <button type="submit" class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300">
+                        <button type="submit" class="w-full py-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all duration-300" data-i18n="btn.subscribe">
                             订阅
                         </button>
                     </form>
@@ -1210,7 +1961,7 @@
             </div>
             
             <div class="border-t border-white/10 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 MIAN 艺术面馆. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2024 MIAN 艺术面馆. 保留所有权利.</p>
             </div>
         </div>
     </footer>
@@ -1221,6 +1972,565 @@
     </button>
 
     <!-- JavaScript -->
+    <script>
+        // 多语言支持
+        document.addEventListener('DOMContentLoaded', function() {
+            const translations = {
+                'zh': {
+                    'nav.home': '首页',
+                    'nav.about': '关于我们',
+                    'nav.menu': '菜单',
+                    'nav.courses': '课程',
+                    'nav.news': '新闻',
+                    'nav.contact': '联系我们',
+                    'nav.reservation': '预约座位',
+                    'hero.title': '面食的<span class="text-secondary italic">艺术</span>',
+                    'hero.subtitle': '每一根面条，都是匠心独运的美味诗篇',
+                    'hero.description': '欢迎来到 MIAN 艺术面馆，这里不仅有美味的面食，更有独特的艺术体验。',
+                    'about.section-title': '关于我们',
+                    'about.title': '面食与艺术的完美融合',
+                    'about.paragraph-1': '两种文化，同一张餐桌。',
+                    'about.paragraph-2': '"面"既是食物，也是脸庞与身份。MIAN 通过中国面、意大利面与面对面用餐的体验，创造一个温暖、开放、融合的空间。',
+                    'about.experience-years': '年面食制作经验',
+                    'about.noodle-types': '特色面食种类',
+                    'about.experience-years': '年面食制作经验',
+                    'about.noodle-types': '特色面食种类',
+                    'menu.section-title': '精选菜单',
+                    'menu.title': '艺术面食精品',
+                    'menu.categories.all': '全部',
+                    'menu.categories.classic': '经典面食',
+                    'menu.categories.dessert': '饮品甜点',
+                    'menu.categories.special': '特色菜品',
+                    'menu.categories.side': '配菜小食',
+                    'menu.categories.italian': '意大利风味',
+                    'menu.description': '每一款面食都经过精心制作，为您带来独特的味觉体验',
+                    'courses.title': '面食艺术工坊',
+                    'courses.description': '跟随我们的面点大师，学习面食制作的传统技艺',
+                    'news.section-title': '最新动态',
+                    'news.title': '面食文化资讯',
+                    'news.description': '了解最新的面食文化、传统工艺和店内活动',
+                    'contact.section-title': '联系我们',
+                    'contact.title': '来品尝艺术面食',
+                    'contact.description': '欢迎来到我们的面食艺术空间，在这里，每一碗面都是一次文化之旅。',
+                    'reservation.title': '预订您的艺术面食体验',
+                    'reservation.subtitle': '立即预约',
+                    'footer.description': '面食与艺术的完美融合，为您带来无与伦比的味觉体验。',
+                    'footer.quicklinks': '快速链接',
+                    'footer.contact': '联系方式',
+                    'footer.subscribe': '订阅我们',
+                    'footer.subscribe-description': '订阅我们的邮件，获取最新的活动和优惠信息。',
+                    'footer.copyright': '© 2024 MIAN 艺术面馆. 保留所有权利.',
+                    'btn.explore-menu': '探索菜单',
+                    'btn.about-us': '关于我们',
+                    'btn.view-menu': '查看完整菜单',
+                    'btn.view-news': '查看更多新闻',
+                    'btn.send-message': '发送消息',
+                    'btn.confirm-reservation': '确认预约',
+                    'btn.subscribe': '订阅',
+                    'form.name': '姓名',
+                    'form.email': '邮箱',
+                    'form.subject': '主题',
+                    'form.message': '消息',
+                    'form.phone': '电话',
+                    'form.date': '日期',
+                    'form.time': '时间',
+                    'form.guests': '人数',
+                    'form.special-requests': '特殊要求',
+                    'form.your-name': '您的姓名',
+                    'form.your-email': '您的邮箱',
+                    'form.your-subject': '消息主题',
+                    'form.your-message': '请输入您的消息',
+                    'form.your-phone': '您的联系电话',
+                    'form.your-notes': '特殊饮食要求等',
+                    'form.your-reservation-message': '请输入您的消息',
+                    'form.email-placeholder': '您的邮箱地址',
+                    'form.select-guests-1': '1人',
+                    'form.select-guests-2': '2人',
+                    'form.select-guests-3': '3人',
+                    'form.select-guests-4': '4人',
+                    'form.select-guests-5': '5人',
+                    'form.select-guests-6': '6人',
+                    'form.select-guests-more': '7人以上',
+                    'address': '北京市朝阳区建国路88号',
+                    'phone': '010-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': '周一至周日 10:00 - 22:00',
+                    'follow-us': '关注我们',
+                    'course-1-title': '面食入门课程',
+                    'course-1-description': '适合初学者的面食基础知识，包括面团制作、揉面技巧和基本成型方法。',
+                    'course-1-duration': '2小时课程',
+                    'course-1-size': '最多8人小班',
+                    'course-1-includes': '含实践操作',
+                    'course-1-price': '¥298/人',
+                    'course-1-btn': '立即预约',
+                    'course-2-title': '拉面大师班',
+                    'course-2-description': '深入学习手工拉面的制作技巧，包括面团调制、醒面、拉制和汤底熬制。',
+                    'course-2-duration': '4小时课程',
+                    'course-2-size': '最多6人小班',
+                    'course-2-includes': '专业认证',
+                    'course-2-price': '¥598/人',
+                    'course-2-btn': '立即预约',
+                    'course-3-title': '意大利传统面食制作',
+                    'course-3-description': '跟随意大利主厨学习正宗意面制作技艺，包括手工面条、酱汁调配和传统烹饪方法。',
+                    'course-3-duration': '3.5小时课程',
+                    'course-3-size': '最多8人小班',
+                    'course-3-includes': '含意式美食品尝',
+                    'course-3-price': '¥568/人',
+                    'course-3-btn': '立即预约',
+                    'news-1-category': '文化展览',
+                    'news-1-date': '2024年6月15日',
+                    'news-1-title': '中国面食文化展开幕',
+                    'news-1-description': '我们将举办一场以中国传统面食为主题的文化展，展示各地面食文化和制作工艺。',
+                    'news-1-btn': '阅读更多',
+                    'news-2-category': '赛事活动',
+                    'news-2-date': '2024年7月20日',
+                    'news-2-title': '第三届面点大师大赛',
+                    'news-2-description': '年度面点大师大赛即将举行，来自全国各地的面点师傅将齐聚一堂，展示精湛的面食制作技艺。',
+                    'news-2-btn': '阅读更多',
+                    'news-3-category': '新品发布',
+                    'news-3-date': '2024年8月5日',
+                    'news-3-title': '夏季养生面食新品',
+                    'news-3-description': '我们推出夏季限定面食系列，采用新鲜食材与传统配方的创意搭配，带来清爽健康的夏日体验。',
+                    'news-3-btn': '阅读更多',
+                    'menu-item-xiaolongbao': '鲜肉小笼包',
+                    'menu-item-xiaolongbao-desc': '皮薄馅嫩，汤汁鲜美',
+                    'menu-item-xiaolongbao-feature': '鲜嫩多汁',
+                    'menu-item-beef-noodle': '红烧牛肉面',
+                    'menu-item-beef-noodle-desc': '慢炖牛肉，香浓汤底',
+                    'menu-item-beef-noodle-feature': '经典红烧风味',
+                    'menu-item-daoxiao': '传统刀削面',
+                    'menu-item-daoxiao-desc': '外滑内筋，别具风味',
+                    'menu-item-daoxiao-feature': '传统刀削工艺',
+                    'menu-item-tomato-egg': '番茄鸡蛋面',
+                    'menu-item-tomato-egg-desc': '酸甜开胃，家常风味',
+                    'menu-item-tomato-egg-feature': '酸甜可口',
+                    'menu-item-chicken-soup': '鸡汤面',
+                    'menu-item-chicken-soup-desc': '慢熬鸡汤，营养丰富',
+                    'menu-item-chicken-soup-feature': '清鲜滋补',
+                    'menu-item-scallion-oil': '葱油拌面',
+                    'menu-item-scallion-oil-desc': '简单美味，葱香扑鼻',
+                    'menu-item-scallion-oil-feature': '葱香四溢',
+                    'menu-item-signature': '特色招牌面',
+                    'menu-item-signature-desc': '匠心独运，口感层次丰富',
+                    'menu-item-signature-feature': '独家秘方',
+                    'menu-item-tiramisu': '经典提拉米苏',
+                    'menu-item-tiramisu-desc': '咖啡浸泡的手指饼干与马斯卡彭奶酪的完美融合',
+                    'menu-item-tiramisu-feature': '意式经典甜点',
+                    'menu-item-espresso': '意式浓缩咖啡',
+                    'menu-item-espresso-desc': '醇厚浓郁，口感丰富',
+                    'menu-item-espresso-feature': '意式进口咖啡豆',
+                    'menu-item-cappuccino': '卡布奇诺',
+                    'menu-item-cappuccino-desc': '香浓咖啡与丝滑奶泡的完美融合',
+                    'menu-item-cappuccino-feature': '丝滑奶泡',
+                    'menu-item-flower-tea': '精选花茶',
+                    'menu-item-flower-tea-desc': '清香怡人，舒缓身心',
+                    'menu-item-flower-tea-feature': '天然花香',
+                    'menu-item-cola': '可乐',
+                    'menu-item-cola-desc': '冰镇可乐，畅爽解渴',
+                    'menu-item-cola-feature': '经典碳酸饮料',
+                    'menu-item-mineral-water': '矿泉水',
+                    'menu-item-mineral-water-desc': '纯净矿泉水，清冽甘甜',
+                    'menu-item-mineral-water-feature': '天然纯净',
+                    'menu-item-yangzhou-fried-rice': '扬州炒饭',
+                    'menu-item-yangzhou-fried-rice-desc': '粒粒分明，鲜香可口',
+                    'menu-item-yangzhou-fried-rice-feature': '经典扬州风味',
+                    'menu-item-chicken-cutlet': '香酥炸鸡排',
+                    'menu-item-chicken-cutlet-desc': '外酥里嫩，口感绝佳',
+                    'menu-item-chicken-cutlet-feature': '外酥里嫩',
+                    'menu-item-avocado-toast': '牛油果鸡蛋土司',
+                    'menu-item-avocado-toast-desc': '营养丰富，口感层次分明',
+                    'menu-item-avocado-toast-feature': '健康美味',
+                    'menu-item-sausage': '烤肠',
+                    'menu-item-sausage-desc': '香气四溢，口感丰富',
+                    'menu-item-sausage-feature': '外焦里嫩',
+                    'menu-item-soup-dumplings': '招牌灌汤包',
+                    'menu-item-soup-dumplings-desc': '皮薄馅大，汤汁浓郁',
+                    'menu-item-soup-dumplings-feature': '汤汁鲜美',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': '番茄罗勒意面',
+                    'menu-item-spaghetti-feature': '新鲜罗勒叶'
+                },
+                'en': {
+                    'nav.home': 'Home',
+                    'nav.about': 'About Us',
+                    'nav.menu': 'Menu',
+                    'nav.courses': 'Courses',
+                    'nav.news': 'News',
+                    'nav.contact': 'Contact Us',
+                    'nav.reservation': 'Reserve a Table',
+                    'hero.title': 'The <span class="text-secondary italic">Art</span> of Noodles',
+                    'hero.subtitle': 'Every strand tells a story of craftsmanship',
+                    'hero.description': 'Welcome to MIAN Artistic Noodle House, where you can enjoy delicious noodles and a unique artistic experience.',
+                    'about.section-title': 'About Us',
+                    'about.title': 'The Perfect Fusion of Noodles and Art',
+                    'about.paragraph-1': 'Two cultures, one table.',
+                    'about.paragraph-2': '"Noodle" is both food and face, identity. Through Chinese noodles, Italian pasta, and the experience of dining face to face, MIAN creates a warm, open, and inclusive space.',
+                    'about.experience-years': 'Years of Experience',
+                    'about.noodle-types': 'Special Noodle Types',
+                    'menu.section-title': 'Our Menu',
+                    'menu.title': 'Artistic Noodle Creations',
+                    'menu.categories.all': 'All',
+                    'menu.categories.classic': 'Classic Noodles',
+                    'menu.categories.dessert': 'Desserts & Drinks',
+                    'menu.categories.special': 'Special Noodles',
+                    'menu.categories.side': 'Side Dishes',
+                    'menu.categories.italian': 'Italian Flavors',
+                    'menu.description': 'Each noodle dish is carefully crafted to bring you a unique culinary experience',
+                    'courses.title': 'Noodle Art Workshop',
+                    'courses.description': 'Learn traditional noodle-making techniques from our master chefs',
+                    'news.section-title': 'Latest News',
+                    'news.title': 'Noodle Culture Information',
+                    'news.description': 'Discover the latest in noodle culture, traditional craftsmanship, and in-store events',
+                    'contact.section-title': 'Contact Us',
+                    'contact.title': 'Come and Taste Artistic Noodles',
+                    'contact.description': 'Welcome to our noodle art space, where every bowl is a cultural journey.',
+                    'reservation.title': 'Reserve Your Artistic Noodle Experience',
+                    'reservation.subtitle': 'Book Now',
+                    'footer.description': 'The perfect fusion of noodles and art, bringing you an unparalleled culinary experience.',
+                    'footer.quicklinks': 'Quick Links',
+                    'footer.contact': 'Contact Information',
+                    'footer.subscribe': 'Subscribe',
+                    'footer.subscribe-description': 'Subscribe to our newsletter for the latest events and offers.',
+                    'footer.copyright': '© 2024 MIAN Artistic Noodle House. All rights reserved.',
+                    'btn.explore-menu': 'Explore Menu',
+                    'btn.about-us': 'About Us',
+                    'btn.view-menu': 'View Full Menu',
+                    'btn.view-news': 'View More News',
+                    'btn.send-message': 'Send Message',
+                    'btn.confirm-reservation': 'Confirm Reservation',
+                    'btn.subscribe': 'Subscribe',
+                    'form.name': 'Name',
+                    'form.email': 'Email',
+                    'form.subject': 'Subject',
+                    'form.message': 'Message',
+                    'form.phone': 'Phone',
+                    'form.date': 'Date',
+                    'form.time': 'Time',
+                    'form.guests': 'Guests',
+                    'form.special-requests': 'Special Requests',
+                    'form.your-name': 'Your Name',
+                    'form.your-email': 'Your Email',
+                    'form.your-subject': 'Message Subject',
+                    'form.your-message': 'Please enter your message',
+                    'form.your-phone': 'Your Phone Number',
+                    'form.your-notes': 'Special dietary requirements, etc.',
+                    'form.your-reservation-message': 'Please enter your message',
+                    'form.email-placeholder': 'Your email address',
+                    'form.select-guests-1': '1 Person',
+                    'form.select-guests-2': '2 People',
+                    'form.select-guests-3': '3 People',
+                    'form.select-guests-4': '4 People',
+                    'form.select-guests-5': '5 People',
+                    'form.select-guests-6': '6 People',
+                    'form.select-guests-more': '7+ People',
+                    'address': '88 Jianguo Road, Chaoyang District, Beijing',
+                    'phone': '+86 10-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': 'Monday to Sunday 10:00 - 22:00',
+                    'follow-us': 'Follow Us',
+                    'course-1-title': 'Noodle Making Basics',
+                    'course-1-description': 'Perfect for beginners, covering dough preparation, kneading techniques, and basic shaping methods.',
+                    'course-1-duration': '2-Hour Course',
+                    'course-1-size': 'Small class (max 8 people)',
+                    'course-1-includes': 'Hands-on practice',
+                    'course-1-price': '¥298/person',
+                    'course-1-btn': 'Book Now',
+                    'course-2-title': 'Ramen Master Class',
+                    'course-2-description': 'Deep dive into handmade ramen techniques, including dough preparation, resting, pulling, and broth making.',
+                    'course-2-duration': '4-Hour Course',
+                    'course-2-size': 'Small class (max 6 people)',
+                    'course-2-includes': 'Professional certification',
+                    'course-2-price': '¥598/person',
+                    'course-2-btn': 'Book Now',
+                    'course-3-title': 'Regional Specialties',
+                    'course-3-description': 'Learn to make famous regional Chinese noodles, including Dandan noodles, Zhajiangmian, and Daoxiao noodles.',
+                    'course-3-duration': '3-Hour Course',
+                    'course-3-size': 'Small class (max 10 people)',
+                    'course-3-includes': 'Tasting session',
+                    'course-3-price': '¥498/person',
+                    'course-3-btn': 'Book Now',
+                    'news-1-category': 'Cultural Exhibition',
+                    'news-1-date': 'June 15, 2024',
+                    'news-1-title': 'Chinese Noodle Culture Exhibition Opens',
+                    'news-1-description': 'We are hosting a cultural exhibition featuring traditional Chinese noodles, showcasing regional noodle cultures and production techniques.',
+                    'news-1-btn': 'Read More',
+                    'news-2-category': 'Competitions',
+                    'news-2-date': 'July 20, 2024',
+                    'news-2-title': '3rd Annual Noodle Master Competition',
+                    'news-2-description': 'The annual Noodle Master Competition is coming soon, featuring master chefs from across the country showcasing their exquisite noodle-making skills.',
+                    'news-2-btn': 'Read More',
+                    'news-3-category': 'New Releases',
+                    'news-3-date': 'August 5, 2024',
+                    'news-3-title': 'Summer Health Noodle Collection',
+                    'news-3-description': 'We are launching our summer limited-edition noodle series, featuring creative combinations of fresh ingredients and traditional recipes for a refreshing and healthy summer experience.',
+                    'news-3-btn': 'Read More',
+                    'menu-item-xiaolongbao': 'Steamed Pork Dumplings',
+                    'menu-item-xiaolongbao-desc': 'Thin skin, tender filling, rich broth',
+                    'menu-item-xiaolongbao-feature': 'Juicy and Tender',
+                    'menu-item-beef-noodle': 'Braised Beef Noodles',
+                    'menu-item-beef-noodle-desc': 'Slow-cooked beef, rich broth',
+                    'menu-item-beef-noodle-feature': 'Classic Braised Flavor',
+                    'menu-item-daoxiao': 'Traditional Knife-Cut Noodles',
+                    'menu-item-daoxiao-desc': 'Smooth exterior, chewy interior, unique flavor',
+                    'menu-item-daoxiao-feature': 'Traditional Knife-Cutting Technique',
+                    'menu-item-tomato-egg': 'Tomato and Egg Noodles',
+                    'menu-item-tomato-egg-desc': 'Sweet and sour, home-style flavor',
+                    'menu-item-tomato-egg-feature': 'Sweet and Sour',
+                    'menu-item-chicken-soup': 'Chicken Soup Noodles',
+                    'menu-item-chicken-soup-desc': 'Slow-simmered chicken broth, nutritious',
+                    'menu-item-chicken-soup-feature': 'Clear and Nourishing',
+                    'menu-item-scallion-oil': 'Scallion Oil Noodles',
+                    'menu-item-scallion-oil-desc': 'Simple and delicious, rich scallion aroma',
+                    'menu-item-scallion-oil-feature': 'Rich Scallion Aroma',
+                    'menu-item-signature': 'Signature Noodles',
+                    'menu-item-signature-desc': 'Crafted with匠心, rich texture layers',
+                    'menu-item-signature-feature': 'Exclusive Recipe',
+                    'menu-item-tiramisu': 'Classic Tiramisu',
+                    'menu-item-tiramisu-desc': 'Perfect fusion of coffee-soaked ladyfingers and mascarpone cheese',
+                    'menu-item-tiramisu-feature': 'Classic Italian Dessert',
+                    'menu-item-espresso': 'Italian Espresso',
+                    'menu-item-espresso-desc': 'Rich and full-bodied, complex flavor',
+                    'menu-item-espresso-feature': 'Imported Italian Coffee Beans',
+                    'menu-item-cappuccino': 'Cappuccino',
+                    'menu-item-cappuccino-desc': 'Perfect fusion of rich coffee and silky milk foam',
+                    'menu-item-cappuccino-feature': 'Silky Milk Foam',
+                    'menu-item-flower-tea': 'Premium Flower Tea',
+                    'menu-item-flower-tea-desc': 'Fragrant and soothing',
+                    'menu-item-flower-tea-feature': 'Natural Floral Aroma',
+                    'menu-item-cola': 'Cola',
+                    'menu-item-cola-desc': 'Iced cola, refreshing and thirst-quenching',
+                    'menu-item-cola-feature': 'Classic Carbonated Drink',
+                    'menu-item-mineral-water': 'Mineral Water',
+                    'menu-item-mineral-water-desc': 'Pure mineral water, clean and sweet',
+                    'menu-item-mineral-water-feature': 'Naturally Pure',
+                    'menu-item-yangzhou-fried-rice': 'Yangzhou Fried Rice',
+                    'menu-item-yangzhou-fried-rice-desc': 'Each grain distinct, fragrant and delicious',
+                    'menu-item-yangzhou-fried-rice-feature': 'Classic Yangzhou Flavor',
+                    'menu-item-chicken-cutlet': 'Crispy Fried Chicken Cutlet',
+                    'menu-item-chicken-cutlet-desc': 'Crispy exterior, tender interior, excellent texture',
+                    'menu-item-chicken-cutlet-feature': 'Crispy Exterior, Tender Interior',
+                    'menu-item-avocado-toast': 'Avocado and Egg Toast',
+                    'menu-item-avocado-toast-desc': 'Nutritious, rich texture layers',
+                    'menu-item-avocado-toast-feature': 'Healthy and Delicious',
+                    'menu-item-sausage': 'Grilled Sausage',
+                    'menu-item-sausage-desc': 'Aromatic, rich flavor',
+                    'menu-item-sausage-feature': 'Crispy Exterior, Juicy Interior',
+                    'menu-item-soup-dumplings': 'Signature Soup Dumplings',
+                    'menu-item-soup-dumplings-desc': 'Thin skin, generous filling, rich broth',
+                    'menu-item-soup-dumplings-feature': 'Delicious Broth',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': 'Tomato and Basil Pasta',
+                    'menu-item-spaghetti-feature': 'Fresh Basil Leaves'
+                },
+                'it': {
+                    'nav.home': 'Casa',
+                    'nav.about': 'Chi Siamo',
+                    'nav.menu': 'Menù',
+                    'nav.courses': 'Corsi',
+                    'nav.news': 'Notizie',
+                    'nav.contact': 'Contatti',
+                    'nav.reservation': 'Prenota un Tavolo',
+                    'hero.title': 'L\'<span class="text-secondary italic">Arte</span> dei Noodles',
+                    'hero.subtitle': 'Ogni filo racconta una storia di artigianalità',
+                    'hero.description': 'Benvenuti a MIAN Artistic Noodle House, dove potete gustare deliziosi noodles e vivere un\'unica esperienza artistica.',
+                    'about.section-title': 'Chi Siamo',
+                    'about.title': 'La Perfetta Fusione tra Noodles e Arte',
+                    'about.paragraph-1': 'Due culture, un tavolo.',
+                    'about.paragraph-2': '"Noodle" è sia cibo che volto, identità. Attraverso i noodles cinesi, la pasta italiana e l\'esperienza di mangiare faccia a faccia, MIAN crea uno spazio caldo, aperto e inclusivo.',
+                    'about.experience-years': 'Anni di Esperienza',
+                    'about.noodle-types': 'Tipi di Noodles Speciali',
+                    'menu.section-title': 'Il Nostro Menù',
+                    'menu.title': 'Creazioni Artistiche di Noodles',
+                    'menu.categories.all': 'Tutti',
+                    'menu.categories.classic': 'Noodles Classici',
+                    'menu.categories.dessert': 'Dolci e Bevande',
+                    'menu.categories.special': 'Noodles Speciali',
+                    'menu.categories.side': 'Contorni',
+                    'menu.categories.italian': 'Sapori Italiani',
+                    'menu.description': 'Ogni piatto di noodles è realizzato con cura per offrirvi un\'esperienza culinarie unica',
+                    'courses.title': 'Laboratorio di Arte del Noodle',
+                    'courses.description': 'Imparate le tecniche tradizionali di preparazione dei noodles dai nostri chef master',
+                    'news.section-title': 'Ultime Notizie',
+                    'news.title': 'Informazioni sulla Cultura del Noodle',
+                    'news.description': 'Scoprite le ultime novità sulla cultura del noodle, l\'artigianalità tradizionale e gli eventi in negozio',
+                    'contact.section-title': 'Contatti',
+                    'contact.title': 'Vieni a Gustare i Noodles Artistici',
+                    'contact.description': 'Benvenuti nel nostro spazio di arte del noodle, dove ogni piatto è un viaggio culturale.',
+                    'reservation.title': 'Prenota la Tua Esperienza di Noodle Artistico',
+                    'reservation.subtitle': 'Prenota Ora',
+                    'footer.description': 'La perfetta fusione tra noodles e arte, per un\'esperienza culinarie senza confini.',
+                    'footer.quicklinks': 'Collegamenti Rapidi',
+                    'footer.contact': 'Informazioni di Contatto',
+                    'footer.subscribe': 'Iscriviti',
+                    'footer.subscribe-description': 'Iscriviti alla nostra newsletter per gli ultimi eventi e offerte.',
+                    'footer.copyright': '© 2024 MIAN Artistic Noodle House. Tutti i diritti riservati.',
+                    'btn.explore-menu': 'Esplora il Menù',
+                    'btn.about-us': 'Chi Siamo',
+                    'btn.view-menu': 'Visualizza il Menù Completo',
+                    'btn.view-news': 'Visualizza Più Notizie',
+                    'btn.send-message': 'Invia Messaggio',
+                    'btn.confirm-reservation': 'Conferma Prenotazione',
+                    'btn.subscribe': 'Iscriviti',
+                    'form.name': 'Nome',
+                    'form.email': 'Email',
+                    'form.subject': 'Oggetto',
+                    'form.message': 'Messaggio',
+                    'form.phone': 'Telefono',
+                    'form.date': 'Data',
+                    'form.time': 'Ora',
+                    'form.guests': 'Ospiti',
+                    'form.special-requests': 'Richieste Speciali',
+                    'form.your-name': 'Il Tuo Nome',
+                    'form.your-email': 'Tua Email',
+                    'form.your-subject': 'Oggetto del Messaggio',
+                    'form.your-message': 'Inserisci il tuo messaggio',
+                    'form.your-phone': 'Il Tuo Numero di Telefono',
+                    'form.your-notes': 'Requisiti alimentari speciali, ecc.',
+                    'form.your-reservation-message': 'Inserisci il tuo messaggio',
+                    'form.email-placeholder': 'Il tuo indirizzo email',
+                    'form.select-guests-1': '1 Persona',
+                    'form.select-guests-2': '2 Persone',
+                    'form.select-guests-3': '3 Persone',
+                    'form.select-guests-4': '4 Persone',
+                    'form.select-guests-5': '5 Persone',
+                    'form.select-guests-6': '6 Persone',
+                    'form.select-guests-more': '7+ Persone',
+                    'address': 'Via Jianguo 88, Distretto di Chaoyang, Pechino',
+                    'phone': '+86 10-8888-8888',
+                    'email': 'info@mianrestaurant.com',
+                    'hours': 'Lunedì al Domenica 10:00 - 22:00',
+                    'follow-us': 'Seguici',
+                    'course-1-title': 'Nozioni di Base sui Noodles',
+                    'course-1-description': 'Perfetto per principianti, copre la preparazione dell\'impasto, le tecniche di impasto e i metodi di modellazione di base.',
+                    'course-1-duration': 'Corso di 2 Ore',
+                    'course-1-size': 'Classe piccola (max 8 persone)',
+                    'course-1-includes': 'Pratica hands-on',
+                    'course-1-price': '¥298/persona',
+                    'course-1-btn': 'Prenota Ora',
+                    'course-2-title': 'Master Class di Ramen',
+                    'course-2-description': 'Approfondimento sulle tecniche di preparazione del ramen artigianale, inclusa la preparazione dell\'impasto, la riposa, lo stiro e la preparazione del brodo.',
+                    'course-2-duration': 'Corso di 4 Ore',
+                    'course-2-size': 'Classe piccola (max 6 persone)',
+                    'course-2-includes': 'Certificazione professionale',
+                    'course-2-price': '¥598/persona',
+                    'course-2-btn': 'Prenota Ora',
+                    'course-3-title': 'Pasta Tradizionale Italiana',
+                    'course-3-description': 'Impara l\'arte della vera pasta italiana con il nostro chef italiano, compresa la preparazione manuale, la salsa e i metodi di cottura tradizionali.',
+                    'course-3-duration': 'Corso di 3.5 Ore',
+                    'course-3-size': 'Classe piccola (max 8 persone)',
+                    'course-3-includes': 'Degustazione di cibi italiani',
+                    'course-3-price': '¥568/persona',
+                    'course-3-btn': 'Prenota Ora',
+                    'news-1-category': 'Mostra Culturale',
+                    'news-1-date': '15 Giugno 2024',
+                    'news-1-title': 'Inaugurazione della Mostra sulla Cultura del Noodle Cinese',
+                    'news-1-description': 'Organizziamo una mostra culturale dedicata ai noodles tradizionali cinesi, che presenta culture regionali dei noodles e tecniche di produzione.',
+                    'news-1-btn': 'Leggi di Più',
+                    'news-2-category': 'Competizioni',
+                    'news-2-date': '20 Luglio 2024',
+                    'news-2-title': '3° Competizione Annuale del Maestro dei Noodles',
+                    'news-2-description': 'La competizione annuale del Maestro dei Noodles sta per iniziare, con chef master provenienti da tutto il paese che mostreranno le loro eccellenti competenze di preparazione dei noodles.',
+                    'news-2-btn': 'Leggi di Più',
+                    'news-3-category': 'Nuove Uscite',
+                    'news-3-date': '5 Agosto 2024',
+                    'news-3-title': 'Collezione Estiva di Noodles per la Salute',
+                    'news-3-description': 'Lanciamo la nostra serie limitata di noodles per l\'estate, con combinazioni creative di ingredienti freschi e ricette tradizionali per un\'esperienza estiva rinfrescante e salutare.',
+                    'news-3-btn': 'Leggi di Più',
+                    'menu-item-xiaolongbao': 'Ravioli di Maiale al Vapore',
+                    'menu-item-xiaolongbao-desc': 'Pelle sottile, ripieno tenero, brodo ricco',
+                    'menu-item-xiaolongbao-feature': 'Ghiotto e Tenero',
+                    'menu-item-beef-noodle': 'Tagliolini con Manzo Brasato',
+                    'menu-item-beef-noodle-desc': 'Manzo cotto a fuoco lento, brodo ricco',
+                    'menu-item-beef-noodle-feature': 'Sapore Classico Brasato',
+                    'menu-item-daoxiao': 'Tagliolini Tagliati a Coltello Tradizionali',
+                    'menu-item-daoxiao-desc': 'Esterno liscio, interno gommoso, sapore unico',
+                    'menu-item-daoxiao-feature': 'Tecnica Tradizionale di Taglio a Coltello',
+                    'menu-item-tomato-egg': 'Tagliolini con Pomodoro e Uova',
+                    'menu-item-tomato-egg-desc': 'Dolce e acido, sapore casalingo',
+                    'menu-item-tomato-egg-feature': 'Dolce e Acido',
+                    'menu-item-chicken-soup': 'Tagliolini in Brodo di Pollo',
+                    'menu-item-chicken-soup-desc': 'Brodo di pollo cotto a lungo, nutriente',
+                    'menu-item-chicken-soup-feature': 'Chiaro e Nutriente',
+                    'menu-item-scallion-oil': 'Tagliolini con Olio di Cipolla',
+                    'menu-item-scallion-oil-desc': 'Semplice e delizioso, ricca aroma di cipolla',
+                    'menu-item-scallion-oil-feature': 'Ricca Aroma di Cipolla',
+                    'menu-item-signature': 'Tagliolini Segnature',
+                    'menu-item-signature-desc': 'Realizzato con maestria, strati di textures ricchi',
+                    'menu-item-signature-feature': 'Ricetta Esclusiva',
+                    'menu-item-tiramisu': 'Tiramisu Classico',
+                    'menu-item-tiramisu-desc': 'Perfetta fusione di savoiardi inzuppati nel caffè e formaggio mascarpone',
+                    'menu-item-tiramisu-feature': 'Dolce Classico Italiano',
+                    'menu-item-espresso': 'Espresso Italiano',
+                    'menu-item-espresso-desc': 'Ricco e corposo, sapore complesso',
+                    'menu-item-espresso-feature': 'Fagioli di Caffè Italiani Importati',
+                    'menu-item-cappuccino': 'Cappuccino',
+                    'menu-item-cappuccino-desc': 'Perfetta fusione di caffè ricco e schiuma di latte setosa',
+                    'menu-item-cappuccino-feature': 'Schiuma di Latte Setosa',
+                    'menu-item-flower-tea': 'Tè Fiorito Premium',
+                    'menu-item-flower-tea-desc': 'Profumato e rinfrescante',
+                    'menu-item-flower-tea-feature': 'Aroma Naturale di Fiori',
+                    'menu-item-cola': 'Cola',
+                    'menu-item-cola-desc': 'Cola ghiacciata, rinfrescante e dissetante',
+                    'menu-item-cola-feature': 'Bevanda Gassata Classica',
+                    'menu-item-mineral-water': 'Acqua Minerale',
+                    'menu-item-mineral-water-desc': 'Acqua minerale pura, pulita e dolce',
+                    'menu-item-mineral-water-feature': 'Naturalmente Pura',
+                    'menu-item-yangzhou-fried-rice': 'Riso Fritto alla Yangzhou',
+                    'menu-item-yangzhou-fried-rice-desc': 'Ogni chicco distinto, profumato e delizioso',
+                    'menu-item-yangzhou-fried-rice-feature': 'Sapore Classico di Yangzhou',
+                    'menu-item-chicken-cutlet': 'Cotoletta di Pollo Fritto Croccante',
+                    'menu-item-chicken-cutlet-desc': 'Esterno croccante, interno tenero, texture eccellente',
+                    'menu-item-chicken-cutlet-feature': 'Esterno Croccante, Interno Tenero',
+                    'menu-item-avocado-toast': 'Toast con Avocado e Uova',
+                    'menu-item-avocado-toast-desc': 'Nutriente, strati di texture ricchi',
+                    'menu-item-avocado-toast-feature': 'Sano e Delizioso',
+                    'menu-item-sausage': 'Salsiccia Grigliata',
+                    'menu-item-sausage-desc': 'Aromatica, sapore ricco',
+                    'menu-item-sausage-feature': 'Esterno Croccante, Interno Ghiotto',
+                    'menu-item-soup-dumplings': 'Ravioli di Brodo Segnature',
+                    'menu-item-soup-dumplings-desc': 'Pelle sottile, ripieno generoso, brodo ricco',
+                    'menu-item-soup-dumplings-feature': 'Brodo Delizioso',
+                    'menu-item-spaghetti': 'SPAGHETTI AL POMODORO',
+                    'menu-item-spaghetti-desc': 'Pasta con Pomodoro e Basilico',
+                    'menu-item-spaghetti-feature': 'Foglie di Basilico Fresche'
+                }
+            };
+
+            const langButtons = document.querySelectorAll('.lang-btn');
+
+            function setLanguage(lang) {
+                document.documentElement.lang = lang;
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+
+                // 更新语言按钮的样式
+                langButtons.forEach(btn => {
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('bg-primary', 'text-white');
+                    } else {
+                        btn.classList.remove('bg-primary', 'text-white');
+                    }
+                });
+            }
+
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    localStorage.setItem('preferredLanguage', lang); // 保存用户偏好
+                });
+            });
+
+            // 初始化
+            const savedLang = localStorage.getItem('preferredLanguage') || 'zh';
+            setLanguage(savedLang);
+        });
+    </script>
     <script>
         // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
