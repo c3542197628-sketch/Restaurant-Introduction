@@ -1,0 +1,24 @@
+index.html
+  06e9b826e9b07f46 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.13",
+  "base_commit_sha": "b395ac13ddc05a441efcfb0d60176ebe6f389bc6",
+  "prompts": {
+    "06e9b826e9b07f46": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7cd5bbd5-1f9c-4062-9b22-08b091623d9b",
+        "model": "default"
+      },
+      "human_author": "chencaodong <chencaodong@cvte.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0,
+      "messages_url": "https://gitai.gz.cvte.cn/cas/843bba76b7ba85e9618b606bab9fb5abaf93da97c9e4aaffc9087bbefe316ddc"
+    }
+  }
+}
