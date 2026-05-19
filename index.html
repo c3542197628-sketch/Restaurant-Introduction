@@ -705,9 +705,16 @@
     
     <style>
         /* 自定义样式 */
-        body {
+        html, body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        input, textarea, select {
+            -webkit-user-select: text;
+            user-select: text;
         }
         
         .font-display {
@@ -2621,6 +2628,14 @@
     <script>
         // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
+            ['copy', 'cut'].forEach(function(eventName) {
+                document.addEventListener(eventName, function(e) {
+                    const el = e.target;
+                    if (el && (el.matches('input, textarea, select') || el.isContentEditable)) return;
+                    e.preventDefault();
+                });
+            });
+
             // 初始化GSAP ScrollTrigger
             gsap.registerPlugin(ScrollTrigger);
             
