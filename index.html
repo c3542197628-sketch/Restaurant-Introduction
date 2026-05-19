@@ -800,6 +800,44 @@
         .menu-item-body {
             padding: 0.25rem 0.5rem 0.375rem;
         }
+
+        .menu-masonry {
+            column-gap: 2rem;
+            column-count: 1;
+        }
+
+        @media (min-width: 768px) {
+            .menu-masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-masonry {
+                column-count: 3;
+            }
+        }
+
+        .menu-masonry .menu-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 2rem;
+            break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .menu-item-media img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .menu-masonry .menu-item:nth-child(6n+1) .menu-item-media img { height: 13rem; }
+        .menu-masonry .menu-item:nth-child(6n+2) .menu-item-media img { height: 16rem; }
+        .menu-masonry .menu-item:nth-child(6n+3) .menu-item-media img { height: 11.5rem; }
+        .menu-masonry .menu-item:nth-child(6n+4) .menu-item-media img { height: 15rem; }
+        .menu-masonry .menu-item:nth-child(6n+5) .menu-item-media img { height: 12.5rem; }
+        .menu-masonry .menu-item:nth-child(6n+6) .menu-item-media img { height: 17rem; }
         
         /* 导航栏滚动效果 */
         .navbar-scrolled {
@@ -1034,13 +1072,13 @@
             </div>
             
             <!-- 菜单项目 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="menu-masonry">
 
                 
                 <!-- 项目2 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/02f18fd854c74afca7b78ce0b76af101.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190353179D7D3AA415DE9977B5CE&amp;rrcfp=8a172a1a&amp;x-expires=1779738797&amp;x-signature=owCLjcXkMH716444RZ%2F6SlwmZW4%3D" alt="提拉米苏" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/02f18fd854c74afca7b78ce0b76af101.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190353179D7D3AA415DE9977B5CE&amp;rrcfp=8a172a1a&amp;x-expires=1779738797&amp;x-signature=owCLjcXkMH716444RZ%2F6SlwmZW4%3D" alt="提拉米苏" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-tiramisu-feature">意式经典甜点</div>
@@ -1061,7 +1099,7 @@
                 <!-- 项目4 -->
                 <div class="menu-item group" data-category="special">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/c8567b2ce1b04a06a4eae7016e84595d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190354363FA06A9C7D7E056755CC&amp;rrcfp=8a172a1a&amp;x-expires=1779738876&amp;x-signature=1Kcqq0PiDFo05IfXfLRztDywCxc%3D" alt="鲜肉小笼包" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/c8567b2ce1b04a06a4eae7016e84595d.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190354363FA06A9C7D7E056755CC&amp;rrcfp=8a172a1a&amp;x-expires=1779738876&amp;x-signature=1Kcqq0PiDFo05IfXfLRztDywCxc%3D" alt="鲜肉小笼包" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-xiaolongbao-feature">鲜嫩多汁</div>
@@ -1084,7 +1122,7 @@
                 <!-- 项目7 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ed41c363b6ce406a9705f99809dc0695.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190355294D1F6DD4CAE220313A7C&amp;rrcfp=8a172a1a&amp;x-expires=1779738929&amp;x-signature=kO2%2F8zENvWubpuudyAdb1Nuy5DY%3D" alt="红烧牛肉面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/ed41c363b6ce406a9705f99809dc0695.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190355294D1F6DD4CAE220313A7C&amp;rrcfp=8a172a1a&amp;x-expires=1779738929&amp;x-signature=kO2%2F8zENvWubpuudyAdb1Nuy5DY%3D" alt="红烧牛肉面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-beef-noodle-feature">经典红烧风味</div>
@@ -1103,7 +1141,7 @@
                 <!-- 项目8 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2410478d81e04e5d871adcc5c791892f.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190356380611E5A8E2C1106AB03B&amp;rrcfp=8a172a1a&amp;x-expires=1779738998&amp;x-signature=DPwrI53Nru4tUyfSVke0iouCAYA%3D" alt="传统刀削面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2410478d81e04e5d871adcc5c791892f.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190356380611E5A8E2C1106AB03B&amp;rrcfp=8a172a1a&amp;x-expires=1779738998&amp;x-signature=DPwrI53Nru4tUyfSVke0iouCAYA%3D" alt="传统刀削面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-daoxiao-feature">传统刀削工艺</div>
@@ -1124,7 +1162,7 @@
                 <!-- 项目10 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/094e0e4bbe9847bc99e92b03526db008.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=2026051903573603CBF08F9A0F6D030C1A&amp;rrcfp=8a172a1a&amp;x-expires=1779739056&amp;x-signature=koadg5t15gpV%2BpHAW6qUhhbM8Hk%3D" alt="番茄鸡蛋面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/094e0e4bbe9847bc99e92b03526db008.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=2026051903573603CBF08F9A0F6D030C1A&amp;rrcfp=8a172a1a&amp;x-expires=1779739056&amp;x-signature=koadg5t15gpV%2BpHAW6qUhhbM8Hk%3D" alt="番茄鸡蛋面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-tomato-egg-feature">酸甜可口</div>
@@ -1143,7 +1181,7 @@
                 <!-- 项目11 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7b96c6fa924f4708afa68da1ca651619.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=20260519035840365DA87D31956A26F845&amp;rrcfp=8a172a1a&amp;x-expires=1779739120&amp;x-signature=6dFQTrmfk2pSjW3O18nHfHgtwro%3D" alt="鸡汤面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7b96c6fa924f4708afa68da1ca651619.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=20260519035840365DA87D31956A26F845&amp;rrcfp=8a172a1a&amp;x-expires=1779739120&amp;x-signature=6dFQTrmfk2pSjW3O18nHfHgtwro%3D" alt="鸡汤面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-chicken-soup-feature">清鲜滋补</div>
@@ -1162,7 +1200,7 @@
                 <!-- 项目7 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7393f1940705459493d88e514a6bb6da.jpeg~tplv-a9rns2rl98-24:720:720.jpeg?lk3s=8e244e95&amp;rcl=20260519040004348EA4340EBD747AFFED&amp;rrcfp=8a172a1a&amp;x-expires=1779739205&amp;x-signature=EX13jeY%2FKfMkz3GCfelE58%2Fg83I%3D" alt="葱油拌面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7393f1940705459493d88e514a6bb6da.jpeg~tplv-a9rns2rl98-24:720:720.jpeg?lk3s=8e244e95&amp;rcl=20260519040004348EA4340EBD747AFFED&amp;rrcfp=8a172a1a&amp;x-expires=1779739205&amp;x-signature=EX13jeY%2FKfMkz3GCfelE58%2Fg83I%3D" alt="葱油拌面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-scallion-oil-feature">葱香四溢</div>
@@ -1181,7 +1219,7 @@
                 <!-- 项目8 -->
                 <div class="menu-item group" data-category="noodle">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/8dfabdcd90ff43f9800460685c850246.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190401346FBE51867EB4B136EE65&amp;rrcfp=8a172a1a&amp;x-expires=1779739294&amp;x-signature=kWoGot7px2L5Eli6p6fNiSjZePk%3D" alt="特色招牌面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/8dfabdcd90ff43f9800460685c850246.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190401346FBE51867EB4B136EE65&amp;rrcfp=8a172a1a&amp;x-expires=1779739294&amp;x-signature=kWoGot7px2L5Eli6p6fNiSjZePk%3D" alt="特色招牌面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-signature-feature">独家秘方</div>
@@ -1200,7 +1238,7 @@
                 <!-- 项目9 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/92d7372df9ef421c9f097aadf2521ef5.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190402399B500E3308C517135578&amp;rrcfp=8a172a1a&amp;x-expires=1779739359&amp;x-signature=F3M5Vj6bqvmcKD3j9Xg6XRN0X7g%3D" alt="意式浓缩咖啡" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/92d7372df9ef421c9f097aadf2521ef5.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=202605190402399B500E3308C517135578&amp;rrcfp=8a172a1a&amp;x-expires=1779739359&amp;x-signature=F3M5Vj6bqvmcKD3j9Xg6XRN0X7g%3D" alt="意式浓缩咖啡" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-espresso-feature">意式进口咖啡豆</div>
@@ -1221,7 +1259,7 @@
                 <!-- 项目7 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7302cd6da35d46a2944d3b973f422504.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=20260519040427E4815325E07D656925CF&amp;rrcfp=8a172a1a&amp;x-expires=1779739468&amp;x-signature=9ef32JW5M7c5sHl5JGIe1pnNUXg%3D" alt="卡布奇诺" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7302cd6da35d46a2944d3b973f422504.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&amp;rcl=20260519040427E4815325E07D656925CF&amp;rrcfp=8a172a1a&amp;x-expires=1779739468&amp;x-signature=9ef32JW5M7c5sHl5JGIe1pnNUXg%3D" alt="卡布奇诺" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-cappuccino-feature">丝滑奶泡</div>
@@ -1240,7 +1278,7 @@
                 <!-- 项目7 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e24378d5697c4c5ab77b1901ea8c97d5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042416113AF4F2795DC73980AD&amp;rrcfp=e75484ac&amp;x-expires=1779740659&amp;x-signature=swyz2qR84bJui9RLJsFe2s1qrOs%3D" alt="花茶" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e24378d5697c4c5ab77b1901ea8c97d5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042416113AF4F2795DC73980AD&amp;rrcfp=e75484ac&amp;x-expires=1779740659&amp;x-signature=swyz2qR84bJui9RLJsFe2s1qrOs%3D" alt="花茶" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-flower-tea-feature">天然花香</div>
@@ -1259,7 +1297,7 @@
                 <!-- 项目8 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/917abca48397468ca4217e3863efb482~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=202605190424593E461838FB855B1AF055&amp;rrcfp=e75484ac&amp;x-expires=1779740703&amp;x-signature=nJUC0Sw09Z9yenKfZElN%2BZ2Pm5s%3D" alt="可乐" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/917abca48397468ca4217e3863efb482~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=202605190424593E461838FB855B1AF055&amp;rrcfp=e75484ac&amp;x-expires=1779740703&amp;x-signature=nJUC0Sw09Z9yenKfZElN%2BZ2Pm5s%3D" alt="可乐" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-cola-feature">经典碳酸饮料</div>
@@ -1278,7 +1316,7 @@
                 <!-- 项目9 -->
                 <div class="menu-item group" data-category="dessert">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/bc3aef9391d34079b1bbd121e1a30dfe~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042548DA83CD9F1061B466D937&amp;rrcfp=e75484ac&amp;x-expires=1779740749&amp;x-signature=5gSTXcM1Y3QycyN5mqwMJmM5C2Q%3D" alt="矿泉水" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/bc3aef9391d34079b1bbd121e1a30dfe~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042548DA83CD9F1061B466D937&amp;rrcfp=e75484ac&amp;x-expires=1779740749&amp;x-signature=5gSTXcM1Y3QycyN5mqwMJmM5C2Q%3D" alt="矿泉水" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-mineral-water-feature">天然纯净</div>
@@ -1302,7 +1340,7 @@
                 <!-- 项目9 -->
                 <div class="menu-item group" data-category="side">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fa7a0ebd1ddf44838a7b52e45828efd5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042641C9BB0D2D13235B725E21&amp;rrcfp=e75484ac&amp;x-expires=1779740804&amp;x-signature=LCFOz2P5gA4AqtCK7djJpTJRm%2BY%3D" alt="炸鸡排" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fa7a0ebd1ddf44838a7b52e45828efd5~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042641C9BB0D2D13235B725E21&amp;rrcfp=e75484ac&amp;x-expires=1779740804&amp;x-signature=LCFOz2P5gA4AqtCK7djJpTJRm%2BY%3D" alt="炸鸡排" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-chicken-cutlet-feature">外酥里嫩</div>
@@ -1321,7 +1359,7 @@
                 <!-- 项目9 -->
                 <div class="menu-item group" data-category="side">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e1a4bdc317f14755a82c0a1f6a2a84b9~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042715355F61CD7FCBF83F1940&amp;rrcfp=e75484ac&amp;x-expires=1779740837&amp;x-signature=RdJOs4D8iHXVwJ9KBwjRNDVlodE%3D" alt="牛油果鸡蛋土司" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e1a4bdc317f14755a82c0a1f6a2a84b9~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042715355F61CD7FCBF83F1940&amp;rrcfp=e75484ac&amp;x-expires=1779740837&amp;x-signature=RdJOs4D8iHXVwJ9KBwjRNDVlodE%3D" alt="牛油果鸡蛋土司" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-avocado-toast-feature">健康美味</div>
@@ -1340,7 +1378,7 @@
                 <!-- 项目10 -->
                 <div class="menu-item group" data-category="side">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/d34b999a5c694c188c9a75ee0d9a67fd~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042746B8111388A2FD5A0EA6D6&amp;rrcfp=e75484ac&amp;x-expires=1779740866&amp;x-signature=7InHTOYQCfoO%2Bcz66WyzhM6sa0k%3D" alt="烤肠" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/d34b999a5c694c188c9a75ee0d9a67fd~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042746B8111388A2FD5A0EA6D6&amp;rrcfp=e75484ac&amp;x-expires=1779740866&amp;x-signature=7InHTOYQCfoO%2Bcz66WyzhM6sa0k%3D" alt="烤肠" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-sausage-feature">外焦里嫩</div>
@@ -1359,7 +1397,7 @@
                 <!-- 项目10 -->
                 <div class="menu-item group" data-category="special">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/2ed1b0cd12c8414e9da9909739beea7d~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042805A25A505A39A9C128EF2E&amp;rrcfp=e75484ac&amp;x-expires=1779740887&amp;x-signature=SLHV6JvOCp5DXDwiKx4mPYJlpGQ%3D" alt="招牌灌汤包" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/2ed1b0cd12c8414e9da9909739beea7d~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042805A25A505A39A9C128EF2E&amp;rrcfp=e75484ac&amp;x-expires=1779740887&amp;x-signature=SLHV6JvOCp5DXDwiKx4mPYJlpGQ%3D" alt="招牌灌汤包" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-soup-dumplings-feature">汤汁鲜美</div>
@@ -1378,7 +1416,7 @@
                 <!-- 项目11 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/abae6d97df9f4903b8db16119623eb9e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=202605190428302C422E7358F951716FE9&amp;rrcfp=e75484ac&amp;x-expires=1779740910&amp;x-signature=BlqMIALQ7zcn3ze97Sswaxm%2B60E%3D" alt="SPAGHETTI AL POMODORO番茄罗勒意面" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/abae6d97df9f4903b8db16119623eb9e~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=202605190428302C422E7358F951716FE9&amp;rrcfp=e75484ac&amp;x-expires=1779740910&amp;x-signature=BlqMIALQ7zcn3ze97Sswaxm%2B60E%3D" alt="SPAGHETTI AL POMODORO番茄罗勒意面" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-spaghetti-feature">新鲜罗勒叶</div>
@@ -1397,7 +1435,7 @@
                 <!-- 项目12 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/954446178357346367~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1793711127&amp;x-signature=T9PPO1AkazXWHe28w14oHXCE3VA%3D" alt="TAGLIATELLE BOLOGNESE" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/954446178357346367~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1793711127&amp;x-signature=T9PPO1AkazXWHe28w14oHXCE3VA%3D" alt="TAGLIATELLE BOLOGNESE" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-bolognese-feature">慢炖牛肉酱</div>
@@ -1416,7 +1454,7 @@
                 <!-- 项目13 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p26-doubao-search-sign.byteimg.com/isp-i18n-media/img/9bc16cb5afec2ed83d3c7f6e78b977cf~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1793711127&amp;x-signature=4Jr4bPmc05%2B95AoBHQSpMKds%2FPY%3D" alt="PAPPARDELLE ALLA NORCINA CON POLLO" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p26-doubao-search-sign.byteimg.com/isp-i18n-media/img/9bc16cb5afec2ed83d3c7f6e78b977cf~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1793711127&amp;x-signature=4Jr4bPmc05%2B95AoBHQSpMKds%2FPY%3D" alt="PAPPARDELLE ALLA NORCINA CON POLLO" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-norcina-feature">奶油松露酱</div>
@@ -1435,7 +1473,7 @@
                 <!-- 项目14 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fc1f04b531fe4e1ba075306fb1dc825d~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904284485CBE9A4A7D304187B3F&amp;rrcfp=e75484ac&amp;x-expires=1779740925&amp;x-signature=cBbUFLIl7IEwwiuLCZ0wSwaWUgM%3D" alt="LINGUINE MARE CHIARO" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/fc1f04b531fe4e1ba075306fb1dc825d~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904284485CBE9A4A7D304187B3F&amp;rrcfp=e75484ac&amp;x-expires=1779740925&amp;x-signature=cBbUFLIl7IEwwiuLCZ0wSwaWUgM%3D" alt="LINGUINE MARE CHIARO" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-mare-chiaro-feature">新鲜海鲜</div>
@@ -1454,7 +1492,7 @@
                 <!-- 项目15 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/2cba90b8a50f4882abfdb0779937d24b~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042858EEE840783C720A95E577&amp;rrcfp=e75484ac&amp;x-expires=1779740939&amp;x-signature=FrXymFBv3jzIbiOmFWxQi5W6Vts%3D" alt="CASERECCE PISTACCHIO GAMBERETTI" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/2cba90b8a50f4882abfdb0779937d24b~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=20260519042858EEE840783C720A95E577&amp;rrcfp=e75484ac&amp;x-expires=1779740939&amp;x-signature=FrXymFBv3jzIbiOmFWxQi5W6Vts%3D" alt="CASERECCE PISTACCHIO GAMBERETTI" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-pistacchio-feature">开心果酱</div>
@@ -1473,7 +1511,7 @@
                 <!-- 项目16 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/86dea9417977444bbf700a4790764938~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904291690F3FD473A6E92210067&amp;rrcfp=e75484ac&amp;x-expires=1779740957&amp;x-signature=ymLnve%2FZosVu7o1BB1GmfLYF%2Fhw%3D" alt="LASAGNA FERRRARESE" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/86dea9417977444bbf700a4790764938~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904291690F3FD473A6E92210067&amp;rrcfp=e75484ac&amp;x-expires=1779740957&amp;x-signature=ymLnve%2FZosVu7o1BB1GmfLYF%2Fhw%3D" alt="LASAGNA FERRRARESE" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-lasagna-feature">多层千层面</div>
@@ -1492,7 +1530,7 @@
                 <!-- 项目17 -->
                 <div class="menu-item group" data-category="italian">
                     <div class="menu-item-media relative overflow-hidden">
-                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/72918e91afab4429ac7cef4774d66d2c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904293474D445819A108381B660&amp;rrcfp=e75484ac&amp;x-expires=1779740975&amp;x-signature=zElGJFtljssd1O64AI4G%2FETXehA%3D" alt="GNOCCHI AL SUD DI CINGHIALE" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://p5-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/72918e91afab4429ac7cef4774d66d2c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&amp;rcl=2026051904293474D445819A108381B660&amp;rrcfp=e75484ac&amp;x-expires=1779740975&amp;x-signature=zElGJFtljssd1O64AI4G%2FETXehA%3D" alt="GNOCCHI AL SUD DI CINGHIALE" class="w-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                             <div class="p-6">
                                 <div class="text-white text-sm" data-i18n="menu-item-gnocchi-feature">野猪酱汁</div>
@@ -2757,7 +2795,7 @@
                     // 筛选菜单项目
                     menuItems.forEach(item => {
                         if (category === 'all' || item.getAttribute('data-category') === category) {
-                            item.style.display = 'block';
+                            item.style.display = 'inline-block';
                             gsap.fromTo(item, 
                                 { opacity: 0, y: 20 },
                                 { opacity: 1, y: 0, duration: 0.5 }
